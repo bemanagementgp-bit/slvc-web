@@ -81,6 +81,18 @@ body {
   backdrop-filter: blur(12px);
 }
 
+/* Mobile: nav siempre blanca, nunca transparente */
+@media(max-width: 768px) {
+  #main-nav {
+    background: rgba(255,255,255,0.97) !important;
+    backdrop-filter: blur(12px);
+  }
+  #main-nav #nav-name { color: var(--ink) !important; -webkit-text-fill-color: var(--ink) !important; }
+  #main-nav #nav-sub  { color: var(--muted) !important; -webkit-text-fill-color: var(--muted) !important; }
+  #main-nav #bar1, #main-nav #bar2, #main-nav #bar3 { background: var(--ink) !important; }
+  #main-nav .nav-social-icon { color: var(--muted) !important; }
+}
+
 .nav-link {
   font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
   font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
