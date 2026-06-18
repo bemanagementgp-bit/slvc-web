@@ -1,0 +1,66 @@
+﻿<!-- ══════════ SOUND GATE ══════════ -->
+<div id="sound-gate">
+  <div style="text-align:center;padding:40px 24px;max-width:380px;animation:fadeUp 0.6s ease both;">
+
+    <!-- Logo -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:36px;">
+      <div style="width:56px;height:56px;background:rgba(139,0,0,0.3);border:1.5px solid rgba(139,0,0,0.6);border-radius:12px;display:flex;align-items:center;justify-content:center;">
+        <img src="/images/Logo.1268415243901683eac4.png" alt="SLVC"
+             style="width:40px;height:40px;object-fit:contain;" />
+      </div>
+      <div style="text-align:left;">
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;color:#fff;text-transform:uppercase;letter-spacing:0.05em;line-height:1.1;">San Lorenzo</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:400;font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:0.12em;">de Villa Castells</div>
+      </div>
+    </div>
+
+    <!-- Icon -->
+    <div style="width:68px;height:68px;background:rgba(139,0,0,0.2);border:1.5px solid rgba(139,0,0,0.45);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+      </svg>
+    </div>
+
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:0.04em;color:#fff;text-transform:uppercase;margin-bottom:28px;line-height:1.05;">
+      ¿Entrás con sonido?
+    </h2>
+
+    <div style="display:flex;flex-direction:column;gap:10px;max-width:260px;margin:0 auto;">
+      <button onclick="enterSite(true)"
+        style="width:100%;padding:15px 0;background:#8B0000;color:#fff;border:none;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 4px 20px rgba(139,0,0,0.45);transition:background 0.2s;"
+        onmouseover="this.style.background='#A00000'" onmouseout="this.style.background='#8B0000'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+        Sí, con sonido
+      </button>
+      <button onclick="enterSite(false)"
+        style="width:100%;padding:13px 0;background:transparent;color:rgba(255,255,255,0.35);border:1.5px solid rgba(255,255,255,0.12);border-radius:8px;font-family:'Inter',sans-serif;font-weight:400;font-size:12px;letter-spacing:0.06em;cursor:pointer;transition:all 0.2s;"
+        onmouseover="this.style.color='rgba(255,255,255,0.7)';this.style.borderColor='rgba(255,255,255,0.3)'" onmouseout="this.style.color='rgba(255,255,255,0.35)';this.style.borderColor='rgba(255,255,255,0.12)'">
+        Continuar sin sonido
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function enterSite(withSound) {
+    const gate = document.getElementById('sound-gate');
+    const video = document.getElementById('hero-video');
+    gate.style.opacity = '0';
+    gate.style.transition = 'opacity 0.6s ease';
+    setTimeout(() => { gate.style.display = 'none'; }, 600);
+    if (video) {
+      video.muted = !withSound;
+      video.play().catch(() => { video.muted = true; video.play(); });
+      // Sync sound button icon
+      const im = document.getElementById('icon-muted');
+      const is = document.getElementById('icon-sound');
+      if(im && is) {
+        im.style.display = video.muted ? '' : 'none';
+        is.style.display = video.muted ? 'none' : '';
+      }
+    }
+  }
+  setTimeout(() => { if (document.getElementById('sound-gate').style.display !== 'none') enterSite(false); }, 8000);
+</script>

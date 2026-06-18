@@ -1,0 +1,74 @@
+<%- include('partials/head', { title: 'Noticias' }) %>
+<%- include('partials/nav') %>
+
+<!-- Page hero -->
+<div style="background:#0A0A0A;padding:120px 24px 60px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:url('/images/nuestraHistoria.aa85fb1c70006604d99b.png') center/cover;opacity:0.08;"></div>
+  <div style="max-width:1200px;margin:0 auto;position:relative;">
+    <div class="section-label" style="color:rgba(200,146,42,0.8);">Del Barrio</div>
+    <h1 class="section-title" style="color:#fff;font-size:clamp(40px,6vw,72px);margin-top:8px;">Noticias</h1>
+    <p class="font-nexa" style="font-size:14px;color:rgba(255,255,255,0.4);margin-top:8px;">Todo lo que pasa en El Nido</p>
+  </div>
+</div>
+
+<section style="padding:60px 24px 80px;background:#fff;">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <!-- Featured -->
+    <% if(news.length > 0){ %>
+    <a href="/noticias/<%= news[0].slug %>" style="display:grid;grid-template-columns:1fr;border-radius:20px;overflow:hidden;text-decoration:none;background:#0A0A0A;margin-bottom:32px;position:relative;"
+       class="card">
+      <div style="position:relative;aspect-ratio:21/8;overflow:hidden;">
+        <img src="<%= news[0].image %>" alt=""
+             style="width:100%;height:100%;object-fit:cover;opacity:0.5;transition:transform 0.7s;display:block;"
+             onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" />
+        <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(92,0,0,0.8) 0%,rgba(10,10,10,0.3) 60%);"></div>
+        <div style="position:absolute;inset:0;padding:48px;display:flex;flex-direction:column;justify-content:flex-end;max-width:700px;">
+          <div style="display:flex;gap:8px;margin-bottom:12px;">
+            <span class="badge" style="background:rgba(139,0,0,0.8);color:#C8922A;border:1px solid rgba(200,146,42,0.3);"><%= news[0].category %></span>
+            <span class="badge badge-done" style="color:rgba(255,255,255,0.5);">Destacada</span>
+          </div>
+          <h2 class="font-zing" style="font-size:clamp(24px,4vw,48px);color:#fff;text-transform:uppercase;line-height:1.05;margin-bottom:10px;"><%= news[0].title %></h2>
+          <p class="font-nexa" style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:20px;"><%= news[0].subtitle %></p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span class="font-nexa" style="font-size:11px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.08em;">
+              <%= new Date(news[0].date).toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'}) %>
+            </span>
+            <span class="btn btn-white" style="font-size:11px;padding:10px 20px;">Leer artículo →</span>
+          </div>
+        </div>
+      </div>
+    </a>
+    <% } %>
+
+    <!-- Grid -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;">
+      <% news.slice(1).forEach(function(n){ %>
+      <a href="/noticias/<%= n.slug %>" class="card" style="text-decoration:none;">
+        <div style="position:relative;aspect-ratio:3/2;overflow:hidden;">
+          <img src="<%= n.thumbnail || n.image %>" alt="<%= n.title %>"
+               style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;"
+               onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'" />
+          <div style="position:absolute;top:10px;left:10px;">
+            <span class="badge badge-bordo" style="font-size:9px;backdrop-filter:blur(4px);"><%= n.category %></span>
+          </div>
+        </div>
+        <div style="padding:20px;">
+          <h3 class="font-zing" style="font-size:20px;text-transform:uppercase;color:#0A0A0A;line-height:1.15;margin-bottom:6px;"><%= n.title %></h3>
+          <p class="font-nexa" style="font-size:13px;color:#71717A;line-height:1.6;"><%= n.subtitle %></p>
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid #F4F4F5;display:flex;align-items:center;justify-content:space-between;">
+            <span class="font-nexa" style="font-size:11px;color:#A1A1AA;">
+              <%= new Date(n.date).toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'numeric'}) %>
+            </span>
+            <span class="font-nexa-bold" style="font-size:11px;color:#8B0000;text-transform:uppercase;letter-spacing:0.06em;">Leer →</span>
+          </div>
+        </div>
+      </a>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>
+</body>
+</html>

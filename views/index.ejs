@@ -1,0 +1,755 @@
+﻿<%- include('partials/head', { title: '' }) %>
+<%- include('partials/sound-gate') %>
+<%- include('partials/nav') %>
+
+<style>
+/* ── Responsive 2-col grids ── */
+.r-grid-2 { display:grid; grid-template-columns:1fr; gap:48px; align-items:start; }
+@media(min-width:900px){
+  .r-grid-2 { grid-template-columns:1fr 1fr; align-items:center; }
+}
+/* timeline hide scrollbar */
+#timeline-scroll::-webkit-scrollbar { display:none; }
+</style>
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════ -->
+<section id="hero" style="position:relative;width:100%;height:100svh;min-height:600px;overflow:hidden;background:#0A0A0A;margin-top:64px;">
+  <!-- Video -->
+  <video id="hero-video" muted playsinline
+         poster="/images/new1.c91ede4c59d431d30c08.jpg"
+         style="width:100%;height:100%;object-fit:cover;display:block;transition:opacity 1s;">
+    <source src="/video/hero.mp4" type="video/mp4" />
+  </video>
+  <!-- Poster fallback (shown when video ends) -->
+  <img id="hero-poster"
+       src="/images/hero-poster.png"
+       alt=""
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s;pointer-events:none;" />
+  <!-- Play/Pause + Sound controls -->
+  <div style="position:absolute;bottom:28px;right:28px;display:flex;gap:10px;z-index:10;">
+    <!-- Play/Pause -->
+    <button id="hero-play-btn" onclick="toggleHeroPlay()"
+      style="width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.55);border:1.5px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:all 0.2s;"
+      title="Pausar / Reproducir">
+      <svg id="icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      <svg id="icon-play"  width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <!-- Sound -->
+    <button id="hero-sound-btn" onclick="toggleHeroSound()"
+      style="width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.55);border:1.5px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;transition:all 0.2s;"
+      title="Activar / Silenciar">
+      <svg id="icon-muted"   width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+      <svg id="icon-sound"  width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+    </button>
+  </div>
+</section>
+
+<script>
+(function(){
+  const video = document.getElementById('hero-video');
+  const poster = document.getElementById('hero-poster');
+
+  if(!video) return;
+
+  video.addEventListener('ended', function(){
+    video.style.opacity = '0';
+    poster.style.opacity = '1';
+    // hide play button since video is done
+    const pb = document.getElementById('hero-play-btn');
+    if(pb) pb.style.display = 'none';
+  });
+})();
+
+function toggleHeroPlay() {
+  const video = document.getElementById('hero-video');
+  const ip = document.getElementById('icon-pause');
+  const ipl = document.getElementById('icon-play');
+  if(!video) return;
+  if(video.paused) {
+    video.play();
+    ip.style.display = ''; ipl.style.display = 'none';
+  } else {
+    video.pause();
+    ip.style.display = 'none'; ipl.style.display = '';
+  }
+}
+
+function toggleHeroSound() {
+  const video = document.getElementById('hero-video');
+  const im = document.getElementById('icon-muted');
+  const is = document.getElementById('icon-sound');
+  if(!video) return;
+  video.muted = !video.muted;
+  im.style.display = video.muted ? '' : 'none';
+  is.style.display = video.muted ? 'none' : '';
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     NEWS TICKER
+════════════════════════════════════════════════════ -->
+<div style="background:#8B0000;padding:0;overflow:hidden;border-bottom:1px solid rgba(0,0,0,0.1);">
+  <div style="display:flex;align-items:stretch;">
+    <div style="background:#5C0000;padding:0 20px;display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;">
+      <span style="width:7px;height:7px;background:#C8922A;border-radius:99px;display:inline-block;"></span>
+      <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#fff;">Últimas</span>
+    </div>
+    <div id="news-ticker" style="flex:1;padding:11px 0;">
+      <div class="ticker-inner">
+        <% news.forEach(function(n){ %>
+          <a href="/noticias/<%= n.slug %>" style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.85);text-decoration:none;padding:0 40px;white-space:nowrap;transition:color 0.2s;"
+             onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.85)'">
+            <strong style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#C8922A;margin-right:6px;letter-spacing:0.06em;"><%= n.category %> ·</strong>
+            <%= n.title %>
+          </a>
+        <% }) %>
+        <% news.forEach(function(n){ %>
+          <a href="/noticias/<%= n.slug %>" style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.85);text-decoration:none;padding:0 40px;white-space:nowrap;">
+            <strong style="font-family:'Barlow Condensed',sans-serif;font-weight:700;color:#C8922A;margin-right:6px;"><%= n.category %> ·</strong>
+            <%= n.title %>
+          </a>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     HISTORIA — LÍNEA DE TIEMPO
+════════════════════════════════════════════════════ -->
+<section id="historia" style="padding:72px 0 64px;background:#071424;overflow:hidden;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px 40px;">
+    <div class="section-label" style="color:rgba(255,255,255,0.45);">Desde 1990</div>
+    <h2 class="section-title" style="color:#fff;">Historia del <span style="color:#C8922A;">Cuervo</span></h2>
+  </div>
+
+  <!-- Timeline horizontal -->
+  <div id="timeline-scroll" style="overflow-x:auto;overflow-y:hidden;padding:0 24px 32px;cursor:grab;user-select:none;scrollbar-width:none;-ms-overflow-style:none;">
+    <div id="timeline-inner" style="display:inline-flex;align-items:flex-start;gap:0;position:relative;padding-bottom:8px;">
+
+      <!-- Connecting line -->
+      <div style="position:absolute;top:20px;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#5C0000 5%,#8B0000 30%,#C8922A 60%,#8B0000 85%,transparent 100%);pointer-events:none;"></div>
+
+      <%
+      var hitos = [
+        { year:'1990', fa:'fa-solid fa-flag',        color:'#C8922A', borderColor:'rgba(200,146,42,0.4)', title:'Fundación', text:'Nino Menechela y Alfredo Giommi sueñan con un club propio y fundan San Lorenzo de Villa Castells.' },
+        { year:'2003', fa:'fa-solid fa-ban',          color:'#ef4444', borderColor:'rgba(239,68,68,0.4)',  title:'El desalojo', text:'El club es desalojado de sus tierras. Años de lucha y vida nómade por el barrio.' },
+        { year:'2008', fa:'fa-solid fa-location-dot', color:'#9B1020', borderColor:'rgba(155,16,32,0.4)',  title:'Nuevo predio', text:'Se consigue terreno en 9 y 505. El Cuervo vuelve a tener suelo donde plantar banderas.' },
+        { year:'2013', fa:'fa-solid fa-house',        color:'#C8922A', borderColor:'rgba(200,146,42,0.4)', title:'Casa propia', text:'El barrio recibe al club en 7 y 485. El Nido queda plantado para siempre.' },
+        { year:'2014', fa:'fa-solid fa-arrow-up',     color:'#22c55e', borderColor:'rgba(34,197,94,0.4)',  title:'Ascenso a 1ª A', text:'El Cuervo sube a Primera "A" de la Liga Amateur Platense. Un sueño hecho realidad.' },
+        { year:'2019', fa:'fa-solid fa-trophy',       color:'#C8922A', borderColor:'rgba(200,146,42,0.5)', title:'Campeones LAPF', text:'San Lorenzo de Villa Castells se corona campeón de la Liga Amateur Platense Primera "A".' },
+        { year:'2024', fa:'fa-solid fa-trophy',       color:'#C8922A', borderColor:'rgba(200,146,42,0.5)', title:'Doble corona', text:'Campeones de la Liga y del Torneo Clasificatorio al Regional. 4ta estrella.' },
+        { year:'2026', fa:'fa-solid fa-star',         color:'#C8922A', borderColor:'rgba(200,146,42,0.6)', title:'5ta Estrella', text:'Campeones del Torneo Clasificatorio al Regional. El logro más grande de la historia.' },
+        { year:'Hoy',  fa:'fa-solid fa-fire',         color:'#9B1020', borderColor:'rgba(155,16,32,0.4)',  title:'Seguimos creciendo', text:'En 7 y 485, nuevas generaciones comparten el sueño de Alfredo y Nino.' }
+      ];
+      %>
+
+      <% hitos.forEach(function(h, i){ %>
+      <div style="display:flex;flex-direction:column;align-items:center;width:300px;flex-shrink:0;padding:0 30px;position:relative;">
+        <!-- Icon circle -->
+        <div style="width:52px;height:52px;border-radius:50%;background:rgba(7,20,36,0.9);border:2px solid <%= h.borderColor %>;display:flex;align-items:center;justify-content:center;z-index:2;flex-shrink:0;box-shadow:0 0 0 5px #071424, 0 4px 20px rgba(0,0,0,0.5);margin-bottom:24px;transition:transform 0.2s;"
+             onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
+          <i class="<%= h.fa %>" style="color:<%= h.color %>;font-size:18px;"></i>
+        </div>
+        <!-- Year -->
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.04em;color:<%= h.color %>;line-height:1;margin-bottom:8px;"><%= h.year %></div>
+        <!-- Title -->
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.9);margin-bottom:10px;text-align:center;"><%= h.title %></div>
+        <!-- Text -->
+        <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.4);line-height:1.65;text-align:center;max-width:220px;"><%= h.text %></div>
+      </div>
+      <% if(i < hitos.length-1){ %>
+      <div style="width:8px;flex-shrink:0;"></div>
+      <% } %>
+      <% }) %>
+    </div>
+  </div>
+
+  <!-- Drag hint -->
+  <div style="text-align:center;margin-top:4px;">
+    <span style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;">← deslizá para ver más →</span>
+  </div>
+</section>
+
+<script>
+(function(){
+  const el = document.getElementById('timeline-scroll');
+  if(!el) return;
+  let down=false, startX=0, scrollL=0;
+  el.addEventListener('mousedown', e=>{ down=true; startX=e.pageX-el.offsetLeft; scrollL=el.scrollLeft; el.style.cursor='grabbing'; });
+  el.addEventListener('mouseleave',()=>{ down=false; el.style.cursor='grab'; });
+  el.addEventListener('mouseup',  ()=>{ down=false; el.style.cursor='grab'; });
+  el.addEventListener('mousemove',e=>{ if(!down) return; e.preventDefault(); el.scrollLeft=scrollL-(e.pageX-el.offsetLeft-startX); });
+})();
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     PRÓXIMO PARTIDO + EN VIVO (fusionados)
+════════════════════════════════════════════════════ -->
+<% if (proximoPartido) {
+   const slvcT2 = teams[proximoPartido.local] || {};
+   const rivT2  = teams[proximoPartido.visitante] || {};
+%>
+<section id="en-vivo" style="padding:80px 24px;background:#fff;overflow:hidden;position:relative;">
+  <div style="position:absolute;top:-120px;right:-120px;width:500px;height:500px;background:rgba(139,0,0,0.03);border-radius:50%;pointer-events:none;"></div>
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div class="r-grid-2">
+
+      <!-- LEFT: match card + live CTA -->
+      <div>
+        <div class="section-label" style="margin-bottom:8px;">
+          <span class="live-dot"></span>
+          Próximo · Transmisión en vivo
+        </div>
+        <h2 class="section-title" style="margin-bottom:20px;">
+          Próximo Partido<br><span style="color:#8B0000;">& Miralo en Vivo</span>
+        </h2>
+
+        <!-- Match card -->
+        <div class="match-card" style="max-width:560px;margin-bottom:24px;">
+          <div class="match-card-header" style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.75);">
+              <%= proximoPartido.torneo %>
+            </span>
+            <span class="badge" style="background:rgba(200,146,42,0.25);color:#C8922A;font-size:10px;">Fecha <%= proximoPartido.fecha %></span>
+          </div>
+          <div style="padding:28px 24px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;">
+            <div style="text-align:center;">
+              <div style="width:68px;height:68px;margin:0 auto 10px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;padding:8px;">
+                <img src="<%= proximoPartido.local === 'SAN LORENZO V.C.' ? '/images/Logo.1268415243901683eac4.png' : (slvcT2.logo || '') %>" alt="" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.opacity=0" />
+              </div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;color:#0A0A0A;line-height:1.2;"><%= proximoPartido.local %></div>
+              <div style="font-family:'Inter',sans-serif;font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Local</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#B0B0B8;line-height:1;letter-spacing:0.04em;">VS</div>
+              <div style="font-family:'Inter',sans-serif;font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.08em;margin-top:6px;">Por jugar</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="width:68px;height:68px;margin:0 auto 10px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;padding:8px;">
+                <img src="<%= proximoPartido.visitante === 'SAN LORENZO V.C.' ? '/images/Logo.1268415243901683eac4.png' : (rivT2.logo || '') %>" alt="" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.opacity=0" />
+              </div>
+              <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;color:#0A0A0A;line-height:1.2;"><%= proximoPartido.visitante %></div>
+              <div style="font-family:'Inter',sans-serif;font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Visitante</div>
+            </div>
+          </div>
+          <div style="border-top:1px solid #F4F4F5;padding:12px 24px;background:#F4F4F5;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-family:'Inter',sans-serif;font-size:11px;color:#A1A1AA;"><%= proximoPartido.lugar %></span>
+            <a href="https://www.lapf.com.ar/datos-torneo/165/442/13/1" target="_blank"
+               style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#8B0000;text-decoration:none;">Ver en LAPF →</a>
+          </div>
+        </div>
+
+        <!-- Live CTA -->
+        <p style="font-family:'Inter',sans-serif;font-size:14px;color:#71717A;line-height:1.65;margin-bottom:20px;max-width:460px;">
+          Seguí el partido en nuestro canal de YouTube. <strong style="font-weight:600;color:#0A0A0A;">Gratis, en vivo, desde El Nido.</strong>
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <a href="https://www.youtube.com/@slvcoficial" target="_blank" rel="noreferrer" class="btn btn-primary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.8 5 12 5 12 5s-4.8 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.2.9C6.4 19 12 19 12 19s4.8 0 7-.1c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9l5.6 2.8-5.6 2.7z"/></svg>
+            Ver en YouTube
+          </a>
+          <a href="https://www.youtube.com/@slvcoficial" target="_blank" class="btn btn-ghost">Suscribite</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: YouTube card -->
+      <a href="https://www.youtube.com/@slvcoficial" target="_blank" rel="noreferrer"
+         style="display:block;border-radius:16px;overflow:hidden;background:#0F0F0F;text-decoration:none;position:relative;aspect-ratio:16/9;max-width:600px;"
+         onmouseover="this.querySelector('.yt-play').style.transform='scale(1.1)'" onmouseout="this.querySelector('.yt-play').style.transform='scale(1)'">
+        <img src="/images/new2.27cd7312841f023b1e44.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45;" />
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(92,0,0,0.6),rgba(0,0,0,0.55));"></div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
+          <div class="yt-play" style="width:68px;height:68px;background:#FF0000;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(255,0,0,0.45);transition:transform 0.3s;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.05em;color:#fff;text-transform:uppercase;">@slvcoficial</div>
+            <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.6);margin-top:3px;">Canal oficial · YouTube</div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ═══════════════════════════════════════════════════
+     FIXTURE + TABLA (side by side)
+════════════════════════════════════════════════════ -->
+<section style="padding:0 24px 80px;background:#fff;" id="fixture">
+  <div style="max-width:1200px;margin:0 auto;">
+    <!-- Header strip -->
+    <div style="background:#fff;border-bottom:1px solid #E4E4E7;padding:20px 0 0;margin-bottom:0;border-radius:16px 16px 0 0;overflow:hidden;">
+      <div style="padding:0 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div class="section-label" style="margin-bottom:4px;">Primera "A" · Rueda 1</div>
+          <h2 class="section-title" style="font-size:clamp(22px,3vw,32px);">Fixture & Tabla</h2>
+        </div>
+        <!-- Fecha selector -->
+        <div style="display:flex;gap:4px;background:#fff;border-radius:8px;padding:4px;">
+          <% [12,13,14,15].forEach(function(f){ %>
+          <button class="tab-btn <%= f===13 ? 'active' : '' %>" onclick="showFecha(<%= f %>)" id="tab-<%= f %>">
+            F<%= f %>
+          </button>
+          <% }) %>
+        </div>
+      </div>
+      <!-- Tabs fixture / tabla -->
+      <div style="display:flex;gap:0;margin-top:16px;border-top:1px solid #E4E4E7;">
+        <button class="fixture-tab-btn active" id="ftab-fixture" onclick="switchSection('fixture')"
+          style="flex:1;padding:12px;font-family:'Nexa',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#fff;cursor:pointer;border-bottom:2px solid #8B0000;color:#8B0000;transition:all 0.2s;">
+          Fixture
+        </button>
+        <button class="fixture-tab-btn" id="ftab-tabla" onclick="switchSection('tabla')"
+          style="flex:1;padding:12px;font-family:'Nexa',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#fff;cursor:pointer;border-bottom:2px solid transparent;color:#71717A;transition:all 0.2s;" id="tabla">
+          Tabla de Posiciones
+        </button>
+      </div>
+    </div>
+
+    <!-- FIXTURE panel -->
+    <div id="panel-fixture" style="background:#fff;border-radius:0 0 16px 16px;border:1px solid #E4E4E7;border-top:none;">
+      <% [12,13,14,15].forEach(function(f){ %>
+      <div id="fecha-<%= f %>" style="display:<%= f===13 ? 'block' : 'none' %>;">
+        <% const fechaMatches = fixture.filter(m => m.fecha === f); %>
+        <% fechaMatches.forEach(function(m, i){ %>
+        <%
+          const tL = teams[m.local]    || {};
+          const tV = teams[m.visitante] || {};
+          const isSlvc = m.local === 'SAN LORENZO V.C.' || m.visitante === 'SAN LORENZO V.C.';
+        %>
+        <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:16px 24px;border-bottom:<%= i < fechaMatches.length-1 ? '1px solid #F4F4F5' : 'none' %>;background:<%= isSlvc ? 'rgba(139,0,0,0.02)' : 'transparent' %>;transition:background 0.15s;"
+             onmouseover="this.style.background='<%= isSlvc ? 'rgba(139,0,0,0.05)' : '#FAFAFA' %>'"
+             onmouseout="this.style.background='<%= isSlvc ? 'rgba(139,0,0,0.02)' : 'transparent' %>'">
+          <!-- Local -->
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;text-align:right;">
+            <span class="font-nexa-bold" style="font-size:13px;color:#0A0A0A;text-transform:uppercase;line-height:1.2;<%= m.local === 'SAN LORENZO V.C.' ? 'color:#8B0000;' : '' %>"><%= m.local %></span>
+            <img src="<%= m.local === 'SAN LORENZO V.C.' ? '/images/Logo.1268415243901683eac4.png' : (tL.logo || '') %>" alt="" style="width:30px;height:30px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'" />
+          </div>
+          <!-- Score / vs -->
+          <div style="text-align:center;min-width:80px;">
+            <% if (m.jugado) { %>
+              <div class="font-zing" style="font-size:22px;color:#0A0A0A;line-height:1;"><%= m.golL %> – <%= m.golV %></div>
+              <div class="badge badge-done" style="margin-top:4px;font-size:9px;">Final</div>
+            <% } else { %>
+              <div class="font-zing" style="font-size:18px;color:#D4D4D8;line-height:1;">vs</div>
+              <div class="badge badge-bordo" style="margin-top:4px;font-size:9px;">Pendiente</div>
+            <% } %>
+          </div>
+          <!-- Visitante -->
+          <div style="display:flex;align-items:center;justify-content:flex-start;gap:10px;">
+            <img src="<%= m.visitante === 'SAN LORENZO V.C.' ? '/images/Logo.1268415243901683eac4.png' : (tV.logo || '') %>" alt="" style="width:30px;height:30px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'" />
+            <span class="font-nexa-bold" style="font-size:13px;color:#0A0A0A;text-transform:uppercase;line-height:1.2;<%= m.visitante === 'SAN LORENZO V.C.' ? 'color:#8B0000;' : '' %>"><%= m.visitante %></span>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% }) %>
+    </div>
+
+    <!-- TABLA panel -->
+    <div id="panel-tabla" style="display:none;background:#fff;border-radius:0 0 16px 16px;border:1px solid #E4E4E7;border-top:none;overflow:hidden;" id="tabla">
+      <table class="standings-table">
+        <thead>
+          <tr>
+            <th style="width:36px;">#</th>
+            <th style="text-align:left;padding-left:8px;">Equipo</th>
+            <th>PJ</th><th>PG</th><th>PE</th><th>PP</th>
+            <th>GF</th><th>GC</th><th>Dif</th>
+            <th style="color:#8B0000;">PTS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% tabla.forEach(function(e){ %>
+          <%
+            const isUs = e.equipo === 'SAN LORENZO V.C.';
+            const diff = e.gf - e.gc;
+            const tInfo = teams[e.equipo] || {};
+          %>
+          <tr class="<%= isUs ? 'slvc-row' : '' %>">
+            <td>
+              <div style="display:flex;align-items:center;justify-content:center;">
+                <% if(e.pos<=3){ %>
+                  <span class="font-nexa-bold" style="font-size:12px;color:<%= e.pos===1?'#C8922A':e.pos===2?'#A0A0A0':'#CD7F32' %>;"><%= e.pos %></span>
+                <% } else { %>
+                  <span class="font-nexa" style="font-size:12px;color:#A1A1AA;"><%= e.pos %></span>
+                <% } %>
+              </div>
+            </td>
+            <td style="text-align:left;padding-left:8px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <img src="<%= tInfo.logo || '' %>" alt="" style="width:24px;height:24px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'" />
+                <span class="<%= isUs ? 'font-nexa-bold' : 'font-nexa' %>" style="font-size:13px;text-transform:uppercase;<%= isUs ? 'color:#8B0000;' : 'color:#0A0A0A;' %>">
+                  <%= e.equipo %>
+                </span>
+                <% if(isUs){ %><span class="badge badge-bordo" style="font-size:8px;padding:2px 6px;">Nosotros</span><% } %>
+              </div>
+            </td>
+            <td class="font-nexa" style="font-size:13px;color:#71717A;"><%= e.pj %></td>
+            <td class="font-nexa-bold" style="font-size:13px;color:#16a34a;"><%= e.pg %></td>
+            <td class="font-nexa" style="font-size:13px;color:#71717A;"><%= e.pe %></td>
+            <td class="font-nexa" style="font-size:13px;color:#dc2626;"><%= e.pp %></td>
+            <td class="font-nexa" style="font-size:13px;color:#71717A;"><%= e.gf %></td>
+            <td class="font-nexa" style="font-size:13px;color:#71717A;"><%= e.gc %></td>
+            <td class="font-nexa" style="font-size:13px;color:<%= diff>0?'#16a34a':diff<0?'#dc2626':'#71717A' %>;">
+              <%= diff > 0 ? '+'+diff : diff %>
+            </td>
+            <td class="font-nexa-bold" style="font-size:15px;color:<%= isUs ? '#8B0000' : '#0A0A0A' %>;"><%= e.pts %></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <!-- LAPF link -->
+      <div style="padding:14px 20px;border-top:1px solid #E4E4E7;background:#F4F4F5;display:flex;align-items:center;justify-content:space-between;">
+        <span class="font-nexa" style="font-size:11px;color:#A1A1AA;">Fuente: Liga Amateur Platense · Actualizado desde lapf.com.ar</span>
+        <a href="https://www.lapf.com.ar/datos-torneo/165/442/12/1" target="_blank" class="font-nexa-bold"
+           style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:#8B0000;text-decoration:none;">Ver en LAPF →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+function showFecha(n) {
+  [12,13,14,15].forEach(f => {
+    const el = document.getElementById('fecha-'+f);
+    const btn = document.getElementById('tab-'+f);
+    if(el) el.style.display = f===n ? 'block' : 'none';
+    if(btn) {
+      btn.classList.toggle('active', f===n);
+    }
+  });
+}
+function switchSection(s) {
+  const fp = document.getElementById('panel-fixture');
+  const tp = document.getElementById('panel-tabla');
+  const fb = document.getElementById('ftab-fixture');
+  const tb = document.getElementById('ftab-tabla');
+  fp.style.display = s==='fixture' ? 'block' : 'none';
+  tp.style.display = s==='tabla'   ? 'block' : 'none';
+  fb.style.borderBottomColor = s==='fixture' ? '#8B0000' : 'transparent';
+  fb.style.color = s==='fixture' ? '#8B0000' : '#71717A';
+  tb.style.borderBottomColor = s==='tabla' ? '#8B0000' : 'transparent';
+  tb.style.color = s==='tabla' ? '#8B0000' : '#71717A';
+}
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     SPONSORS BANNER
+════════════════════════════════════════════════════ -->
+<section style="background:#fff;border-top:1px solid #E4E4E7;border-bottom:1px solid #E4E4E7;padding:0;overflow:hidden;">
+  <div style="display:flex;align-items:stretch;">
+    <div style="background:#0A0A0A;padding:0 20px;display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;min-height:56px;">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#71717A;">Sponsors</span>
+    </div>
+    <div style="overflow:hidden;flex:1;">
+      <div style="display:inline-flex;align-items:center;animation:ticker 35s linear infinite;gap:0;white-space:nowrap;">
+        <% [1,2].forEach(function(){ %>
+        <div style="display:inline-flex;align-items:center;gap:64px;padding:0 64px;">
+          <% [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17].forEach(function(n){ %>
+          <img src="/images/sponsor/<%= n %>.png" alt="" style="height:24px;max-width:120px;object-fit:contain;flex-shrink:0;opacity:0.5;filter:grayscale(1);transition:all 0.2s;" onmouseover="this.style.opacity=1;this.style.filter='none'" onmouseout="this.style.opacity=0.5;this.style.filter='grayscale(1)'" />
+          <% }) %>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     NOTICIAS — CARRUSEL
+════════════════════════════════════════════════════ -->
+<section style="padding:80px 0 80px;background:#F4F4F5;overflow:hidden;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="section-label">Del Barrio</div>
+        <h2 class="section-title">Últimas <span style="color:#8B0000;">Noticias</span></h2>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button onclick="slideNews(-1)" id="btn-prev"
+          style="width:44px;height:44px;border:1.5px solid #E4E4E7;border-radius:50%;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;color:#0A0A0A;box-shadow:0 2px 8px rgba(0,0,0,0.06);"
+          onmouseover="this.style.borderColor='#8B0000';this.style.color='#8B0000'" onmouseout="this.style.borderColor='#E4E4E7';this.style.color='#0A0A0A'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button onclick="slideNews(1)" id="btn-next"
+          style="width:44px;height:44px;border:1.5px solid #E4E4E7;border-radius:50%;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;color:#0A0A0A;box-shadow:0 2px 8px rgba(0,0,0,0.06);"
+          onmouseover="this.style.borderColor='#8B0000';this.style.color='#8B0000'" onmouseout="this.style.borderColor='#E4E4E7';this.style.color='#0A0A0A'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <a href="/noticias" class="btn btn-primary" style="font-size:12px;padding:10px 20px;">Ver todas →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carrusel track -->
+  <div style="position:relative;overflow:hidden;">
+    <div id="news-track" style="display:flex;gap:24px;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);will-change:transform;padding:0 24px 8px;max-width:none;">
+      <%
+      // Render twice for seamless infinite loop
+      var newsDouble = news.concat(news);
+      newsDouble.forEach(function(n, i){ %>
+      <a href="/noticias/<%= n.slug %>"
+         style="text-decoration:none;flex-shrink:0;width:340px;border-radius:16px;overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:box-shadow 0.3s,transform 0.3s;box-shadow:0 2px 12px rgba(0,0,0,0.06);"
+         onmouseover="this.style.boxShadow='0 12px 40px rgba(0,0,0,0.12)';this.style.transform='translateY(-4px)'"
+         onmouseout="this.style.boxShadow='0 2px 12px rgba(0,0,0,0.06)';this.style.transform='translateY(0)'">
+        <div style="position:relative;height:220px;overflow:hidden;flex-shrink:0;">
+          <img src="<%= n.thumbnail || n.image %>" alt="<%= n.title %>"
+               style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s;" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(7,20,36,0.75) 0%,rgba(7,20,36,0.1) 55%,transparent 100%);"></div>
+          <div style="position:absolute;top:14px;left:14px;">
+            <span style="display:inline-flex;align-items:center;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;background:rgba(139,0,0,0.9);color:#fff;padding:4px 10px;border-radius:4px;backdrop-filter:blur(4px);"><%= n.category %></span>
+          </div>
+          <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 18px;">
+            <h3 style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.03em;text-transform:uppercase;color:#fff;line-height:1.05;text-shadow:0 1px 4px rgba(0,0,0,0.4);"><%= n.title %></h3>
+          </div>
+        </div>
+        <div style="padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:12px;">
+          <p style="font-family:'Inter',sans-serif;font-size:13px;color:#52525B;line-height:1.6;"><%= n.subtitle %></p>
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:6px;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#A1A1AA"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM7 11h5v5H7z"/></svg>
+              <span style="font-family:'Inter',sans-serif;font-size:11px;color:#A1A1AA;">
+                <%= new Date(n.date).toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'numeric'}) %>
+              </span>
+            </div>
+            <span style="display:inline-flex;align-items:center;gap:4px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:#8B0000;">
+              Leer
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+      <% }) %>
+    </div>
+  </div>
+
+  <!-- Dots (solo los originales) -->
+  <div style="display:flex;justify-content:center;gap:6px;margin-top:28px;" id="news-dots">
+    <% news.forEach(function(n, i){ %>
+    <button onclick="goToSlide(<%= i %>)" id="dot-<%= i %>"
+      style="width:<%= i===0?'28px':'8px' %>;height:8px;border-radius:99px;border:none;background:<%= i===0?'#8B0000':'#D4D4D8' %>;cursor:pointer;transition:all 0.3s;padding:0;"></button>
+    <% }) %>
+  </div>
+</section>
+
+<script>
+let newsIdx = 0;
+const newsTotal = <%= news.length %>;
+const cardWidth = 364; // card 340 + gap 24
+
+function updateCarousel(animated) {
+  const track = document.getElementById('news-track');
+  if(!track) return;
+  if(animated === false) {
+    track.style.transition = 'none';
+  } else {
+    track.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+  }
+  track.style.transform = `translateX(-${newsIdx * cardWidth}px)`;
+  const dotIdx = newsIdx % newsTotal;
+  for(let i = 0; i < newsTotal; i++){
+    const d = document.getElementById('dot-'+i);
+    if(d){ d.style.background = i===dotIdx?'#8B0000':'#D4D4D8'; d.style.width = i===dotIdx?'28px':'8px'; }
+  }
+}
+
+function slideNews(dir) {
+  newsIdx += dir;
+  // When we reach the duplicated set, jump back silently
+  if(newsIdx >= newsTotal * 2) { newsIdx = newsTotal; updateCarousel(false); requestAnimationFrame(()=>{ newsIdx++; updateCarousel(true); }); return; }
+  if(newsIdx < 0) newsIdx = newsTotal - 1;
+  updateCarousel(true);
+}
+
+function goToSlide(i) { newsIdx = i; updateCarousel(true); }
+
+setInterval(()=>{
+  newsIdx++;
+  // Seamless loop: when we hit the start of the clone set, animate through then jump
+  if(newsIdx >= newsTotal * 2) {
+    updateCarousel(true);
+    setTimeout(()=>{ newsIdx = newsTotal % newsTotal; updateCarousel(false); }, 500);
+    return;
+  }
+  updateCarousel(true);
+}, 5000);
+</script>
+
+<!-- ═══════════════════════════════════════════════════
+     INSTAGRAM
+════════════════════════════════════════════════════ -->
+<section style="padding:80px 24px;background:#fff;overflow:hidden;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:48px;">
+      <div style="width:56px;height:56px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 8px 24px rgba(220,39,67,0.3);">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 3a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm5.25-.75a.875.875 0 1 1 0 1.75.875.875 0 0 1 0-1.75z"/></svg>
+      </div>
+      <div class="section-label" style="justify-content:center;">Seguinos</div>
+      <h2 class="section-title">El Cuervo en <span style="color:#8B0000;">Instagram</span></h2>
+      <p style="font-family:'Inter',sans-serif;font-size:14px;color:#71717A;line-height:1.7;max-width:480px;margin-top:12px;">
+        Fotos del barrio, del equipo y de cada partido. Todo el día, desde El Nido.
+      </p>
+    </div>
+
+    <!-- LightWidget feed real -->
+    <div style="margin-bottom:40px;">
+      <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+      <iframe src="//lightwidget.com/widgets/08cfe676f84856a3b0505687ec0e4c15.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+    </div>
+
+    <!-- CTA -->
+    <div style="text-align:center;">
+      <a href="https://www.instagram.com/slvc.oficial/" target="_blank" rel="noreferrer"
+         style="display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;padding:14px 32px;border-radius:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 24px rgba(220,39,67,0.3);transition:all 0.2s;"
+         onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 32px rgba(220,39,67,0.4)'"
+         onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 24px rgba(220,39,67,0.3)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 3a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm5.25-.75a.875.875 0 1 1 0 1.75.875.875 0 0 1 0-1.75z"/></svg>
+        Seguir a @slvc.oficial
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     EL NIDO
+════════════════════════════════════════════════════ -->
+<section id="el-nido" style="padding:80px 24px;background:#fff;">
+  <div style="max-width:1200px;margin:0 auto;" class="r-grid-2">
+
+    <div>
+      <div class="section-label">Nuestra casa</div>
+      <h2 class="section-title" style="margin-bottom:20px;">El <span style="color:#8B0000;">Nido</span></h2>
+      <p class="font-nexa" style="font-size:14px;color:#71717A;line-height:1.7;margin-bottom:32px;max-width:480px;">
+        El corazón de Villa Castells. El Nido es más que una cancha: es donde el barrio respira fútbol, donde cada domingo El Cuervo sale a ganar.
+      </p>
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:420px;">
+        <div style="background:#fff;border:1px solid #E4E4E7;border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:14px;">
+          <div style="width:40px;height:40px;background:rgba(139,0,0,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#8B0000"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <div>
+            <div class="font-nexa-bold" style="font-size:12px;text-transform:uppercase;letter-spacing:0.04em;color:#0A0A0A;">Dirección</div>
+            <div class="font-nexa" style="font-size:13px;color:#71717A;margin-top:2px;">Calle 7 y 485 · Villa Castells · La Plata, BA</div>
+          </div>
+        </div>
+        <div style="background:#fff;border:1px solid #E4E4E7;border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:14px;">
+          <div style="width:40px;height:40px;background:rgba(139,0,0,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#8B0000"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </div>
+          <div>
+            <div class="font-nexa-bold" style="font-size:12px;text-transform:uppercase;letter-spacing:0.04em;color:#0A0A0A;">Teléfono</div>
+            <div class="font-nexa" style="font-size:13px;color:#71717A;margin-top:2px;">221-123-4567 · 221-891-2345</div>
+          </div>
+        </div>
+      </div>
+      <a href="https://maps.google.com/?q=Club+San+Lorenzo+de+Villa+Castells" target="_blank" rel="noreferrer"
+         class="btn btn-primary" style="margin-top:24px;">
+        Cómo llegar
+      </a>
+    </div>
+
+    <!-- Mapa -->
+    <div style="border-radius:16px;overflow:hidden;box-shadow:0 4px 32px rgba(0,0,0,0.1);aspect-ratio:4/3;max-width:600px;">
+      <iframe title="El Nido SLVC"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3273.6088323636086!2d-58.02461389939831!3d-34.86605494297835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a2de0c06ad6561%3A0x957ccb6adbd3bc7c!2sClub%20San%20Lorenzo%20de%20Villa%20Castells!5e0!3m2!1ses!2sar!4v1710445018896!5m2!1ses!2sar"
+        width="100%" height="100%" style="border:0;display:block;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     CONTACTO
+════════════════════════════════════════════════════ -->
+<section id="contacto" style="padding:80px 24px;background:#fff;">
+  <div style="max-width:1200px;margin:0 auto;" class="r-grid-2">
+
+    <!-- Left: info -->
+    <div>
+      <div class="section-label">Sumate al Cuervo</div>
+      <h2 class="section-title" style="margin-bottom:16px;">Contacto &<br><span style="color:#8B0000;">WhatsApp</span></h2>
+      <p style="font-family:'Inter',sans-serif;font-size:14px;color:#71717A;line-height:1.7;margin-bottom:28px;max-width:420px;">
+        ¿Querés saber más del club, sumarte como socio o asociar a tus hijos? Escribinos, el barrio te espera.
+      </p>
+      <a href="https://wa.me/5492211234567?text=Hola!%20Me%20interesa%20saber%20más%20sobre%20el%20club%20San%20Lorenzo%20de%20Villa%20Castells"
+         target="_blank" rel="noreferrer"
+         style="display:inline-flex;align-items:center;gap:12px;background:#25D366;color:#0A0A0A;padding:14px 28px;border-radius:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.35);transition:all 0.2s;"
+         onmouseover="this.style.background='#1EBE5A';this.style.boxShadow='0 6px 24px rgba(37,211,102,0.45)'"
+         onmouseout="this.style.background='#25D366';this.style.boxShadow='0 4px 20px rgba(37,211,102,0.35)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Escribinos por WhatsApp
+      </a>
+    </div>
+
+    <!-- Right: form -->
+    <div style="background:#fff;border:1px solid #E4E4E7;border-radius:16px;padding:32px;">
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.03em;text-transform:uppercase;color:#0A0A0A;margin-bottom:24px;">Envianos un mensaje</h3>
+      <form id="contact-form" onsubmit="sendWhatsApp(event)" style="display:flex;flex-direction:column;gap:16px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div>
+            <label style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#71717A;display:block;margin-bottom:6px;">Nombre</label>
+            <input type="text" id="cf-nombre" placeholder="Tu nombre" required
+              style="width:100%;padding:11px 14px;border:1.5px solid #E4E4E7;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:#0A0A0A;outline:none;transition:border-color 0.2s;background:#fff;"
+              onfocus="this.style.borderColor='#8B0000'" onblur="this.style.borderColor='#E4E4E7'" />
+          </div>
+          <div>
+            <label style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#71717A;display:block;margin-bottom:6px;">Teléfono</label>
+            <input type="tel" id="cf-tel" placeholder="Tu teléfono"
+              style="width:100%;padding:11px 14px;border:1.5px solid #E4E4E7;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:#0A0A0A;outline:none;transition:border-color 0.2s;background:#fff;"
+              onfocus="this.style.borderColor='#8B0000'" onblur="this.style.borderColor='#E4E4E7'" />
+          </div>
+        </div>
+        <div>
+          <label style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#71717A;display:block;margin-bottom:6px;">Asunto</label>
+          <select id="cf-asunto"
+            style="width:100%;padding:11px 14px;border:1.5px solid #E4E4E7;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:#0A0A0A;outline:none;background:#fff;transition:border-color 0.2s;"
+            onfocus="this.style.borderColor='#8B0000'" onblur="this.style.borderColor='#E4E4E7'">
+            <option value="Ser socio">Quiero ser socio</option>
+            <option value="Inscribir a mi hijo">Inscribir a mi hijo</option>
+            <option value="Sponsor / Publicidad">Sponsor / Publicidad</option>
+            <option value="Info general">Información general</option>
+            <option value="Otro">Otro</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#71717A;display:block;margin-bottom:6px;">Mensaje</label>
+          <textarea id="cf-msg" rows="3" placeholder="¿En qué te podemos ayudar?" required
+            style="width:100%;padding:11px 14px;border:1.5px solid #E4E4E7;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;color:#0A0A0A;outline:none;resize:vertical;transition:border-color 0.2s;background:#fff;"
+            onfocus="this.style.borderColor='#8B0000'" onblur="this.style.borderColor='#E4E4E7'"></textarea>
+        </div>
+        <button type="submit"
+          style="width:100%;padding:14px;background:#8B0000;color:#fff;border:none;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background 0.2s;"
+          onmouseover="this.style.background='#A00000'" onmouseout="this.style.background='#8B0000'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Enviar por WhatsApp
+        </button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function sendWhatsApp(e) {
+  e.preventDefault();
+  const nombre  = document.getElementById('cf-nombre').value.trim();
+  const tel     = document.getElementById('cf-tel').value.trim();
+  const asunto  = document.getElementById('cf-asunto').value;
+  const msg     = document.getElementById('cf-msg').value.trim();
+  const text = encodeURIComponent(
+    `Hola! Soy ${nombre}${tel?' ('+tel+')':''}.\nAsunto: ${asunto}\n${msg}`
+  );
+  window.open(`https://wa.me/5492211234567?text=${text}`, '_blank');
+}
+</script>
+
+<%- include('partials/footer') %>
+</body>
+</html>
