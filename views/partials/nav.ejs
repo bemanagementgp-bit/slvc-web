@@ -7,8 +7,8 @@
       <img src="/images/Logo.1268415243901683eac4.png" alt="SLVC"
            style="width:40px;height:40px;object-fit:contain;" id="nav-logo-img" />
       <div style="line-height:1.1;">
-        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.06em;color:#0A0A0A !important;-webkit-text-fill-color:#0A0A0A !important;" id="nav-name">San Lorenzo</div>
-        <div style="font-family:'Inter',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:#71717A !important;-webkit-text-fill-color:#71717A !important;" id="nav-sub">de Villa Castells</div>
+        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.06em;color:#fff;-webkit-text-fill-color:#fff;" id="nav-name">San Lorenzo</div>
+        <div style="font-family:'Inter',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);-webkit-text-fill-color:rgba(255,255,255,0.6);" id="nav-sub">de Villa Castells</div>
       </div>
     </a>
 
@@ -35,9 +35,9 @@
       <!-- Hamburger -->
       <button id="menu-btn" onclick="toggleDrawer()"
         style="display:flex;flex-direction:column;gap:5px;padding:6px;background:transparent;border:none;cursor:pointer;" aria-label="Menú">
-        <span style="width:22px;height:2px;border-radius:2px;background:#0A0A0A;display:block;transition:all 0.3s;" id="bar1"></span>
-        <span style="width:22px;height:2px;border-radius:2px;background:#0A0A0A;display:block;transition:all 0.3s;" id="bar2"></span>
-        <span style="width:16px;height:2px;border-radius:2px;background:#0A0A0A;display:block;transition:all 0.3s;" id="bar3"></span>
+        <span style="width:22px;height:2px;border-radius:2px;background:#fff;display:block;transition:all 0.3s;" id="bar1"></span>
+        <span style="width:22px;height:2px;border-radius:2px;background:#fff;display:block;transition:all 0.3s;" id="bar2"></span>
+        <span style="width:16px;height:2px;border-radius:2px;background:#fff;display:block;transition:all 0.3s;" id="bar3"></span>
       </button>
     </div>
   </div>
@@ -81,15 +81,20 @@
 .nav-link {
   font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;
   letter-spacing:0.08em;text-transform:uppercase;
-  padding:8px 12px;border-radius:6px;color:#0A0A0A;
+  padding:8px 12px;border-radius:6px;color:#fff;
   text-decoration:none;transition:background 0.2s;
 }
-.nav-link:hover { background:rgba(0,0,0,0.06); }
-.nav-social-icon { color:#71717A;transition:color 0.2s; }
-.nav-social-icon:hover { color:#0A0A0A; }
+.nav-link:hover { background:rgba(255,255,255,0.15); }
+.nav-social-icon { color:rgba(255,255,255,0.7);transition:color 0.2s; }
+.nav-social-icon:hover { color:#fff; }
 </style>
 
 <script>
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('main-nav');
+    if (!nav) return;
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
   function toggleDrawer() {
     document.getElementById('mobile-drawer').classList.toggle('open');
   }

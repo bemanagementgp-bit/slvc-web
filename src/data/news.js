@@ -103,7 +103,7 @@
     slug: 'quinta-estrella-2026',
     category: 'PRIMERA DIVISIÓN',
     title: 'La Quinta Estrella',
-    subtitle: 'Campeones del Torneo Clasificatorio 2026: la historia de una gesta',
+    subtitle: 'Clasificados al Torneo Regional',
     image: '/images/new2.27cd7312841f023b1e44.png',
     thumbnail: '/images/new2.27cd7312841f023b1e44.png',
     date: '2026-06-01',
@@ -115,7 +115,7 @@
       <h3>La final</h3>
       <p>La final se jugó en El Nido ante más de ochocientas personas. La banda del club tocó desde el calentamiento, el barrio entero se pintó de bordo y blanco. El partido fue intenso, igualado, emocionante. El gol de la victoria llegó a los 88 minutos y desató una euforia colectiva que se escuchó hasta el centro de La Plata.</p>
       <h3>La quinta estrella</h3>
-      <p>Con este título, San Lorenzo de Villa Castells se convierte en uno de los clubes con más estrellas en la Liga Amateur Platense. Un logro que hubiera parecido imposible para quienes vieron el club nacer en 1990 de la mano de Nino Menechela y Alfredo Giommi.</p>
+      <p>Con este título, San Lorenzo de Villa Castells se clasifica al Torneo Regional Federado, el siguiente escalón en la pirámide del fútbol argentino. Un logro que hubiera parecido imposible para quienes vieron el club nacer en 1990 de la mano de Nino Menechela y Alfredo Giommi.</p>
       <p>"Esto es para todos los que estuvieron desde el principio", dijeron los capitanes al levantar la copa. Y Villa Castells les respondió con un abrazo de barrio que duró toda la noche.</p>
     `,
     gallery: [

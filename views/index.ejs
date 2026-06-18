@@ -10,23 +10,49 @@
 }
 /* timeline hide scrollbar */
 #timeline-scroll::-webkit-scrollbar { display:none; }
+/* Hero mobile: video completo sin espacio vacío */
+@media(max-width:768px){
+  #hero {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  #hero-video {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: unset !important;
+  }
+  #hero-poster {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+  #hero-play-btn, #hero-sound-btn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+}
 </style>
 
 <!-- ═══════════════════════════════════════════════════
      HERO
 ════════════════════════════════════════════════════ -->
-<section id="hero" style="position:relative;width:100%;height:100svh;min-height:600px;overflow:hidden;background:#0A0A0A;margin-top:64px;">
+<section id="hero" style="position:relative;width:100%;height:100svh;min-height:600px;overflow:hidden;background:#0A0A0A;">
   <!-- Video -->
   <video id="hero-video" muted playsinline
          poster="/images/new1.c91ede4c59d431d30c08.jpg"
          style="width:100%;height:100%;object-fit:cover;display:block;transition:opacity 1s;">
     <source src="/video/hero.mp4" type="video/mp4" />
   </video>
+  <!-- Top gradient: opaque at nav height, fades out below -->
+  <div style="position:absolute;top:0;left:0;right:0;height:160px;background:linear-gradient(to bottom,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.88) 64px,rgba(0,0,0,0.2) 110px,transparent 100%);z-index:1;pointer-events:none;"></div>
   <!-- Poster fallback (shown when video ends) -->
   <img id="hero-poster"
        src="/images/hero-poster.png"
        alt=""
-       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s;pointer-events:none;" />
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0;transition:opacity 1.2s;pointer-events:none;" />
   <!-- Play/Pause + Sound controls -->
   <div style="position:absolute;bottom:28px;right:28px;display:flex;gap:10px;z-index:10;">
     <!-- Play/Pause -->
@@ -119,18 +145,30 @@ function toggleHeroSound() {
 <!-- ═══════════════════════════════════════════════════
      HISTORIA — LÍNEA DE TIEMPO
 ════════════════════════════════════════════════════ -->
-<section id="historia" style="padding:72px 0 64px;background:#071424;overflow:hidden;">
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px 40px;">
-    <div class="section-label" style="color:rgba(255,255,255,0.45);">Desde 1990</div>
+<section id="historia" style="padding:72px 0 64px;overflow:hidden;position:relative;background:#060D18;">
+  <!-- Mesh gradient background -->
+  <div style="position:absolute;inset:0;background:
+    radial-gradient(ellipse 55% 70% at 15% 60%, rgba(92,0,0,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 60% at 85% 40%, rgba(200,146,42,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(7,20,36,0.9) 0%, transparent 100%);
+    pointer-events:none;z-index:0;"></div>
+  <!-- Dot grid overlay -->
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.028) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0;"></div>
+  <!-- Top fade -->
+  <div style="position:absolute;top:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,#060D18,transparent);pointer-events:none;z-index:0;"></div>
+
+  <div style="position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 24px 40px;">
+    <div class="section-label" style="color:rgba(255,255,255,0.4);">Desde 1990</div>
     <h2 class="section-title" style="color:#fff;">Historia del <span style="color:#C8922A;">Cuervo</span></h2>
   </div>
 
   <!-- Timeline horizontal -->
-  <div id="timeline-scroll" style="overflow-x:auto;overflow-y:hidden;padding:0 24px 32px;cursor:grab;user-select:none;scrollbar-width:none;-ms-overflow-style:none;">
+  <div id="timeline-scroll" style="position:relative;z-index:1;overflow-x:auto;overflow-y:hidden;padding:0 24px 32px;cursor:grab;user-select:none;scrollbar-width:none;-ms-overflow-style:none;">
     <div id="timeline-inner" style="display:inline-flex;align-items:flex-start;gap:0;position:relative;padding-bottom:8px;">
 
-      <!-- Connecting line -->
-      <div style="position:absolute;top:20px;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,#5C0000 5%,#8B0000 30%,#C8922A 60%,#8B0000 85%,transparent 100%);pointer-events:none;"></div>
+      <!-- Connecting line — glowing gradient -->
+      <div style="position:absolute;top:20px;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,rgba(92,0,0,0.6) 5%,#8B0000 25%,#C8922A 55%,#8B0000 80%,transparent 100%);pointer-events:none;"></div>
+      <div style="position:absolute;top:19px;left:0;right:0;height:3px;background:linear-gradient(to right,transparent,rgba(139,0,0,0.15) 5%,rgba(139,0,0,0.25) 30%,rgba(200,146,42,0.3) 55%,rgba(139,0,0,0.2) 80%,transparent 100%);filter:blur(3px);pointer-events:none;"></div>
 
       <%
       var hitos = [
@@ -148,17 +186,26 @@ function toggleHeroSound() {
 
       <% hitos.forEach(function(h, i){ %>
       <div style="display:flex;flex-direction:column;align-items:center;width:300px;flex-shrink:0;padding:0 30px;position:relative;">
-        <!-- Icon circle -->
-        <div style="width:52px;height:52px;border-radius:50%;background:rgba(7,20,36,0.9);border:2px solid <%= h.borderColor %>;display:flex;align-items:center;justify-content:center;z-index:2;flex-shrink:0;box-shadow:0 0 0 5px #071424, 0 4px 20px rgba(0,0,0,0.5);margin-bottom:24px;transition:transform 0.2s;"
-             onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'">
-          <i class="<%= h.fa %>" style="color:<%= h.color %>;font-size:18px;"></i>
+        <!-- Icon circle with glow -->
+        <div style="position:relative;margin-bottom:24px;">
+          <div style="position:absolute;inset:-6px;border-radius:50%;background:<%= h.color %>;opacity:0.12;filter:blur(8px);pointer-events:none;"></div>
+          <div style="width:52px;height:52px;border-radius:50%;background:rgba(6,13,24,0.95);border:1.5px solid <%= h.borderColor %>;display:flex;align-items:center;justify-content:center;z-index:2;flex-shrink:0;box-shadow:0 0 0 4px rgba(6,13,24,0.9),0 0 20px rgba(0,0,0,0.6);position:relative;transition:transform 0.25s,border-color 0.25s;"
+               onmouseover="this.style.transform='scale(1.18)';this.style.borderColor='<%= h.color %>'" onmouseout="this.style.transform='scale(1)';this.style.borderColor='<%= h.borderColor %>'">
+            <i class="<%= h.fa %>" style="color:<%= h.color %>;font-size:18px;"></i>
+          </div>
         </div>
-        <!-- Year -->
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:0.04em;color:<%= h.color %>;line-height:1;margin-bottom:8px;"><%= h.year %></div>
-        <!-- Title -->
-        <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.9);margin-bottom:10px;text-align:center;"><%= h.title %></div>
-        <!-- Text -->
-        <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.4);line-height:1.65;text-align:center;max-width:220px;"><%= h.text %></div>
+        <!-- Card body -->
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:4px;padding:20px 18px;text-align:center;backdrop-filter:blur(8px);transition:background 0.25s,border-color 0.25s;"
+             onmouseover="this.style.background='rgba(255,255,255,0.065)';this.style.borderColor='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.03)';this.style.borderColor='rgba(255,255,255,0.06)'">
+          <!-- Year -->
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:0.04em;color:<%= h.color %>;line-height:1;margin-bottom:6px;"><%= h.year %></div>
+          <!-- Title -->
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.9);margin-bottom:10px;"><%= h.title %></div>
+          <!-- Divider -->
+          <div style="height:1px;background:linear-gradient(to right,transparent,<%= h.borderColor %>,transparent);margin-bottom:10px;"></div>
+          <!-- Text -->
+          <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.42);line-height:1.65;"><%= h.text %></div>
+        </div>
       </div>
       <% if(i < hitos.length-1){ %>
       <div style="width:8px;flex-shrink:0;"></div>
@@ -168,8 +215,8 @@ function toggleHeroSound() {
   </div>
 
   <!-- Drag hint -->
-  <div style="text-align:center;margin-top:4px;">
-    <span style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;">← deslizá para ver más →</span>
+  <div style="position:relative;z-index:1;text-align:center;margin-top:4px;">
+    <span style="font-family:'Inter',sans-serif;font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:0.1em;text-transform:uppercase;">← deslizá para ver más →</span>
   </div>
 </section>
 
@@ -192,7 +239,7 @@ function toggleHeroSound() {
    const slvcT2 = teams[proximoPartido.local] || {};
    const rivT2  = teams[proximoPartido.visitante] || {};
 %>
-<section id="en-vivo" style="padding:80px 24px;background:#fff;overflow:hidden;position:relative;">
+<section id="en-vivo" style="padding:80px 24px;background:#fff;overflow:hidden;position:relative;border-top:3px solid #8B0000;">
   <div style="position:absolute;top:-120px;right:-120px;width:500px;height:500px;background:rgba(139,0,0,0.03);border-radius:50%;pointer-events:none;"></div>
   <div style="max-width:1200px;margin:0 auto;">
 
@@ -218,25 +265,25 @@ function toggleHeroSound() {
           </div>
           <div style="padding:28px 24px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;">
             <div style="text-align:center;">
-              <div style="width:68px;height:68px;margin:0 auto 10px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;padding:8px;">
+              <div style="width:68px;height:68px;margin:0 auto 10px;background:#F4F4F5;display:flex;align-items:center;justify-content:center;padding:8px;">
                 <img src="<%= proximoPartido.local === 'SAN LORENZO V.C.' ? '/images/Logo.1268415243901683eac4.png' : (slvcT2.logo || '') %>" alt="" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.opacity=0" />
               </div>
               <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;color:#0A0A0A;line-height:1.2;"><%= proximoPartido.local %></div>
               <div style="font-family:'Inter',sans-serif;font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Local</div>
             </div>
             <div style="text-align:center;">
-              <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#B0B0B8;line-height:1;letter-spacing:0.04em;">VS</div>
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:44px;color:#8B0000;line-height:1;letter-spacing:0.04em;">VS</div>
               <div style="font-family:'Inter',sans-serif;font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.08em;margin-top:6px;">Por jugar</div>
             </div>
             <div style="text-align:center;">
-              <div style="width:68px;height:68px;margin:0 auto 10px;border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;padding:8px;">
+              <div style="width:68px;height:68px;margin:0 auto 10px;background:#F4F4F5;display:flex;align-items:center;justify-content:center;padding:8px;">
                 <img src="<%= proximoPartido.visitante === 'SAN LORENZO V.C.' ? '/images/Logo.1268415243901683eac4.png' : (rivT2.logo || '') %>" alt="" style="width:100%;height:100%;object-fit:contain;" onerror="this.style.opacity=0" />
               </div>
               <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;color:#0A0A0A;line-height:1.2;"><%= proximoPartido.visitante %></div>
               <div style="font-family:'Inter',sans-serif;font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">Visitante</div>
             </div>
           </div>
-          <div style="border-top:1px solid #F4F4F5;padding:12px 24px;background:#F4F4F5;display:flex;align-items:center;justify-content:space-between;">
+          <div style="border-top:1px solid var(--border);padding:12px 24px;background:#F4F4F5;display:flex;align-items:center;justify-content:space-between;">
             <span style="font-family:'Inter',sans-serif;font-size:11px;color:#A1A1AA;"><%= proximoPartido.lugar %></span>
             <a href="https://www.lapf.com.ar/datos-torneo/165/442/13/1" target="_blank"
                style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#8B0000;text-decoration:none;">Ver en LAPF →</a>
@@ -260,8 +307,8 @@ function toggleHeroSound() {
       <a href="https://www.youtube.com/@slvcoficial" target="_blank" rel="noreferrer"
          style="display:block;border-radius:16px;overflow:hidden;background:#0F0F0F;text-decoration:none;position:relative;aspect-ratio:16/9;max-width:600px;"
          onmouseover="this.querySelector('.yt-play').style.transform='scale(1.1)'" onmouseout="this.querySelector('.yt-play').style.transform='scale(1)'">
-        <img src="/images/new2.27cd7312841f023b1e44.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45;" />
-        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(92,0,0,0.6),rgba(0,0,0,0.55));"></div>
+        <img src="/images/hero-poster.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:1;" />
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.25),rgba(0,0,0,0.4));"></div>
         <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
           <div class="yt-play" style="width:68px;height:68px;background:#FF0000;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(255,0,0,0.45);transition:transform 0.3s;">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
@@ -281,7 +328,7 @@ function toggleHeroSound() {
 <!-- ═══════════════════════════════════════════════════
      FIXTURE + TABLA (side by side)
 ════════════════════════════════════════════════════ -->
-<section style="padding:0 24px 80px;background:#fff;" id="fixture">
+<section style="padding:80px 24px;background:#F4F4F5;" id="fixture">
   <div style="max-width:1200px;margin:0 auto;">
     <!-- Header strip -->
     <div style="background:#fff;border-bottom:1px solid #E4E4E7;padding:20px 0 0;margin-bottom:0;border-radius:16px 16px 0 0;overflow:hidden;">
@@ -447,10 +494,10 @@ function switchSection(s) {
     <div style="background:#0A0A0A;padding:0 20px;display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;min-height:56px;">
       <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#71717A;">Sponsors</span>
     </div>
-    <div style="overflow:hidden;flex:1;">
-      <div style="display:inline-flex;align-items:center;animation:ticker 35s linear infinite;gap:0;white-space:nowrap;">
+    <div style="overflow:hidden;flex:1;height:56px;display:flex;align-items:center;">
+      <div style="display:inline-flex;align-items:center;animation:ticker 35s linear infinite;gap:0;white-space:nowrap;height:100%;">
         <% [1,2].forEach(function(){ %>
-        <div style="display:inline-flex;align-items:center;gap:64px;padding:0 64px;">
+        <div style="display:inline-flex;align-items:center;gap:64px;padding:0 64px;height:56px;">
           <% [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17].forEach(function(n){ %>
           <img src="/images/sponsor/<%= n %>.png" alt="" style="height:24px;max-width:120px;object-fit:contain;flex-shrink:0;opacity:0.5;filter:grayscale(1);transition:all 0.2s;" onmouseover="this.style.opacity=1;this.style.filter='none'" onmouseout="this.style.opacity=0.5;this.style.filter='grayscale(1)'" />
           <% }) %>
@@ -464,7 +511,7 @@ function switchSection(s) {
 <!-- ═══════════════════════════════════════════════════
      NOTICIAS — CARRUSEL
 ════════════════════════════════════════════════════ -->
-<section style="padding:80px 0 80px;background:#F4F4F5;overflow:hidden;">
+<section style="padding:80px 0 80px;background:#fff;overflow:hidden;">
   <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
     <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px;">
       <div>
@@ -491,9 +538,10 @@ function switchSection(s) {
   <div style="position:relative;overflow:hidden;">
     <div id="news-track" style="display:flex;gap:24px;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);will-change:transform;padding:0 24px 8px;max-width:none;">
       <%
-      // Render twice for seamless infinite loop
-      var newsDouble = news.concat(news);
-      newsDouble.forEach(function(n, i){ %>
+      // Triple set: [copy A] + [originals] + [copy B]
+      // JS starts at index N (the originals), corrects silently when hitting either end
+      var newsTriple = news.concat(news).concat(news);
+      newsTriple.forEach(function(n, i){ %>
       <a href="/noticias/<%= n.slug %>"
          style="text-decoration:none;flex-shrink:0;width:340px;border-radius:16px;overflow:hidden;background:#fff;display:flex;flex-direction:column;transition:box-shadow 0.3s,transform 0.3s;box-shadow:0 2px 12px rgba(0,0,0,0.06);"
          onmouseover="this.style.boxShadow='0 12px 40px rgba(0,0,0,0.12)';this.style.transform='translateY(-4px)'"
@@ -539,52 +587,49 @@ function switchSection(s) {
 </section>
 
 <script>
-let newsIdx = 0;
 const newsTotal = <%= news.length %>;
-const cardWidth = 364; // card 340 + gap 24
+const cardWidth = 364; // card 340px + gap 24px
+let newsIdx = newsTotal; // start at beginning of middle (original) set
 
 function updateCarousel(animated) {
   const track = document.getElementById('news-track');
-  if(!track) return;
-  if(animated === false) {
-    track.style.transition = 'none';
-  } else {
-    track.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1)';
-  }
+  if (!track) return;
+  track.style.transition = animated ? 'transform 0.5s cubic-bezier(0.4,0,0.2,1)' : 'none';
   track.style.transform = `translateX(-${newsIdx * cardWidth}px)`;
   const dotIdx = newsIdx % newsTotal;
-  for(let i = 0; i < newsTotal; i++){
-    const d = document.getElementById('dot-'+i);
-    if(d){ d.style.background = i===dotIdx?'#8B0000':'#D4D4D8'; d.style.width = i===dotIdx?'28px':'8px'; }
+  for (let i = 0; i < newsTotal; i++) {
+    const d = document.getElementById('dot-' + i);
+    if (d) { d.style.background = i === dotIdx ? '#8B0000' : '#D4D4D8'; d.style.width = i === dotIdx ? '28px' : '8px'; }
   }
+}
+
+// After each animated move, silently reposition into the middle set if needed
+function correctLoop() {
+  if (newsIdx >= newsTotal * 2) { newsIdx -= newsTotal; updateCarousel(false); }
+  else if (newsIdx < newsTotal) { newsIdx += newsTotal; updateCarousel(false); }
 }
 
 function slideNews(dir) {
   newsIdx += dir;
-  // When we reach the duplicated set, jump back silently
-  if(newsIdx >= newsTotal * 2) { newsIdx = newsTotal; updateCarousel(false); requestAnimationFrame(()=>{ newsIdx++; updateCarousel(true); }); return; }
-  if(newsIdx < 0) newsIdx = newsTotal - 1;
+  updateCarousel(true);
+  setTimeout(correctLoop, 520);
+}
+
+function goToSlide(i) {
+  newsIdx = newsTotal + i;
   updateCarousel(true);
 }
 
-function goToSlide(i) { newsIdx = i; updateCarousel(true); }
+// Set initial position without animation
+updateCarousel(false);
 
-setInterval(()=>{
-  newsIdx++;
-  // Seamless loop: when we hit the start of the clone set, animate through then jump
-  if(newsIdx >= newsTotal * 2) {
-    updateCarousel(true);
-    setTimeout(()=>{ newsIdx = newsTotal % newsTotal; updateCarousel(false); }, 500);
-    return;
-  }
-  updateCarousel(true);
-}, 5000);
+setInterval(() => slideNews(1), 5000);
 </script>
 
 <!-- ═══════════════════════════════════════════════════
      INSTAGRAM
 ════════════════════════════════════════════════════ -->
-<section style="padding:80px 24px;background:#fff;overflow:hidden;">
+<section style="padding:80px 24px;background:#F4F4F5;overflow:hidden;">
   <div style="max-width:1200px;margin:0 auto;">
     <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:48px;">
       <div style="width:56px;height:56px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;box-shadow:0 8px 24px rgba(220,39,67,0.3);">
@@ -619,7 +664,7 @@ setInterval(()=>{
 <!-- ═══════════════════════════════════════════════════
      EL NIDO
 ════════════════════════════════════════════════════ -->
-<section id="el-nido" style="padding:80px 24px;background:#fff;">
+<section id="el-nido" style="padding:80px 24px;background:#fff;border-top:3px solid #8B0000;">
   <div style="max-width:1200px;margin:0 auto;" class="r-grid-2">
 
     <div>
@@ -668,7 +713,7 @@ setInterval(()=>{
 <!-- ═══════════════════════════════════════════════════
      CONTACTO
 ════════════════════════════════════════════════════ -->
-<section id="contacto" style="padding:80px 24px;background:#fff;">
+<section id="contacto" style="padding:80px 24px;background:#F4F4F5;">
   <div style="max-width:1200px;margin:0 auto;" class="r-grid-2">
 
     <!-- Left: info -->
