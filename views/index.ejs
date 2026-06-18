@@ -46,8 +46,8 @@
          style="width:100%;height:100%;object-fit:cover;display:block;transition:opacity 1s;">
     <source src="/video/hero.mp4" type="video/mp4" />
   </video>
-  <!-- Top gradient: opaque at nav height, fades out below -->
-  <div style="position:absolute;top:0;left:0;right:0;height:160px;background:linear-gradient(to bottom,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.88) 64px,rgba(0,0,0,0.2) 110px,transparent 100%);z-index:1;pointer-events:none;"></div>
+  <!-- Top gradient: very subtle, only for nav text readability -->
+  <div style="position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,rgba(0,0,0,0.28) 0%,transparent 100%);z-index:1;pointer-events:none;"></div>
   <!-- Poster fallback (shown when video ends) -->
   <img id="hero-poster"
        src="/images/hero-poster.png"
@@ -645,23 +645,19 @@ setInterval(() => slideNews(1), 5000);
     <!-- Instagram posts grid -->
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:40px;border-radius:12px;overflow:hidden;">
       <% [
-        { code:'DY3P7LxMbsi' },
-        { code:'DY7I0yEPRsr' },
-        { code:'DXDFjD1GQa5' },
-        { code:'DY4xTPIv4lm' },
-        { code:'DZgaRp6xJ18' },
-        { code:'DZk1X3VRUho' }
+        { img:'/images/ig-1.jpg', url:'https://www.instagram.com/p/DY3P7LxMbsi/' },
+        { img:'/images/ig-2.jpg', url:'https://www.instagram.com/p/DY7I0yEPRsr/' },
+        { img:'/images/ig-3.jpg', url:'https://www.instagram.com/p/DXDFjD1GQa5/' },
+        { img:'/images/ig-1.jpg', url:'https://www.instagram.com/p/DY4xTPIv4lm/' },
+        { img:'/images/ig-2.jpg', url:'https://www.instagram.com/p/DZgaRp6xJ18/' },
+        { img:'/images/ig-3.jpg', url:'https://www.instagram.com/p/DZk1X3VRUho/' }
       ].forEach(function(p){ %>
-      <a href="https://www.instagram.com/p/<%= p.code %>/" target="_blank" rel="noreferrer"
+      <a href="<%= p.url %>" target="_blank" rel="noreferrer"
          style="position:relative;aspect-ratio:1/1;overflow:hidden;display:block;background:#1a1a1a;"
-         onmouseover="this.querySelector('.ig-overlay').style.opacity='1'"
-         onmouseout="this.querySelector('.ig-overlay').style.opacity='0'">
-        <img src="https://www.instagram.com/p/<%= p.code %>/media/?size=l"
-             alt="Instagram SLVC"
-             style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;"
-             onmouseover="this.style.transform='scale(1.05)'"
-             onmouseout="this.style.transform='scale(1)'"
-             onerror="this.parentElement.style.background='linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)';this.style.display='none'" />
+         onmouseover="this.querySelector('.ig-overlay').style.opacity='1';this.querySelector('img').style.transform='scale(1.05)'"
+         onmouseout="this.querySelector('.ig-overlay').style.opacity='0';this.querySelector('img').style.transform='scale(1)'">
+        <img src="<%= p.img %>" alt="Instagram SLVC"
+             style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;" />
         <div class="ig-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;pointer-events:none;">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 3a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm5.25-.75a.875.875 0 1 1 0 1.75.875.875 0 0 1 0-1.75z"/></svg>
         </div>
