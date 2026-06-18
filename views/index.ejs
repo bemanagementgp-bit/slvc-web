@@ -642,10 +642,31 @@ setInterval(() => slideNews(1), 5000);
       </p>
     </div>
 
-    <!-- LightWidget feed real -->
-    <div style="margin-bottom:40px;">
-      <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
-      <iframe src="//lightwidget.com/widgets/08cfe676f84856a3b0505687ec0e4c15.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+    <!-- Instagram posts grid -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-bottom:40px;border-radius:12px;overflow:hidden;">
+      <% [
+        { code:'DY3P7LxMbsi' },
+        { code:'DY7I0yEPRsr' },
+        { code:'DXDFjD1GQa5' },
+        { code:'DY4xTPIv4lm' },
+        { code:'DZgaRp6xJ18' },
+        { code:'DZk1X3VRUho' }
+      ].forEach(function(p){ %>
+      <a href="https://www.instagram.com/p/<%= p.code %>/" target="_blank" rel="noreferrer"
+         style="position:relative;aspect-ratio:1/1;overflow:hidden;display:block;background:#1a1a1a;"
+         onmouseover="this.querySelector('.ig-overlay').style.opacity='1'"
+         onmouseout="this.querySelector('.ig-overlay').style.opacity='0'">
+        <img src="https://www.instagram.com/p/<%= p.code %>/media/?size=l"
+             alt="Instagram SLVC"
+             style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;"
+             onmouseover="this.style.transform='scale(1.05)'"
+             onmouseout="this.style.transform='scale(1)'"
+             onerror="this.parentElement.style.background='linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)';this.style.display='none'" />
+        <div class="ig-overlay" style="position:absolute;inset:0;background:rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;pointer-events:none;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 3a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm5.25-.75a.875.875 0 1 1 0 1.75.875.875 0 0 1 0-1.75z"/></svg>
+        </div>
+      </a>
+      <% }) %>
     </div>
 
     <!-- CTA -->
