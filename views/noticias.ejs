@@ -1,6 +1,14 @@
 <%- include('partials/head', { title: 'Noticias — San Lorenzo de Villa Castells' }) %>
 <%- include('partials/nav') %>
 
+<script>
+  // Forzar nav blanca desde el inicio en esta página
+  document.addEventListener('DOMContentLoaded', function() {
+    const nav = document.getElementById('main-nav');
+    if (nav) nav.classList.add('scrolled');
+  });
+</script>
+
 <style>
 /* ── Newspaper masthead ── */
 .news-masthead {
@@ -68,13 +76,14 @@
 .feat-img-wrap {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 4/3;
+  height: 320px;
 }
 @media(min-width: 900px) {
-  .feat-img-wrap { aspect-ratio: unset; min-height: 500px; }
+  .feat-img-wrap { height: 420px; }
 }
 .feat-img-wrap img {
   width: 100%; height: 100%; object-fit: cover;
+  object-position: center top;
   transition: transform 0.7s;
   display: block;
 }

@@ -1,6 +1,13 @@
 <%- include('partials/head', { title: noticia.title + ' — SLVC' }) %>
 <%- include('partials/nav') %>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const nav = document.getElementById('main-nav');
+    if (nav) nav.classList.add('scrolled');
+  });
+</script>
+
 <style>
 /* ── Article page ── */
 .art-header {
