@@ -49,7 +49,7 @@ function parseStandings(html) {
 
     const getText = (cell) => cell.replace(/<[^>]+>/g, '').trim();
     const imgAlt = cells[1] && cells[1].match(/alt="logo ([^"]+)"/);
-    const equipo = imgAlt ? imgAlt[1].trim() : getText(cells[1]);
+    const equipo = normalizeName(imgAlt ? imgAlt[1].trim() : getText(cells[1]));
 
     tabla.push({
       pos:    parseInt(getText(cells[0])) || tabla.length + 1,
@@ -86,10 +86,10 @@ function parseFixture(html, fechaNum) {
       return txt === '' || txt === '-' ? null : parseInt(txt);
     };
 
-    const local     = getTeam(cells[0]);
+    const local     = normalizeName(getTeam(cells[0]));
     const golL      = cells[1] ? getScore(cells[1]) : null;
     const golV      = cells[3] ? getScore(cells[3]) : null;
-    const visitante = cells[4] ? getTeam(cells[4]) : '';
+    const visitante = cells[4] ? normalizeName(getTeam(cells[4])) : '';
 
     if (!local || !visitante) return;
 
@@ -128,6 +128,14 @@ async function getCurrentFechaUrl() {
       res.resume();
     }).on('error', () => resolve(null));
   });
+}
+
+// Normaliza nombres de LAPF para que coincidan con las keys del fallback
+const FALLBACK_KEYS = Object.keys(fallback.teams);
+function normalizeName(lapfName) {
+  const stripped = lapfName.replace(/[^A-Z]/g, '');
+  const match = FALLBACK_KEYS.find(k => k.replace(/[^A-Z]/g, '') === stripped);
+  return match || lapfName;
 }
 
 function parseFechaFromUrl(url) {
