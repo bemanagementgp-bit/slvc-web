@@ -55,33 +55,6 @@ const news = [
     ]
   },
   {
-    slug: 'hermosa-aventura',
-    category: 'INFANTIL',
-    title: 'Una Hermosa Aventura',
-    subtitle: 'La generación 2006 que enamoró al barrio',
-    image: '/images/2006.b130e720f2043832b1fa.jpeg',
-    thumbnail: '/images/2006-2.e5eda6b3b0353341de3d.jpeg',
-    date: '2024-02-20',
-    content: `
-      <p>Hay equipos que dejan huella. La generación 2006 de San Lorenzo de Villa Castells fue mucho más que un equipo de fútbol infantil: fue una familia, una aventura que el barrio no va a olvidar fácilmente.</p>
-      <p>Pibes que corrían detrás de una pelota con los ojos llenos de ilusión, con las camisetas bordó bien puestas, representando con orgullo a su club de barrio. Un club que supera los 450 chicos distribuidos en más de 10 categorías desde que llegó al predio propio en 2013.</p>
-      <h3>El equipo</h3>
-      <p>Desde el primer entrenamiento se notó que este grupo tenía algo especial. No solo habilidad técnica, sino un espíritu de equipo fuera de lo común. Se cubrían, se gritaban, se abrazaban. El mismo ADN que caracteriza a todo lo que se construyó en El Nido desde aquella fundación del 10 de noviembre de 1990.</p>
-      <h3>La campaña</h3>
-      <p>Partido a partido fueron creciendo. Con victorias y derrotas, pero siempre de pie. El barrio empezó a seguirlos, las familias llenaban la banda, El Nido se transformó en una fiesta cada fin de semana.</p>
-      <h3>Más que fútbol</h3>
-      <p>Lo que se llevaron esos pibes va mucho más allá de los resultados. Se llevaron amigos para toda la vida, valores y la pertenencia a algo más grande que ellos mismos: San Lorenzo de Villa Castells, un club que desde sus inicios tuvo como prioridad que las familias humildes pudieran acceder al deporte.</p>
-    `,
-    gallery: [
-      '/images/2006.b130e720f2043832b1fa.jpeg',
-      '/images/2006-2.e5eda6b3b0353341de3d.jpeg',
-      '/images/2006-3.a319bf39ce5d505aaa41.jpeg',
-      '/images/2006-4.c2b9373ce0df7a1d0b90.jpeg',
-      '/images/2006-5.8938ba69fa07010aaf8e.jpeg',
-      '/images/2006-6.9c484901fc83c308696a.jpeg',
-    ]
-  },
-  {
     slug: 'pelicula-del-campeon',
     category: 'PRIMERA DIVISIÓN',
     title: 'El Santo de los Milagros',
@@ -105,28 +78,6 @@ const news = [
       '/images/slvc-2019.dcb08635384c9881cc13.jpeg',
       '/images/metegol.d1c5848b9add1f613f66.jpg',
       '/images/rosa.1962ad8da2e25daa80ef.jpg',
-    ]
-  },
-  {
-    slug: 'alfredo-casero',
-    category: 'CULTURA',
-    title: 'Alfredo Casero en El Nido',
-    subtitle: 'La noche que el famoso visitó la casa del Cuervo',
-    image: '/images/alfredo-casero.6947f86a6e13dd383159.jpg',
-    thumbnail: '/images/alfredo.33b65ce0b1fff2f07c61.jpg',
-    date: '2023-11-05',
-    content: `
-      <p>Una noche especial en El Nido. El reconocido artista y humorista <strong>Alfredo Casero</strong> visitó las instalaciones de San Lorenzo de Villa Castells, generando una velada única que quedará en la memoria de todos los presentes.</p>
-      <p>Casero, conocido por su amor al fútbol de barrio y a las instituciones con historia, no dudó en acercarse cuando recibió la invitación de la comisión directiva del club.</p>
-      <h3>Una visita inesperada</h3>
-      <p>La noticia corrió rápido por el barrio. Socios y simpatizantes se acercaron para compartir un momento único con el artista, que se mostró distendido y cercano con todos. Recorrió las instalaciones, habló con los jugadores y se tomó fotos con los chicos de las inferiores y sus familias.</p>
-      <h3>El mensaje</h3>
-      <p>Casero aprovechó la ocasión para reivindicar el fútbol de barrio: los clubes que mantienen viva la cultura del fútbol argentino desde abajo, con familias, con historia, con identidad. San Lorenzo de Villa Castells —fundado en 1990, declarado Entidad de Bien Público dos años después, y hoy con cinco estrellas en su escudo— es exactamente eso.</p>
-    `,
-    gallery: [
-      '/images/alfredo-casero.6947f86a6e13dd383159.jpg',
-      '/images/alfredo.33b65ce0b1fff2f07c61.jpg',
-      '/images/alfredo-escudo.d87e16cde174c38a8f6c.jpg',
     ]
   },
   {
@@ -227,29 +178,6 @@ const news = [
     ]
   },
   {
-    slug: 'el-nido-se-renueva',
-    category: 'INSTITUCIONAL',
-    title: 'El Nido se Renueva',
-    subtitle: 'Las obras que transforman el predio de 485 entre 5 y 6',
-    image: '/images/new1.c91ede4c59d431d30c08.jpg',
-    thumbnail: '/images/new1.c91ede4c59d431d30c08.jpg',
-    date: '2025-08-01',
-    content: `
-      <p>El Nido tiene nueva piel. El predio de <strong>485 entre 5 y 6, Villa Castells</strong> —el mismo que el club recuperó en 2013 después de diez años de vida nómade— luce renovado, con obras que mejoran la experiencia para jugadores, socios y familias.</p>
-      <p>La inversión representa el proyecto de infraestructura más importante desde que el club llegó a este predio, donde Alfredo Giommi vive y trabaja todos los días para que el sueño que fundó junto a Nino Menechella el 10 de noviembre de 1990 siga creciendo.</p>
-      <h3>Las obras</h3>
-      <p>Se renovaron los vestuarios, se mejoró la iluminación del campo principal para los entrenamientos nocturnos, y se amplió la capacidad de la tribuna local. En 2013, el predio llegó con tres canchas básicas. Hoy es una instalación que puede recibir a unos 1.500 espectadores.</p>
-      <h3>El buffet</h3>
-      <p>Una de las mejoras más celebradas fue la del buffet, punto de encuentro del barrio todos los fines de semana. Alfredo Giommi, como siempre, estuvo al frente de la planificación. Ese es el espíritu de San Lorenzo de Villa Castells: más que fútbol, comunidad.</p>
-      <h3>Un predio para los próximos 35 años</h3>
-      <p>Con más de 450 chicos en más de 10 categorías y cinco estrellas en el escudo, El Nido necesitaba estar a la altura. Este es el club que fundaron dos soñadores en 1990 con una cancha en Villa Rivera. Hoy es una institución que mira el futuro con ambición y con raíces firmes en el barrio.</p>
-    `,
-    gallery: [
-      '/images/new1.c91ede4c59d431d30c08.jpg',
-      '/images/new2.27cd7312841f023b1e44.png',
-    ]
-  },
-  {
     slug: 'flaco-lopez',
     category: 'PRIMERA DIVISIÓN',
     title: 'De Villa Castells al Mundo',
@@ -271,53 +199,6 @@ const news = [
     gallery: [
       '/images/new2.27cd7312841f023b1e44.png',
       '/images/slvc-2019.dcb08635384c9881cc13.jpeg',
-    ]
-  },
-  {
-    slug: 'sub13-campeon-2025',
-    category: 'INFANTIL',
-    title: 'Los Cuervitos Campeones',
-    subtitle: 'La Sub-13 ganó el torneo y promete para el futuro del club',
-    image: '/images/2006.b130e720f2043832b1fa.jpeg',
-    thumbnail: '/images/2006-3.a319bf39ce5d505aaa41.jpeg',
-    date: '2025-10-05',
-    content: `
-      <p>El futuro de San Lorenzo de Villa Castells tiene buena pinta. La categoría <strong>Sub-13</strong> se coronó campeona en el torneo infantil de la Liga Amateur Platense, continuando una tradición de éxito en las divisiones formativas del club, donde hoy se forman más de 450 chicos en más de 10 categorías.</p>
-      <p>Doce pibes, un sueño, y una copa que ahora brilla en la vitrina de El Nido.</p>
-      <h3>Un grupo especial</h3>
-      <p>Los técnicos del club destacan la calidad humana y futbolística del grupo. "Son chicos que se cuidan, que juegan en equipo y que entienden los valores del club. Eso es lo más importante", explicó el entrenador de la categoría. El mismo espíritu que vio nacer el club en 1990: colectivo, solidario, de barrio.</p>
-      <h3>La final</h3>
-      <p>La final se jugó en El Nido ante centenares de familias. Un partido vibrante, ganado en los penales después de un empate emocionante. Las lágrimas de los chicos al levantar la copa fueron la imagen más emotiva del torneo.</p>
-      <h3>El siguiente paso</h3>
-      <p>Varios jugadores de este grupo ya están siendo seguidos de cerca por el cuerpo técnico del primer equipo. En dos o tres años, más de uno podría estar defendiendo los colores del club en Primera "A", siguiendo los pasos de los pibes del Cuervo que siempre dejaron huella.</p>
-    `,
-    gallery: [
-      '/images/2006.b130e720f2043832b1fa.jpeg',
-      '/images/2006-2.e5eda6b3b0353341de3d.jpeg',
-      '/images/2006-4.c2b9373ce0df7a1d0b90.jpeg',
-    ]
-  },
-  {
-    slug: 'record-de-espectadores',
-    category: 'PRIMERA DIVISIÓN',
-    title: 'El Nido Explotó',
-    subtitle: 'El partido más visto de la historia en 485 entre 5 y 6',
-    image: '/images/metegol.d1c5848b9add1f613f66.jpg',
-    thumbnail: '/images/new2.27cd7312841f023b1e44.png',
-    date: '2025-11-03',
-    content: `
-      <p>El Nido nunca había visto algo así. En un partido decisivo de temporada, las tribunas se desbordaron. El estadio de <strong>485 entre 5 y 6</strong> —el mismo predio que el club recuperó en 2013 después de más de una década sin casa— se quedó chico para la gente que quiso presenciar al Cuervo en uno de sus momentos más importantes.</p>
-      <p>Una muestra del crecimiento del club que fundaron Giommi y Nino Menechella en 1990: de un espacio en Villa Rivera a un estadio que convoca a cada vez más personas.</p>
-      <h3>La previa</h3>
-      <p>La semana anterior al partido, el barrio entero hablaba del encuentro. Las redes del club explotaron de actividad, las familias coordinaban para ir juntas a El Nido. El efecto de los títulos conseguidos en 2024 y 2026 se traduce en hinchada: más gente se suma al Cuervo.</p>
-      <h3>El partido</h3>
-      <p>El ambiente fue eléctrico desde el calentamiento. La banda acompañó todo el partido con bombos y cornetas. El equipo respondió a la altura: un juego vistoso, intenso, con las camisetas bordó bien puestas hasta el último minuto.</p>
-      <h3>La transmisión en vivo</h3>
-      <p>Además de los presentes en El Nido, el partido fue seguido por miles de personas en el canal de YouTube del club. Un número que refleja la dimensión que va tomando San Lorenzo de Villa Castells más allá del barrio, más allá de La Plata.</p>
-    `,
-    gallery: [
-      '/images/metegol.d1c5848b9add1f613f66.jpg',
-      '/images/new1.c91ede4c59d431d30c08.jpg',
     ]
   },
   {
