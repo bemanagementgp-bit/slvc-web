@@ -3,19 +3,23 @@ const news = [
     slug: 'nino-menechella',
     category: 'HISTORIA',
     title: 'Una vida de película',
-    subtitle: '"Nino Menechella": ídolo, capitán y leyenda del Cuervo',
+    subtitle: 'Pelegrino "Nino" Menechella: 33 años fundando, sosteniendo y amando al Cuervo',
     image: '/images/nino.55506f53a389e94e93fe.jpg',
     thumbnail: '/images/Nino1.f32367de668cd82a2d63.jpeg',
-    date: '2024-03-15',
+    date: '2023-12-07',
     content: `
-      <p>Hay nombres que se vuelven sinónimos de un club. En San Lorenzo de Villa Castells, ese nombre es <strong>Nino Menechella</strong>. Dirigente histórico, alma del barrio y uno de los pilares que junto a Alfredo Giommi hicieron posible que este club de barrio se convirtiera en lo que es hoy.</p>
-      <p>Nino no solo estuvo en los buenos momentos. Estuvo cuando el club no tenía cancha, cuando jugaban en espacios prestados, cuando parecía que todo podía derrumbarse. Y siguió.</p>
+      <p>El 7 de diciembre de 2023, la Liga Amateur Platense publicó una nota que comenzaba así: <em>"Una vida de película con 33 años en San Lorenzo de Villa Castells"</em>. Era el homenaje a <strong>Pelegrino "Nino" Menechella</strong>, cofundador del club, maquinista de ferrocarril, técnico, secretario y dirigente durante más de tres décadas. El hombre sin el que este club no sería lo que es.</p>
+      <p>El 16 de diciembre, el club le rindió un homenaje en la cancha de calle 485 entre 5 y 6. El mismo predio que él ayudó a construir. El mismo lugar donde se viven las glorias que él sembró.</p>
       <h3>Los comienzos</h3>
-      <p>Desde los primeros días del club, fundado el 10 de noviembre de 1990, Nino fue parte de ese puñado de soñadores que creyeron que Villa Castells merecía tener su propia institución deportiva. Un lugar donde los chicos del barrio pudieran practicar fútbol con cuotas accesibles para las familias más humildes.</p>
-      <h3>Los años difíciles</h3>
-      <p>El desalojo de principios de los 2000 fue el golpe más duro. El club perdió su predio original cuando se proyectó la construcción de viviendas que nunca llegaron a concretarse. Durante más de una década, San Lorenzo de Villa Castells fue un equipo nómade: entrenando donde podían, jugando de local en canchas ajenas. Nino estuvo en cada uno de esos años.</p>
-      <h3>Legado</h3>
-      <p>En 2013 el club recuperó un predio propio. En 2014 ascendió a Primera "A". En 2019 ganó su primer campeonato. Nino vio todo eso. Su legado no se mide en goles ni en títulos propios, sino en la identidad que ayudó a construir para San Lorenzo de Villa Castells durante más de tres décadas.</p>
+      <p>Nino creció en Tolosa, en el barrio conocido como "Las Mil Casas". Trabajaba como maquinista de ferrocarril cuando, junto a <strong>Alfredo Giommi</strong>, decidió fundar un club de fútbol en Villa Castells. El <strong>10 de noviembre de 1990</strong> nació San Lorenzo de Villa Castells. La primera cancha era una pequeña superficie en 11 y 520, en el barrio Villa Rivera. De a poco, el club fue creciendo hasta conseguir un predio propio en 10 y 505 de dos hectáreas y media.</p>
+      <p>Apenas dos años después de la fundación, el club fue declarado <strong>Entidad de Bien Público</strong>.</p>
+      <h3>El desalojo y los años duros</h3>
+      <p>En 2003 llegó el peor golpe: el desalojo. El club perdió su predio y tuvo que mudarse a 25 y 514. Durante una década, San Lorenzo de Villa Castells fue un club sin casa. Nino siguió. En 2007, el club se afilió a la Liga Amateur Platense.</p>
+      <h3>La anécdota que lo define</h3>
+      <p>En una reunión del Comité Ejecutivo de la Liga en 2009, un dirigente lo cuestionó: <em>"Aquí opinan los presidentes, no los acompañantes"</em>. Nino, sin perder la calma, respondió: <em>"Doctor, seré acompañante, pero decente"</em>. Esa frase resume todo lo que fue: sin cargo formal muchas veces, pero siempre presente. Siempre decente.</p>
+      <h3>El sueño cumplido</h3>
+      <p>En 2013 llegó el nuevo predio. El <strong>7 de diciembre de 2014</strong>, San Lorenzo ganó su primer campeonato. El <strong>14 de diciembre de 2014</strong> ascendió a Primera "A". Los goles de <strong>Leonel Lozano</strong>, <strong>Martín Baleani</strong> y <strong>Patricio Salto</strong> sellaron el ascenso histórico. El <strong>12 de marzo de 2016</strong> se inauguró la nueva cancha. Y en 2019, bajo la conducción de Maximiliano Borgarelli, llegó el primer título en Primera "A".</p>
+      <p>Nino vio todo eso. Lo construyó todo eso. Y el club que se consagra campeón hoy lleva su huella en cada ladrillo de El Nido.</p>
     `,
     gallery: [
       '/images/Nino1.f32367de668cd82a2d63.jpeg',
@@ -24,6 +28,30 @@ const news = [
       '/images/Nino4.34c44e6477323561a186.jpeg',
       '/images/Nino5.8bbb4a868a7ca339f18e.jpeg',
       '/images/Nino6.49bdb25d34d950c13dee.jpeg',
+    ]
+  },
+  {
+    slug: 'rosa-folino',
+    category: 'HISTORIA',
+    title: 'El Recuerdo Eterno de Todo el Cuervo',
+    subtitle: 'Rosa Folino: la mamá de todos en San Lorenzo de Villa Castells',
+    image: '/images/rosa.1962ad8da2e25daa80ef.jpg',
+    thumbnail: '/images/rosa.1962ad8da2e25daa80ef.jpg',
+    date: '2025-09-05',
+    content: `
+      <p>Hay personas que no ocupan un cargo en el organigrama de un club pero que, sin embargo, son el corazón de la institución. <strong>Rosa Folino</strong> fue eso para San Lorenzo de Villa Castells durante 35 años. La compañera de <strong>Alfredo Giommi</strong>, sí. Pero sobre todo, según todos los que la conocieron, <em>"la mamá de todos en el Cuervo"</em>.</p>
+      <p>El 5 de septiembre de 2025, el programa <em>Pase a la Liga Radio</em> le dedicó un homenaje especial. Sebastián Giommi, hijo de Rosa y secretario del club, y los hijos de Nino Menechella —Tomás y Juana— visitaron los estudios para recordarla. Los mensajes de audio de allegados, amigos y jugadores no dejaron dudas: Rosa había marcado a todos.</p>
+      <h3>35 años en El Nido</h3>
+      <p>Desde la fundación del club el 10 de noviembre de 1990, Rosa estuvo ahí. Cuando el club no tenía predio, cuando el desalojo de 2003 amenazaba con terminar con todo, cuando había que levantar de nuevo, Rosa estuvo. Vivía en el propio predio junto a Alfredo y sus nietos, siendo parte inseparable de la vida cotidiana del club.</p>
+      <h3>La mamá del Cuervo</h3>
+      <p>Los jugadores la recuerdan como alguien siempre presente: con una palabra de aliento, con el buffet listo, con la calidez que solo da alguien que genuinamente ama lo que hace. Ella no cobraba sueldo. No tenía cargo. Simplemente estaba, y eso lo cambiaba todo.</p>
+      <h3>Legado imborrable</h3>
+      <p>Rosa Folino falleció en 2025, el mismo año en que el club cumplió 35 años. Como si hubiera esperado ver ese aniversario, esa quinta estrella, ese reconocimiento a todo lo que ella también contribuyó a construir. San Lorenzo de Villa Castells no sería lo que es sin Alfredo Giommi, sin Nino Menechella. Y tampoco sin Rosa Folino.</p>
+      <p>El Cuervo la recuerda. Siempre la recordará.</p>
+    `,
+    gallery: [
+      '/images/rosa.1962ad8da2e25daa80ef.jpg',
+      '/images/Nino1.f32367de668cd82a2d63.jpeg',
     ]
   },
   {
@@ -36,13 +64,13 @@ const news = [
     date: '2024-02-20',
     content: `
       <p>Hay equipos que dejan huella. La generación 2006 de San Lorenzo de Villa Castells fue mucho más que un equipo de fútbol infantil: fue una familia, una aventura que el barrio no va a olvidar fácilmente.</p>
-      <p>Pibes que corrían detrás de una pelota con los ojos llenos de ilusión, con las camisetas bordó bien puestas, representando con orgullo a su club de barrio. Un club que hoy supera los 450 chicos distribuidos en más de 10 categorías.</p>
+      <p>Pibes que corrían detrás de una pelota con los ojos llenos de ilusión, con las camisetas bordó bien puestas, representando con orgullo a su club de barrio. Un club que supera los 450 chicos distribuidos en más de 10 categorías desde que llegó al predio propio en 2013.</p>
       <h3>El equipo</h3>
-      <p>Desde el primer entrenamiento se notó que este grupo tenía algo especial. No solo habilidad técnica, sino un espíritu de equipo fuera de lo común. Se cubrían, se gritaban, se abrazaban. El mismo ADN que caracteriza a todo lo que se construyó en El Nido desde 1990.</p>
+      <p>Desde el primer entrenamiento se notó que este grupo tenía algo especial. No solo habilidad técnica, sino un espíritu de equipo fuera de lo común. Se cubrían, se gritaban, se abrazaban. El mismo ADN que caracteriza a todo lo que se construyó en El Nido desde aquella fundación del 10 de noviembre de 1990.</p>
       <h3>La campaña</h3>
       <p>Partido a partido fueron creciendo. Con victorias y derrotas, pero siempre de pie. El barrio empezó a seguirlos, las familias llenaban la banda, El Nido se transformó en una fiesta cada fin de semana.</p>
       <h3>Más que fútbol</h3>
-      <p>Lo que se llevaron esos pibes va mucho más allá de los resultados. Se llevaron amigos para toda la vida, valores y la pertenencia a algo más grande que ellos mismos: San Lorenzo de Villa Castells, un club que desde sus inicios tuvo como prioridad que las familias humildes pudieran acceder al deporte con cuotas mínimas.</p>
+      <p>Lo que se llevaron esos pibes va mucho más allá de los resultados. Se llevaron amigos para toda la vida, valores y la pertenencia a algo más grande que ellos mismos: San Lorenzo de Villa Castells, un club que desde sus inicios tuvo como prioridad que las familias humildes pudieran acceder al deporte.</p>
     `,
     gallery: [
       '/images/2006.b130e720f2043832b1fa.jpeg',
@@ -60,16 +88,18 @@ const news = [
     subtitle: 'Clausura 2019: el primer título de la historia del Cuervo',
     image: '/images/metegol.d1c5848b9add1f613f66.jpg',
     thumbnail: '/images/slvc-2019.dcb08635384c9881cc13.jpeg',
-    date: '2019-12-17',
+    date: '2019-12-15',
     content: `
-      <p>El martes 17 de diciembre de 2019, Diario El Día tituló su nota deportiva "El Santo de los milagros". Ese era el nombre perfecto para lo que había logrado San Lorenzo de Villa Castells: <strong>ganar el Clausura 2019 de Primera "A" de la Liga Amateur Platense</strong>, el primer título en toda su historia.</p>
-      <p>Un logro que años antes parecía imposible. Apenas cinco años después de ascender a Primera "A" en 2014, el equipo que había pasado varios torneos peleando el descenso se coronó campeón.</p>
-      <h3>La transformación</h3>
-      <p>El técnico <strong>Maximiliano Borgarelli</strong> fue el artífice del cambio. Él mismo lo resumió mejor que nadie: <em>"Esto es realmente un sueño. Pensar que el objetivo era salvarnos del descenso"</em>. De a poco, el equipo fue creciendo, mejorando, creyendo. Y cuando nadie los esperaba, llegaron al título.</p>
-      <h3>La clave</h3>
-      <p>Los jugadores destacaron dos factores por encima de todo: la unidad del grupo y el trabajo físico. Un equipo que rompió con la hegemonía de los grandes de la categoría, que pudo ganarle a los favoritos, que tuvo en el aliento de El Nido su decimosegundo jugador.</p>
-      <h3>La historia que empezaba</h3>
-      <p>Lo que nadie sabía en ese diciembre de 2019 era que este título era solo el comienzo. Que El Cuervo había despertado. Que lo que vendría después sería todavía más grande.</p>
+      <p>El domingo 15 de diciembre de 2019, Diario El Día publicó: <em>"San Lorenzo gritó campeón de la liga por primera vez en su historia"</em>. Era oficial. San Lorenzo de Villa Castells había ganado el <strong>Clausura 2019 de Primera "A"</strong> de la Liga Amateur Platense, el primer título en toda su existencia.</p>
+      <p>El partido decisivo se jugó en Los Hornos contra <strong>Comunidad Rural</strong>. El resultado fue 3-1. Unos 300 hinchas cuervos presenciaron la hazaña. Al pitazo final del árbitro <strong>Walter Ferreyra</strong>, jugadores y cuerpo técnico se fundieron en un abrazo en el centro del campo.</p>
+      <h3>Los goles</h3>
+      <p><strong>Nicolás Maitini</strong>, <strong>Dardo Coronel</strong> y <strong>Facundo Maitini</strong> convirtieron para San Lorenzo. Los tres goles llegaron en el primer tiempo: el partido estaba prácticamente resuelto antes del descanso. El descuento de Comunidad Rural fue mera anécdota.</p>
+      <h3>La hazaña en contexto</h3>
+      <p>El técnico <strong>Maximiliano Borgarelli</strong> resumió perfectamente lo que significaba: <em>"Esto es realmente un sueño. Pensar que el objetivo era salvarnos del descenso"</em>. En efecto: durante ese mismo año 2019, el club había peleado para no perder la categoría. Pasar de la lucha por el descenso al campeonato en el mismo torneo fue algo que nadie esperaba.</p>
+      <h3>La caravana</h3>
+      <p>Tras el pitazo final, los festejos comenzaron en Los Hornos y continuaron en caravana hacia Villa Castells. El barrio entero salió a recibir a sus campeones. El Nido, fundado con un sueño en 1990, tenía su primer título 29 años después.</p>
+      <h3>El siguiente paso</h3>
+      <p>La victoria les otorgó la clasificación al <strong>Torneo Federal Amateur 2020</strong>. Pero lo más importante no era la próxima competencia: era lo que este título decía sobre el club. El Cuervo había despertado. Lo que vendría después sería todavía más grande.</p>
     `,
     gallery: [
       '/images/slvc-2019.dcb08635384c9881cc13.jpeg',
@@ -87,11 +117,11 @@ const news = [
     date: '2023-11-05',
     content: `
       <p>Una noche especial en El Nido. El reconocido artista y humorista <strong>Alfredo Casero</strong> visitó las instalaciones de San Lorenzo de Villa Castells, generando una velada única que quedará en la memoria de todos los presentes.</p>
-      <p>Casero, conocido hincha del fútbol amateur y de los clubes de barrio, no dudó en acercarse cuando recibió la invitación. "Este es el fútbol de verdad", dijo al pisar el césped de El Nido.</p>
+      <p>Casero, conocido por su amor al fútbol de barrio y a las instituciones con historia, no dudó en acercarse cuando recibió la invitación de la comisión directiva del club.</p>
       <h3>Una visita inesperada</h3>
-      <p>La noticia corrió rápido por el barrio. Socios y simpatizantes se acercaron para compartir un momento único con el artista, que se mostró distendido y cercano con todos. Recorrió las instalaciones, habló con los jugadores y se tomó fotos con los chicos de las inferiores.</p>
+      <p>La noticia corrió rápido por el barrio. Socios y simpatizantes se acercaron para compartir un momento único con el artista, que se mostró distendido y cercano con todos. Recorrió las instalaciones, habló con los jugadores y se tomó fotos con los chicos de las inferiores y sus familias.</p>
       <h3>El mensaje</h3>
-      <p>Casero aprovechó la ocasión para reivindicar el fútbol de barrio: los clubes que mantienen viva la cultura del fútbol argentino desde abajo, con familias, con barrio, con historia. San Lorenzo de Villa Castells es exactamente eso.</p>
+      <p>Casero aprovechó la ocasión para reivindicar el fútbol de barrio: los clubes que mantienen viva la cultura del fútbol argentino desde abajo, con familias, con historia, con identidad. San Lorenzo de Villa Castells —fundado en 1990, declarado Entidad de Bien Público dos años después, y hoy con cinco estrellas en su escudo— es exactamente eso.</p>
     `,
     gallery: [
       '/images/alfredo-casero.6947f86a6e13dd383159.jpg',
@@ -102,20 +132,20 @@ const news = [
   {
     slug: 'quinta-estrella-2026',
     category: 'PRIMERA DIVISIÓN',
-    title: 'La Quinta Estrella',
-    subtitle: 'Campeones del Torneo Clasificatorio al Regional 2026',
+    title: 'En el Umbral de algo Histórico',
+    subtitle: 'Clasificatorio 2026: San Lorenzo a la final con Zelaya por la quinta estrella',
     image: '/images/new2.27cd7312841f023b1e44.png',
     thumbnail: '/images/new2.27cd7312841f023b1e44.png',
-    date: '2026-06-01',
+    date: '2026-05-15',
     content: `
-      <p>San Lorenzo de Villa Castells volvió a hacer historia. El Cuervo se coronó campeón del <strong>Torneo Clasificatorio al Regional 2026</strong>, sumando la quinta estrella a su escudo y confirmando que el club de Villa Castells está en el mejor momento de su historia.</p>
-      <p>El equipo dirigido por <strong>Maximiliano Badell</strong> demostró carácter y oficio a lo largo de todo el torneo, con una actuación que comenzó con una contundente victoria 4-2 ante Lomas Fútbol en El Nido y no paró hasta levantar el trofeo.</p>
-      <h3>El arranque</h3>
-      <p>El debut en el Clasificatorio fue una declaración de intenciones. San Lorenzo comenzó abajo en el marcador tras un golazo de tiro libre de Sánchez, pero la remontada fue eléctrica. <strong>Gustavo Sivila</strong> empató, <strong>Tobías Silva</strong> dio vuelta el marcador, <strong>Ramos</strong> amplió y <strong>Federico Benítez</strong> sentenció el 4-2 final.</p>
-      <h3>La clasificación</h3>
-      <p>Con trabajo, con garra y con el apoyo de todo el barrio, El Cuervo atravesó las distintas fases del torneo hasta consagrarse campeón. Un logro que les da acceso al <strong>Torneo Regional Federal</strong>, el siguiente escalón en la pirámide del fútbol argentino.</p>
-      <h3>La quinta estrella</h3>
-      <p>Corazón, familia, entrega y gloria. Las cuatro palabras que el club eligió para describir esta conquista. Una quinta estrella que representa décadas de sacrificio, de un barrio que creyó cuando nadie más lo hacía, y de una institución que sigue creciendo.</p>
+      <p>El 15 de mayo de 2026, Diario El Día lo dijo con precisión: <em>"San Lorenzo quedó en el umbral de algo histórico"</em>. El Cuervo goleó 4-1 a <strong>Pilar City</strong> en la semifinal de vuelta del Torneo Clasificatorio al Regional Amateur 2026, avanzando a la final con un contundente 5-2 en el global.</p>
+      <p>El técnico es <strong>Maximiliano Badell</strong>, ex jugador de Estudiantes de La Plata, quien tomó las riendas del primer equipo para esta temporada y construyó un equipo sólido, ofensivo y con hambre de gloria.</p>
+      <h3>La semfinal vs Pilar City</h3>
+      <p>San Lorenzo necesitaba ganar: había perdido el partido de ida. La respuesta fue implacable. <strong>Rodrigo Ramos</strong> convirtió dos goles, <strong>Federico Benítez</strong> añadió el tercero y <strong>Mauricio Gómez</strong> cerró el 4-1. El único tanto de Pilar City lo anotó Gustavo Pelayo, pero no alcanzó para frenar al Cuervo.</p>
+      <h3>La final: San Lorenzo vs Zelaya</h3>
+      <p>En la gran final, el rival será el <strong>Club Atlético Zelaya</strong>, representante de la Liga de Escobar, que eliminó a Atlético Roberts 6-1 en el global. Zelaya llega a la definición como uno de los equipos más en forma del torneo, lo que anticipa una final de alto voltaje.</p>
+      <h3>Lo que está en juego</h3>
+      <p>La victoria en la serie final le otorgaría a San Lorenzo de Villa Castells el acceso al <strong>Torneo Regional Amateur</strong> y una chance de pelear la <strong>Pampeana Bonaerense</strong>. Y, claro, la <strong>quinta estrella</strong>: el símbolo que confirmaría que el club fundado en 1990 con un sueño en un barrio humilde de La Plata se ha convertido en una potencia del fútbol amateur argentino.</p>
     `,
     gallery: [
       '/images/new2.27cd7312841f023b1e44.png',
@@ -140,7 +170,7 @@ const news = [
       <p>Como si un campeonato no fuera suficiente, San Lorenzo volvió a consagrarse dos meses después. El 21 de julio, el equipo goleó 4-0 a <strong>Fomento Los Hornos</strong> como visitante y se quedó con el título del <strong>Apertura de la Liga Amateur Platense</strong>.</p>
       <p>Los goles fueron de <strong>Juan Olivera</strong> (26'), <strong>Jonathan Ortega</strong> (53'), <strong>Valentín Bidart</strong> (59') y <strong>Federico Ocampo</strong> (70'). El equipo terminó la competencia con <strong>37 puntos</strong>, producto de 11 victorias, 4 empates y apenas 1 derrota en 16 partidos.</p>
       <h3>Una temporada histórica</h3>
-      <p>Dos títulos. Una clasificación al Regional. Un equipo que demostró que San Lorenzo de Villa Castells ya no es una sorpresa, sino una potencia del fútbol amateur platense.</p>
+      <p>Dos títulos. Una clasificación al Regional. Un equipo que demostró que San Lorenzo de Villa Castells ya no es una sorpresa, sino una potencia del fútbol amateur platense. El legado de ese 2024 se siente hasta hoy.</p>
     `,
     gallery: [
       '/images/metegol.d1c5848b9add1f613f66.jpg',
@@ -156,14 +186,15 @@ const news = [
     thumbnail: '/images/Nino2.336d3853692fdc24fbda.jpeg',
     date: '2025-11-10',
     content: `
-      <p>El <strong>10 de noviembre de 2025</strong>, San Lorenzo de Villa Castells cumplió <strong>35 años de vida</strong>. Tres décadas y media desde aquella tarde de otoño de 1990 en que un grupo de soñadores del barrio decidió que Villa Castells merecía tener su propio club de fútbol.</p>
-      <p>Hoy, esa institución que arrancó con cuatro gatos locos y una pelota cuenta con <strong>más de 450 chicos</strong> distribuidos en más de 10 categorías, instalaciones propias en 7 y 485, y cinco títulos en su vitrina.</p>
+      <p>El <strong>10 de noviembre de 2025</strong>, San Lorenzo de Villa Castells cumplió <strong>35 años de vida</strong>. Tres décadas y media desde aquella tarde de 1990 en que un grupo de soñadores del barrio decidió que Villa Castells merecía tener su propio club de fútbol.</p>
+      <p>Hoy, esa institución cuenta con <strong>más de 450 chicos</strong> distribuidos en más de 10 categorías, instalaciones propias en 485 entre 5 y 6, y cinco títulos en su vitrina.</p>
       <h3>Los que estuvieron desde el principio</h3>
-      <p><strong>Alfredo Luis Giommi</strong>, el presidente y fundador, estuvo presente en los festejos del 35° aniversario. El mismo hombre que vive en el predio, que prepara el buffet, que gestiona la utilería y que atiende a los padres. Apenas dos años después de la fundación, el club fue declarado <strong>Entidad de Bien Público</strong>, reconocimiento que refleja el impacto social que tuvo desde sus inicios en el barrio.</p>
-      <h3>Tres décadas de lucha</h3>
-      <p>No todo fue fácil. A principios de los 2000 el club fue desalojado de su predio original. Más de una década de vida nómade, entrenando donde podían, resistiendo. Hasta que en 2013 consiguieron un nuevo hogar. En 2014 llegó el ascenso a Primera "A". En 2019 el primer título. Y el resto es historia conocida.</p>
-      <h3>El futuro</h3>
-      <p>Con cinco estrellas en el escudo, clasificación al Torneo Regional Federal y una cantera que no para de producir jugadores, los próximos 35 años del Cuervo prometen ser todavía más gloriosos.</p>
+      <p><strong>Alfredo Luis Giommi</strong> y <strong>Pelegrino "Nino" Menechella</strong> fundaron el club el 10 de noviembre de 1990. Apenas dos años después, fue declarado <strong>Entidad de Bien Público</strong>. La primera cancha fue una pequeña superficie en 11 y 520. Después vino el predio en 10 y 505. Y en 2003, el desalojo que casi termina con todo.</p>
+      <h3>La resistencia</h3>
+      <p>Durante diez años, el club funcionó sin predio propio. Entrenaban donde podían. Jugaban en canchas ajenas. Pero Giommi, Nino y <strong>Rosa Folino</strong> —la compañera de Alfredo, "la mamá de todos en el Cuervo"— nunca dejaron de creer. En 2007 se afiliaron a la Liga Amateur Platense. En 2013 consiguieron el predio actual.</p>
+      <h3>La gloria</h3>
+      <p>El 14 de diciembre de 2014, el primer ascenso a Primera "A". El 7 de diciembre de 2014, el primer campeonato de su historia. El 15 de diciembre de 2019, el título en Primera "A" con el técnico Borgarelli. En 2024, el doblete histórico. Y en 2026, la quinta estrella.</p>
+      <p>Todo lo que Giommi soñó aquella tarde de noviembre de 1990, y mucho más.</p>
     `,
     gallery: [
       '/images/Nino1.f32367de668cd82a2d63.jpeg',
@@ -178,16 +209,16 @@ const news = [
     subtitle: 'El fundador que lo apostó todo por un club de barrio',
     image: '/images/Nino4.34c44e6477323561a186.jpeg',
     thumbnail: '/images/Nino5.8bbb4a868a7ca339f18e.jpeg',
-    date: '2025-06-10',
+    date: '2018-08-10',
     content: `
-      <p>Hay personas que construyen monumentos de piedra. <strong>Alfredo Luis Giommi</strong> construyó algo más duradero: un club de fútbol, una comunidad, un hogar para cientos de familias de Villa Castells.</p>
-      <p>El 10 de noviembre de 1990, junto a un grupo de vecinos soñadores, fundó San Lorenzo de Villa Castells con una idea clara: que los chicos del barrio pudieran practicar fútbol con cuotas accesibles, sin importar el bolsillo de sus familias. Dos años después, el club era declarado <strong>Entidad de Bien Público</strong>.</p>
+      <p>El 10 de agosto de 2018, Diario El Día tituló su nota: <em>"Un sueño Santo que al fin se hizo realidad"</em>. La historia de <strong>Alfredo Luis Giommi</strong> es exactamente eso: la historia de un hombre que apostó todo —tiempo, dinero, vida cotidiana— por un club de barrio en la periferia de La Plata.</p>
+      <p>El <strong>10 de noviembre de 1990</strong>, junto a <strong>Nino Menechella</strong> y un grupo de vecinos soñadores, fundó San Lorenzo de Villa Castells. La idea era simple: que los chicos del barrio pudieran practicar fútbol, sin importar el bolsillo de sus familias. En 1992, el club fue declarado <strong>Entidad de Bien Público</strong>.</p>
       <h3>El hombre del predio</h3>
-      <p>Giommi no es solo el presidente. Es el alma del club. Él mismo prepara los alimentos para el buffet, gestiona la utilería, atiende a los padres. <em>"Somos un club de barrio, que se destaca por la parte social. Estamos ubicados en una zona periférica de La Plata"</em>, dijo su hijo <strong>Sebastián Giommi</strong>, secretario del club, en una entrevista con Diario Actualidad en 2024. Alfredo vive en el propio predio junto a su esposa y nietos.</p>
+      <p>Giommi no es solo el presidente. Es el alma del club. Prepara los alimentos para el buffet, gestiona la utilería, atiende a los padres, arregla lo que se rompe. <em>"Es un esfuerzo enorme desde lo económico poder armar una cancha. Esto es nuestra vida y luchamos mucho para tener un predio"</em>, dijo en aquella entrevista de 2018. Alfredo vive en el propio predio junto a su esposa y nietos. Así es como se hace un club de barrio.</p>
       <h3>Los años más duros</h3>
-      <p>A principios de los 2000, el club fue desalojado. Se proyectó construir viviendas en el terreno donde San Lorenzo tenía su cancha, y el club perdió su casa. Fue el golpe más duro. Durante más de una década, funcionaron en espacios alquilados, complejos deportivos y espacios públicos. Pero nunca se rindieron.</p>
-      <h3>El regreso y la gloria</h3>
-      <p>En 2013 obtuvieron un nuevo predio. En 2014 ascendieron a Primera "A". Y después vinieron los títulos. Cinco estrellas. Clasificación al Regional. Todo lo que Alfredo soñó aquella tarde de 1990, y mucho más.</p>
+      <p>En 2003 llegó el desalojo. El club perdió su predio original y pasó diez años sin casa fija. En 2006, el municipio instó formalmente a entregar un espacio físico. Recién en <strong>2013</strong> llegaron al predio actual de 485 entre 5 y 6, con tres canchas. Fueron más de una década de resistencia.</p>
+      <h3>La recompensa</h3>
+      <p>El 2018, cuando El Día publicó esta nota, el club ya tenía unos 300 chicos en 10 categorías. Hoy superan los 450. Y en la vitrina, cinco estrellas. Giommi tenía razón: valió la pena luchar.</p>
     `,
     gallery: [
       '/images/Nino4.34c44e6477323561a186.jpeg',
@@ -199,19 +230,19 @@ const news = [
     slug: 'el-nido-se-renueva',
     category: 'INSTITUCIONAL',
     title: 'El Nido se Renueva',
-    subtitle: 'Las obras que transforman el predio de 7 y 485',
+    subtitle: 'Las obras que transforman el predio de 485 entre 5 y 6',
     image: '/images/new1.c91ede4c59d431d30c08.jpg',
     thumbnail: '/images/new1.c91ede4c59d431d30c08.jpg',
     date: '2025-08-01',
     content: `
-      <p>El Nido tiene nueva piel. Después de meses de trabajo, el predio de <strong>Calle 7 y 485</strong> luce renovado, con obras que transforman las instalaciones y mejoran la experiencia para jugadores, socios y familias.</p>
-      <p>La inversión, posible gracias al trabajo de la comisión directiva y el apoyo de los socios, representa el proyecto de infraestructura más importante desde que el club se instaló definitivamente en este predio en 2013.</p>
+      <p>El Nido tiene nueva piel. El predio de <strong>485 entre 5 y 6, Villa Castells</strong> —el mismo que el club recuperó en 2013 después de diez años de vida nómade— luce renovado, con obras que mejoran la experiencia para jugadores, socios y familias.</p>
+      <p>La inversión representa el proyecto de infraestructura más importante desde que el club llegó a este predio, donde Alfredo Giommi vive y trabaja todos los días para que el sueño que fundó junto a Nino Menechella el 10 de noviembre de 1990 siga creciendo.</p>
       <h3>Las obras</h3>
-      <p>Se renovaron los vestuarios con nuevo equipamiento sanitario, se mejoró la iluminación del campo principal para poder entrenar de noche, y se amplió la capacidad de la tribuna local. El estadio hoy tiene capacidad para alrededor de 1.500 espectadores.</p>
-      <h3>La cancha</h3>
-      <p>El campo de juego también fue mejorado. Sistema de drenaje y mantenimiento del césped para que El Nido pueda ofrecer siempre las mejores condiciones, independientemente del clima platense.</p>
+      <p>Se renovaron los vestuarios, se mejoró la iluminación del campo principal para los entrenamientos nocturnos, y se amplió la capacidad de la tribuna local. En 2013, el predio llegó con tres canchas básicas. Hoy es una instalación que puede recibir a unos 1.500 espectadores.</p>
       <h3>El buffet</h3>
-      <p>Una de las novedades más celebradas fue la mejora del buffet, que funciona todos los fines de semana y se ha convertido en un punto de encuentro del barrio. Un espacio donde el club sigue siendo lo que siempre fue: mucho más que fútbol.</p>
+      <p>Una de las mejoras más celebradas fue la del buffet, punto de encuentro del barrio todos los fines de semana. Alfredo Giommi, como siempre, estuvo al frente de la planificación. Ese es el espíritu de San Lorenzo de Villa Castells: más que fútbol, comunidad.</p>
+      <h3>Un predio para los próximos 35 años</h3>
+      <p>Con más de 450 chicos en más de 10 categorías y cinco estrellas en el escudo, El Nido necesitaba estar a la altura. Este es el club que fundaron dos soñadores en 1990 con una cancha en Villa Rivera. Hoy es una institución que mira el futuro con ambición y con raíces firmes en el barrio.</p>
     `,
     gallery: [
       '/images/new1.c91ede4c59d431d30c08.jpg',
@@ -258,7 +289,7 @@ const news = [
       <h3>La final</h3>
       <p>La final se jugó en El Nido ante centenares de familias. Un partido vibrante, ganado en los penales después de un empate emocionante. Las lágrimas de los chicos al levantar la copa fueron la imagen más emotiva del torneo.</p>
       <h3>El siguiente paso</h3>
-      <p>Varios jugadores de este grupo ya están siendo seguidos de cerca por el cuerpo técnico del primer equipo. En dos o tres años, más de uno podría estar defendiendo los colores del club en Primera "A", siguiendo los pasos de todos los que pasaron por El Nido y dejaron huella.</p>
+      <p>Varios jugadores de este grupo ya están siendo seguidos de cerca por el cuerpo técnico del primer equipo. En dos o tres años, más de uno podría estar defendiendo los colores del club en Primera "A", siguiendo los pasos de los pibes del Cuervo que siempre dejaron huella.</p>
     `,
     gallery: [
       '/images/2006.b130e720f2043832b1fa.jpeg',
@@ -270,17 +301,17 @@ const news = [
     slug: 'record-de-espectadores',
     category: 'PRIMERA DIVISIÓN',
     title: 'El Nido Explotó',
-    subtitle: 'El partido más visto de la historia en 7 y 485',
+    subtitle: 'El partido más visto de la historia en 485 entre 5 y 6',
     image: '/images/metegol.d1c5848b9add1f613f66.jpg',
     thumbnail: '/images/new2.27cd7312841f023b1e44.png',
     date: '2025-11-03',
     content: `
-      <p>El Nido nunca había visto algo así. En un partido decisivo de temporada, las tribunas se desbordaron. El estadio de <strong>Calle 7 y 485</strong>, con capacidad para 1.500 espectadores, se quedó chico para la gente que quiso presenciar al Cuervo en uno de sus momentos más importantes.</p>
-      <p>Una muestra más del crecimiento exponencial del club en los últimos años, que pasó de ser un equipo nómade sin cancha propia a convertirse en uno de los clubes más convocantes del fútbol amateur platense.</p>
+      <p>El Nido nunca había visto algo así. En un partido decisivo de temporada, las tribunas se desbordaron. El estadio de <strong>485 entre 5 y 6</strong> —el mismo predio que el club recuperó en 2013 después de más de una década sin casa— se quedó chico para la gente que quiso presenciar al Cuervo en uno de sus momentos más importantes.</p>
+      <p>Una muestra del crecimiento del club que fundaron Giommi y Nino Menechella en 1990: de un espacio en Villa Rivera a un estadio que convoca a cada vez más personas.</p>
       <h3>La previa</h3>
       <p>La semana anterior al partido, el barrio entero hablaba del encuentro. Las redes del club explotaron de actividad, las familias coordinaban para ir juntas a El Nido. El efecto de los títulos conseguidos en 2024 y 2026 se traduce en hinchada: más gente se suma al Cuervo.</p>
       <h3>El partido</h3>
-      <p>El ambiente fue eléctrico desde el calentamiento. La banda del club acompañó todo el partido con sus bombos y cornetas. El equipo respondió a la altura: un juego vistoso, intenso, con las camisetas bien puestas hasta el último minuto.</p>
+      <p>El ambiente fue eléctrico desde el calentamiento. La banda acompañó todo el partido con bombos y cornetas. El equipo respondió a la altura: un juego vistoso, intenso, con las camisetas bordó bien puestas hasta el último minuto.</p>
       <h3>La transmisión en vivo</h3>
       <p>Además de los presentes en El Nido, el partido fue seguido por miles de personas en el canal de YouTube del club. Un número que refleja la dimensión que va tomando San Lorenzo de Villa Castells más allá del barrio, más allá de La Plata.</p>
     `,
@@ -298,14 +329,13 @@ const news = [
     thumbnail: '/images/2006-6.9c484901fc83c308696a.jpeg',
     date: '2025-04-20',
     content: `
-      <p>En 2013, San Lorenzo de Villa Castells terminó con más de una década de vida nómade y se instaló en su propio predio. Ese año marca un antes y un después en la historia del club. Y los chicos que empezaron a entrenar ahí, en ese campo recién recuperado, son la <strong>generación del regreso</strong>.</p>
-      <p>Crecieron junto al club, lo vieron crecer a ellos. Vivieron el ascenso a Primera "A" en 2014, el primer campeonato en 2019 y la explosión de 2024. Son parte de la historia viva del Cuervo.</p>
+      <p>En 2013, San Lorenzo de Villa Castells llegó al predio de <strong>485 entre 5 y 6</strong> después de más de una década de vida nómade. Desde el desalojo de 2003, el club había entrenado en 25 y 514 y en espacios prestados. El regreso a una casa propia fue una revolución. Y los chicos que empezaron a entrenar en ese predio recién inaugurado son la <strong>generación del regreso</strong>.</p>
       <h3>El primer verano en casa</h3>
-      <p>"Fue mágico", recuerda uno de los jugadores de esa generación. "Tener cancha propia, poder entrenar en el mismo lugar todos los días, sin tener que andar viajando. Eso cambió todo." Durante más de diez años el club había entrenado en espacios alquilados, complejos deportivos y espacios públicos. El regreso a un predio propio fue una revolución.</p>
-      <h3>Construyendo junto al club</h3>
-      <p>Fue una época de construcción en todos los sentidos. Los chicos que pasaron por esas categorías vivieron en carne propia el crecimiento de la institución: nuevos vestuarios, más socios, más gente en la banda, más títulos. El club que hoy supera los 450 chicos en sus divisiones formativas es en parte obra de esa generación.</p>
+      <p>Tener cancha propia, poder entrenar en el mismo lugar todos los días, sin tener que andar viajando. Eso cambió todo para los pibes que llegaron a las categorías formativas en 2013 y 2014. Eran parte de algo que se estaba construyendo. Lo sentían.</p>
+      <h3>Vivieron la gloria</h3>
+      <p>Crecieron junto al club. Vivieron el ascenso a Primera "A" en diciembre de 2014, cuando <strong>Leonel Lozano</strong>, <strong>Martín Baleani</strong> y <strong>Patricio Salto</strong> sellaron el histórico. Vivieron el primer título en Primera "A" en 2019 con el técnico Borgarelli. Y después los títulos de 2024 bajo la conducción de Leandro Sarco.</p>
       <h3>El legado</h3>
-      <p>Algunos de ellos llegaron al primer equipo. Otros se convirtieron en técnicos de inferiores. Varios siguen en el club como socios activos o colaboradores. La generación del regreso construyó más que goles: construyó comunidad.</p>
+      <p>Algunos llegaron al primer equipo. Otros se convirtieron en entrenadores de inferiores. Varios siguen en el club como socios activos. La generación del regreso construyó más que goles: construyó la base sobre la que se apoya hoy un club con cinco estrellas y más de 450 chicos en sus categorías.</p>
     `,
     gallery: [
       '/images/2006-5.8938ba69fa07010aaf8e.jpeg',
