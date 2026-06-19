@@ -3,23 +3,34 @@ const news = [
     slug: 'nino-menechella',
     category: 'HISTORIA',
     title: 'Una vida de película',
-    subtitle: 'Pelegrino "Nino" Menechella: 33 años fundando, sosteniendo y amando al Cuervo',
+    subtitle: '"Nino" Menechella: una vida de película con 33 años en San Lorenzo de Villa Castells',
     image: '/images/nino.55506f53a389e94e93fe.jpg',
     thumbnail: '/images/Nino1.f32367de668cd82a2d63.jpeg',
     date: '2023-12-07',
     content: `
-      <p>El 7 de diciembre de 2023, la Liga Amateur Platense publicó una nota que comenzaba así: <em>"Una vida de película con 33 años en San Lorenzo de Villa Castells"</em>. Era el homenaje a <strong>Pelegrino "Nino" Menechella</strong>, cofundador del club, maquinista de ferrocarril, técnico, secretario y dirigente durante más de tres décadas. El hombre sin el que este club no sería lo que es.</p>
-      <p>El 16 de diciembre, el club le rindió un homenaje en la cancha de calle 485 entre 5 y 6. El mismo predio que él ayudó a construir. El mismo lugar donde se viven las glorias que él sembró.</p>
+      <p>Miles de millones de seres humanos forman parte de la humanidad, pero sólo un puñado puede decirse que fundó una institución. <strong>Pelegrino Menechella</strong> fue uno de los que comenzaron el fenómeno el 10 de noviembre de 1990, fecha que certificó Personerías Jurídicas con un grato nombre, <strong>Club San Lorenzo de Villa Castells</strong>.</p>
+      <p>El "Nino" Menechella creó, dio vida, en la familia y la comunidad deportiva de la ciudad. El sábado 16 de diciembre la <strong>Liga Amateur Platense</strong> le brindó un homenaje póstumo, en la cancha de la calle 485 entre 5 y 6. Allí donde escribió los últimos 33 años de su vida y donde pese a la ausencia física solo queda la alegría, un rastro de su bohemia, de un dirigente de las entidades de bien público.</p>
       <h3>Los comienzos</h3>
-      <p>Nino creció en Tolosa, en el barrio conocido como "Las Mil Casas". Trabajaba como maquinista de ferrocarril cuando, junto a <strong>Alfredo Giommi</strong>, decidió fundar un club de fútbol en Villa Castells. El <strong>10 de noviembre de 1990</strong> nació San Lorenzo de Villa Castells. La primera cancha era una pequeña superficie en 11 y 520, en el barrio Villa Rivera. De a poco, el club fue creciendo hasta conseguir un predio propio en 10 y 505 de dos hectáreas y media.</p>
-      <p>Apenas dos años después de la fundación, el club fue declarado <strong>Entidad de Bien Público</strong>.</p>
-      <h3>El desalojo y los años duros</h3>
-      <p>En 2003 llegó el peor golpe: el desalojo. El club perdió su predio y tuvo que mudarse a 25 y 514. Durante una década, San Lorenzo de Villa Castells fue un club sin casa. Nino siguió. En 2007, el club se afilió a la Liga Amateur Platense.</p>
+      <p>"Nino" creció en Tolosa, en el barrio donde los ingleses que construyeron los ferrocarriles usaron como vivienda: <em>"Las Mil Casas"</em>. Allí fue a vivir su madre italiana <strong>Giovanna Vecchiolla</strong> con 23 años, tras la Segunda Guerra. En la década del sesenta se enloqueció por Estudiantes de La Plata, llevando para siempre la admiración por <strong>Osvaldo Zubeldía</strong>. Tal vez pensando en esa filosofía del "imposible" se involucró un día en el <strong>Club Social y Cultural Villa Rivera</strong>, donde fue técnico y secretario, con la cancha chica en 11 y 520. Como allí no había cancha de once, un buen día puso en acción a "Nino" con quien era su amigo y se convertiría en una dupla inseparable: <strong>Alfredo Giommi</strong>.</p>
+      <p>En cuatro meses emprolijaron un terreno listo para jugar en calle 10 y 505, terreno que pertenecía a Salud de la Provincia. Ahí jugaba San Lorenzo sus primeros partidos ante el asombro de los pibes que escuchaban el trepidar del tren sobre las vías, que a Nino lo llevaba a su viejo oficio de maquinista del ferrocarril.</p>
+      <h3>Un dirigente diferente</h3>
+      <p>"Nino buscaba pibes de un lado para otro, los traía, pero no dirigía, esa no era su pasión, sino que haya pibes jugando. Nino era la unión de todos", afirma <strong>Roberto Cornell</strong>, "Tito", hoy titular de la Asociación Ribereña de Árbitros.</p>
+      <p>San Lorenzo debutó en LIFIPA. "Se había encaprichado en llegar a jugar en la <strong>Liga Amateur Platense</strong>, a pesar de que los gastos eran más grandes", recuerda <strong>Domingo Messina</strong>, el DT de la 88. <strong>Y en 2007, sin cancha propia, lograron la afiliación.</strong></p>
       <h3>La anécdota que lo define</h3>
-      <p>En una reunión del Comité Ejecutivo de la Liga en 2009, un dirigente lo cuestionó: <em>"Aquí opinan los presidentes, no los acompañantes"</em>. Nino, sin perder la calma, respondió: <em>"Doctor, seré acompañante, pero decente"</em>. Esa frase resume todo lo que fue: sin cargo formal muchas veces, pero siempre presente. Siempre decente.</p>
+      <p>A pesar de que la representación exigía la presencia de un dirigente, a Alfredo siempre lo acompañaba Nino. Un episodio de 2009, en una reunión de Comité Ejecutivo, nos devuelve la imagen de Menechella, a veces parado, otras sentado, afuera, con un cigarrillo encendido. Un alto directivo le espetó: <em>"Acá opinan los presidentes, y no los heladeros"</em>. Eso pareció escuchar Nino, que no se echó atrás. <strong>"¡Doctor, yo seré heladero, pero decente!"</strong></p>
+      <p>La confusión fue porque el término en verdad se refería a "ladero" —de quien acompaña a alguien—. Pero la respuesta de Nino quedó para siempre.</p>
+      <h3>Los años nómades</h3>
+      <p>Fue a mediados de 2003 cuando quedaron en la calle con los pibes, siendo habitantes de ramblas, hasta conseguir un terreno virgen en 25 y 514. Con la pala los vieron desmalezar 2,5 hectáreas. "Los chicos nos preguntaban '¿Dónde jugamos?', y les decíamos que no sabíamos… alquilamos en Porteño, Comunidad Rural… Como paseamos por todos los clubes, tenemos buena relación con casi todos los dirigentes", expresó Nino en un reportaje.</p>
+      <p>Durante 14 años fueron nómades, inquilinos, tal como si los de Villa Castells revivieran el mito del San Lorenzo de Almagro en los años ochenta y noventa. Mientras tanto, la consigna de la dupla era clara: resurgir como en la leyenda del ave fénix, de sus propias cenizas.</p>
       <h3>El sueño cumplido</h3>
-      <p>En 2013 llegó el nuevo predio. El <strong>7 de diciembre de 2014</strong>, San Lorenzo ganó su primer campeonato. El <strong>14 de diciembre de 2014</strong> ascendió a Primera "A". Los goles de <strong>Leonel Lozano</strong>, <strong>Martín Baleani</strong> y <strong>Patricio Salto</strong> sellaron el ascenso histórico. El <strong>12 de marzo de 2016</strong> se inauguró la nueva cancha. Y en 2019, bajo la conducción de Maximiliano Borgarelli, llegó el primer título en Primera "A".</p>
-      <p>Nino vio todo eso. Lo construyó todo eso. Y el club que se consagra campeón hoy lleva su huella en cada ladrillo de El Nido.</p>
+      <p>A fines de 2014 el torneo Clausura tuvo dos últimas fechas apasionantes. El <strong>domingo 7 de diciembre de 2014</strong> golearon a Tricolores 3 a 0 y obtuvieron la primera estrella. Imagen impactante: los jugadores lloraban adentro de la cancha mientras todavía se jugaba el partido.</p>
+      <p>Al domingo siguiente (14/12) definieron el primer ascenso a la A, en el estadio "Juan Carmelo Zerillo" de Gimnasia, ante Porteño. Fue otra victoria 3 a 1 con goles de <strong>Leonel Lozano, Martín Baleani</strong> y <strong>Patricio Salto</strong>, de penal. Nino hacía los cercos con hilos, sacaba la bosta de las vacas que pastaban por ahí. Fue un albañil, pintor, canchero, <em>¡alma y vida!</em></p>
+      <p>El <strong>12 de marzo de 2016</strong> se inauguró la nueva cancha. Y el 2019 trajo un campeonato en Primera A, de la mano de <strong>Maximiliano Borgarelli</strong>, con quien "Nino" tuvo una suerte de cábala después de cada partido. Si ganaba San Lorenzo, le decía al DT: <em>"Tenés una semana más"</em>. Si empataban o perdían, lo miraba entre serio y jocoso: <em>"Mirá que estás en la cuerda floja"</em>.</p>
+      <p>"Me quedó marcada la relación de hermandad de Nino y Alfredo, que se eligieron para andar toda la vida hasta el último día de Nino. No han laburado por un resultado deportivo, sino por los pibes", afirmó Maxi Borgarelli.</p>
+      <h3>Legado eterno</h3>
+      <p>"Se fue con un club crecido y en crecimiento", afirma <strong>Lucas Baratucci</strong>, actual DT de Primera. Con <strong>Alfredo Giommi</strong> y su mujer <strong>Rosa Folino</strong> también hay un espíritu familiar. <em>"Nuestra primera dama, Rosita"</em>, decía Nino.</p>
+      <p>"San Lorenzo es como un hijo, y nació antes que mi primer hijo", le dijo Nino a un periodista de Pase a la Liga, en un homenaje por los 30 años del club. "¿Somos diferentes? Sí… a mí me gusta el escolazo, la joda y éste no juega, no fuma, esa es la única diferencia entre nosotros", dijo, mirándolo a Alfredo.</p>
+      <p>En cada partido de San Lorenzo, en una práctica, cuando el sol alumbra el verde o cuando se apagan las luces y todo es penumbra y silencio, Nino siempre está. Algún sabio desglosó al amor en tres aspectos: amor propio, amor por lo propio y amor divino. En las tres definiciones encaja Pelegrino "Nino" Menechella.</p>
     `,
     gallery: [
       '/images/Nino1.f32367de668cd82a2d63.jpeg',
@@ -39,14 +50,14 @@ const news = [
     thumbnail: '/images/rosa.1962ad8da2e25daa80ef.jpg',
     date: '2025-09-05',
     content: `
-      <p>Hay personas que no ocupan un cargo en el organigrama de un club pero que, sin embargo, son el corazón de la institución. <strong>Rosa Folino</strong> fue eso para San Lorenzo de Villa Castells durante 35 años. La compañera de <strong>Alfredo Giommi</strong>, sí. Pero sobre todo, según todos los que la conocieron, <em>"la mamá de todos en el Cuervo"</em>.</p>
-      <p>El 5 de septiembre de 2025, el programa <em>Pase a la Liga Radio</em> le dedicó un homenaje especial. Sebastián Giommi, hijo de Rosa y secretario del club, y los hijos de Nino Menechella —Tomás y Juana— visitaron los estudios para recordarla. Los mensajes de audio de allegados, amigos y jugadores no dejaron dudas: Rosa había marcado a todos.</p>
-      <h3>35 años en El Nido</h3>
-      <p>Desde la fundación del club el 10 de noviembre de 1990, Rosa estuvo ahí. Cuando el club no tenía predio, cuando el desalojo de 2003 amenazaba con terminar con todo, cuando había que levantar de nuevo, Rosa estuvo. Vivía en el propio predio junto a Alfredo y sus nietos, siendo parte inseparable de la vida cotidiana del club.</p>
-      <h3>La mamá del Cuervo</h3>
-      <p>Los jugadores la recuerdan como alguien siempre presente: con una palabra de aliento, con el buffet listo, con la calidez que solo da alguien que genuinamente ama lo que hace. Ella no cobraba sueldo. No tenía cargo. Simplemente estaba, y eso lo cambiaba todo.</p>
+      <p>En las últimas horas, San Lorenzo perdió físicamente a uno de sus pilares, <strong>Rosa Folino</strong>. La compañera de <strong>Alfredo Giommi</strong>, pero en especial la mamá de todos en el Cuervo, será recordada por siempre.</p>
+      <p>Desde <em>Pase a la Liga Radio</em> reconocimos la figura clave que fue Rosa en el crecimiento del club en estos 35 años. Para eso, visitaron los estudios de Nuevos Aires <strong>Tomás y Juana Menechella</strong>, hijos de otro hombre que será recordado por siempre como lo fue Nino.</p>
+      <p>Además, muchos enviaron su mensaje vía audio y sobre el final dialogamos con <strong>Sebastián Giommi</strong>, hijo de Rosa y compañero de trabajo en la institución de Villa Castells.</p>
+      <h3>La mamá de todos</h3>
+      <p>Rosa estuvo presente desde la fundación del club el <strong>10 de noviembre de 1990</strong>. Vivía en el propio predio junto a Alfredo y sus nietos, siendo parte inseparable de la vida cotidiana del club durante tres décadas y media. Cuando no había predio y el club era nómade, Rosa también estuvo. Cuando llegó el predio en 2013, los títulos en 2014, 2019 y 2024, Rosa estuvo en cada uno de esos momentos.</p>
+      <p>En la nota sobre Nino Menechella que la Liga Amateur Platense publicó en diciembre de 2023, Nino la mencionaba siempre con el mismo cariño: <em>"Nuestra primera dama, Rosita"</em>.</p>
       <h3>Legado imborrable</h3>
-      <p>Rosa Folino falleció en 2025, el mismo año en que el club cumplió 35 años. Como si hubiera esperado ver ese aniversario, esa quinta estrella, ese reconocimiento a todo lo que ella también contribuyó a construir. San Lorenzo de Villa Castells no sería lo que es sin Alfredo Giommi, sin Nino Menechella. Y tampoco sin Rosa Folino.</p>
+      <p>San Lorenzo de Villa Castells no sería lo que es sin Alfredo Giommi. No sería lo que es sin Nino Menechella. Y tampoco sin Rosa Folino. Tres personas que pusieron su vida al servicio de un club de barrio, sin cargos formales muchas veces, sin reconocimiento externo casi siempre. Solo por amor al Cuervo y al barrio.</p>
       <p>El Cuervo la recuerda. Siempre la recordará.</p>
     `,
     gallery: [
@@ -57,22 +68,21 @@ const news = [
   {
     slug: 'pelicula-del-campeon',
     category: 'PRIMERA DIVISIÓN',
-    title: 'El Santo de los Milagros',
-    subtitle: 'Clausura 2019: el primer título de la historia del Cuervo',
+    title: 'Campeón por Primera Vez en su Historia',
+    subtitle: 'San Lorenzo gritó campeón de la Liga por primera vez en su historia',
     image: '/images/metegol.d1c5848b9add1f613f66.jpg',
     thumbnail: '/images/slvc-2019.dcb08635384c9881cc13.jpeg',
     date: '2019-12-15',
     content: `
-      <p>El domingo 15 de diciembre de 2019, Diario El Día publicó: <em>"San Lorenzo gritó campeón de la liga por primera vez en su historia"</em>. Era oficial. San Lorenzo de Villa Castells había ganado el <strong>Clausura 2019 de Primera "A"</strong> de la Liga Amateur Platense, el primer título en toda su existencia.</p>
-      <p>El partido decisivo se jugó en Los Hornos contra <strong>Comunidad Rural</strong>. El resultado fue 3-1. Unos 300 hinchas cuervos presenciaron la hazaña. Al pitazo final del árbitro <strong>Walter Ferreyra</strong>, jugadores y cuerpo técnico se fundieron en un abrazo en el centro del campo.</p>
-      <h3>Los goles</h3>
-      <p><strong>Nicolás Maitini</strong>, <strong>Dardo Coronel</strong> y <strong>Facundo Maitini</strong> convirtieron para San Lorenzo. Los tres goles llegaron en el primer tiempo: el partido estaba prácticamente resuelto antes del descanso. El descuento de Comunidad Rural fue mera anécdota.</p>
-      <h3>La hazaña en contexto</h3>
-      <p>El técnico <strong>Maximiliano Borgarelli</strong> resumió perfectamente lo que significaba: <em>"Esto es realmente un sueño. Pensar que el objetivo era salvarnos del descenso"</em>. En efecto: durante ese mismo año 2019, el club había peleado para no perder la categoría. Pasar de la lucha por el descenso al campeonato en el mismo torneo fue algo que nadie esperaba.</p>
-      <h3>La caravana</h3>
-      <p>Tras el pitazo final, los festejos comenzaron en Los Hornos y continuaron en caravana hacia Villa Castells. El barrio entero salió a recibir a sus campeones. El Nido, fundado con un sueño en 1990, tenía su primer título 29 años después.</p>
-      <h3>El siguiente paso</h3>
-      <p>La victoria les otorgó la clasificación al <strong>Torneo Federal Amateur 2020</strong>. Pero lo más importante no era la próxima competencia: era lo que este título decía sobre el club. El Cuervo había despertado. Lo que vendría después sería todavía más grande.</p>
+      <p>San Lorenzo de Villa Castells se dio el gusto de escribir su nombre en la lista de los campeones de la Liga Amateur. Y no es para menos. Acaba de cerrar el 2019 obteniendo <strong>por primera vez en su historia el Torneo Clausura de primera división</strong>, después de derrotar por 3-1, en Los Hornos, a la Comunidad Rural.</p>
+      <p>El Cuervo, de esta manera, rompió con todos los pronósticos, logró prevalecer frente a la hegemonía de los denominados grandes y será uno de los representantes del próximo <strong>Torneo Federal Amateur 2020</strong>, en representación del fútbol platense.</p>
+      <h3>El partido</h3>
+      <p>San Lorenzo liquidó el partido en el primer tiempo. Tres goles arriba para ir al descanso con una ventaja que, a la postre, sería indescontable. <strong>Nicolás Maitini, Dardo Coronel y Facundo Maitini</strong> marcaron los goles del equipo de Villa Castells, para el delirio de las más de trescientas personas que se hicieron presentes en Los Hornos para acompañar a los dirigidos por <strong>Maximiliano Borgarelli</strong>. El descuento llegó a través de <strong>Juan Cruz Tirao</strong>.</p>
+      <p>Tras el pitazo final del árbitro <strong>Walter Ferreyra</strong>, los jugadores y el cuerpo técnico se unieron en la mitad de la cancha en un abrazo único e interminable.</p>
+      <h3>La celebración</h3>
+      <p>Con banderas y con cánticos de <em>¡dale campeón, dale campeón...!</em>, el plantel del Cuervo festejó en la mitad de la cancha; mientras que su gente tuvo su propio desahogo detrás del alambrado. Luego, en caravana, la familia de San Lorenzo se dirigió hasta 7 y 50 para prolongar los festejos.</p>
+      <h3>El contexto</h3>
+      <p>Y pensar que durante todo este año peleó por zafar del descenso. De la lucha por no perder la categoría al primer campeonato de la historia, en el mismo torneo. El Cuervo había despertado. Lo que vendría después sería todavía más grande.</p>
     `,
     gallery: [
       '/images/slvc-2019.dcb08635384c9881cc13.jpeg',
@@ -84,19 +94,21 @@ const news = [
     slug: 'quinta-estrella-2026',
     category: 'PRIMERA DIVISIÓN',
     title: 'En el Umbral de algo Histórico',
-    subtitle: 'Clasificatorio 2026: San Lorenzo a la final con Zelaya por la quinta estrella',
+    subtitle: 'San Lorenzo quedó en el umbral de algo histórico — Diario El Día, 15 de mayo de 2026',
     image: '/images/new2.27cd7312841f023b1e44.png',
     thumbnail: '/images/new2.27cd7312841f023b1e44.png',
     date: '2026-05-15',
     content: `
-      <p>El 15 de mayo de 2026, Diario El Día lo dijo con precisión: <em>"San Lorenzo quedó en el umbral de algo histórico"</em>. El Cuervo goleó 4-1 a <strong>Pilar City</strong> en la semifinal de vuelta del Torneo Clasificatorio al Regional Amateur 2026, avanzando a la final con un contundente 5-2 en el global.</p>
-      <p>El técnico es <strong>Maximiliano Badell</strong>, ex jugador de Estudiantes de La Plata, quien tomó las riendas del primer equipo para esta temporada y construyó un equipo sólido, ofensivo y con hambre de gloria.</p>
-      <h3>La semfinal vs Pilar City</h3>
-      <p>San Lorenzo necesitaba ganar: había perdido el partido de ida. La respuesta fue implacable. <strong>Rodrigo Ramos</strong> convirtió dos goles, <strong>Federico Benítez</strong> añadió el tercero y <strong>Mauricio Gómez</strong> cerró el 4-1. El único tanto de Pilar City lo anotó Gustavo Pelayo, pero no alcanzó para frenar al Cuervo.</p>
-      <h3>La final: San Lorenzo vs Zelaya</h3>
-      <p>En la gran final, el rival será el <strong>Club Atlético Zelaya</strong>, representante de la Liga de Escobar, que eliminó a Atlético Roberts 6-1 en el global. Zelaya llega a la definición como uno de los equipos más en forma del torneo, lo que anticipa una final de alto voltaje.</p>
+      <p>San Lorenzo de Villa Castells se encuentra ante una gran oportunidad de poder ingresar al <strong>Torneo Regional Amateur</strong>, en representación de la Liga Platense. El miércoles dio un paso clave: derrotó por <strong>4-1 a Pilar City</strong>, de la Liga de Escobar, en el partido revancha (5-2 en el global) y obtuvo el derecho de disputar la final del Torneo Clasificatorio.</p>
+      <p>El conjunto que dirige un ex Estudiantes, <strong>Maximiliano Badell</strong>, necesitaba ganar ya que había perdido el partido de ida. Y lo hizo con contundencia, lo que demostró que fue el mejor en los dos partidos de semifinales.</p>
+      <h3>Los goles</h3>
+      <p>Los goles del Cuervo fueron convertidos por <strong>Rodrigo Ramos</strong>, en dos oportunidades, <strong>Federico Benítez</strong> y <strong>Mauricio Gómez</strong>.</p>
+      <p>El partido, en líneas generales, fue claramente favorable para San Lorenzo. Arrancó con un penal que el arquero Jacob Ayambilla le contuvo a Federico Benítez. Sin embargo, tres minutos después, Rodrigo Ramos pudo quebrar el marcador para igualar la serie. Un rato después, Mauricio Gómez amplió la ventaja para el Cuervo, que empezó a envalentonarse con pasar de ronda directamente.</p>
+      <p>En el complemento, San Lorenzo generó más goles, a través de Rodrigo Ramos nuevamente y Federico Benítez, que tuvo revancha después de aquel penal malogrado al comienzo. Sobre los 25 minutos descontó <strong>Gustavo Pelayo</strong> para Pilar, pero no alcanzó.</p>
+      <h3>La final: San Lorenzo vs Club Atlético Zelaya</h3>
+      <p>En la instancia decisiva enfrentarán en partidos de ida y vuelta al <strong>Club Atlético Zelaya</strong>, representante de la Liga de Escobar, que en la instancia anterior superó por un global de 6 a 1 a Atlético Roberts.</p>
       <h3>Lo que está en juego</h3>
-      <p>La victoria en la serie final le otorgaría a San Lorenzo de Villa Castells el acceso al <strong>Torneo Regional Amateur</strong> y una chance de pelear la <strong>Pampeana Bonaerense</strong>. Y, claro, la <strong>quinta estrella</strong>: el símbolo que confirmaría que el club fundado en 1990 con un sueño en un barrio humilde de La Plata se ha convertido en una potencia del fútbol amateur argentino.</p>
+      <p>En caso de que San Lorenzo consiga adjudicarse las dos finales, no solo obtendrá una de las plazas para el Torneo Regional Amateur, sino que además tendrá la posibilidad de jugar otra final en la que podrá coronarse como <strong>campeón provincial de la Federación Pampeana Bonaerense</strong>. En las próximas horas se sorteará la localía para el primer partido de la serie final.</p>
     `,
     gallery: [
       '/images/new2.27cd7312841f023b1e44.png',
@@ -156,20 +168,21 @@ const news = [
   {
     slug: 'alfredo-giommi-el-sueno',
     category: 'HISTORIA',
-    title: 'El Sueño de Alfredo Giommi',
-    subtitle: 'El fundador que lo apostó todo por un club de barrio',
+    title: 'Un Sueño Santo que al Fin se Hizo Realidad',
+    subtitle: 'Alfredo Giommi y el club de barrio que fundó para que los chicos humildes pudieran jugar al fútbol',
     image: '/images/Nino4.34c44e6477323561a186.jpeg',
     thumbnail: '/images/Nino5.8bbb4a868a7ca339f18e.jpeg',
     date: '2018-08-10',
     content: `
-      <p>El 10 de agosto de 2018, Diario El Día tituló su nota: <em>"Un sueño Santo que al fin se hizo realidad"</em>. La historia de <strong>Alfredo Luis Giommi</strong> es exactamente eso: la historia de un hombre que apostó todo —tiempo, dinero, vida cotidiana— por un club de barrio en la periferia de La Plata.</p>
-      <p>El <strong>10 de noviembre de 1990</strong>, junto a <strong>Nino Menechella</strong> y un grupo de vecinos soñadores, fundó San Lorenzo de Villa Castells. La idea era simple: que los chicos del barrio pudieran practicar fútbol, sin importar el bolsillo de sus familias. En 1992, el club fue declarado <strong>Entidad de Bien Público</strong>.</p>
-      <h3>El hombre del predio</h3>
-      <p>Giommi no es solo el presidente. Es el alma del club. Prepara los alimentos para el buffet, gestiona la utilería, atiende a los padres, arregla lo que se rompe. <em>"Es un esfuerzo enorme desde lo económico poder armar una cancha. Esto es nuestra vida y luchamos mucho para tener un predio"</em>, dijo en aquella entrevista de 2018. Alfredo vive en el propio predio junto a su esposa y nietos. Así es como se hace un club de barrio.</p>
-      <h3>Los años más duros</h3>
-      <p>En 2003 llegó el desalojo. El club perdió su predio original y pasó diez años sin casa fija. En 2006, el municipio instó formalmente a entregar un espacio físico. Recién en <strong>2013</strong> llegaron al predio actual de 485 entre 5 y 6, con tres canchas. Fueron más de una década de resistencia.</p>
-      <h3>La recompensa</h3>
-      <p>El 2018, cuando El Día publicó esta nota, el club ya tenía unos 300 chicos en 10 categorías. Hoy superan los 450. Y en la vitrina, cinco estrellas. Giommi tenía razón: valió la pena luchar.</p>
+      <p>El club fue fundado el <strong>10 de noviembre de 1990</strong> por un grupo de padres que buscaban un espacio para que los niños del barrio practicaran fútbol. Hoy cuenta con casi <strong>300 chicos distribuidos en 10 categorías</strong>. <strong>Alfredo Luis Giommi</strong> es el presidente y fundador, y vive en el propio predio junto a su familia.</p>
+      <p>La entidad enfrentó dificultades enormes: un desalojo en 2003 y una década entera sin sede propia. Durante esos años, entrenaban en espacios alquilados, en la República de los Niños y en espacios públicos. En 2013 finalmente se establecieron en el predio de 505 y 6, donde construyeron tres canchas.</p>
+      <h3>El hombre que vive el club</h3>
+      <p>Giommi es un presidente polifacético: prepara la parrilla, gestiona la utilería, completa las planillas. Es el alma del club. Y vive ahí, en el predio, junto a su esposa <strong>Rosa Folino</strong> y sus nietos. Así es como se hace una institución de barrio.</p>
+      <p><em>"Es un esfuerzo enorme desde lo económico poder armar una cancha. Esto es nuestra vida y luchamos mucho para tener un predio"</em>, expresó Giommi.</p>
+      <h3>La filosofía del club</h3>
+      <p>Desde sus inicios, el objetivo fue claro: que las familias más humildes pudieran acceder al deporte con cuotas mínimas. <em>"Es la única forma en que la gente más humilde pueda llevar a sus hijos a practicar un deporte"</em>, explica Giommi. La entidad fue declarada <strong>Entidad de Bien Público</strong> apenas dos años después de su fundación, en 1992.</p>
+      <h3>De la resistencia al sueño cumplido</h3>
+      <p>En 2006, el municipio exhortó formalmente a entregar un espacio físico al club. Recién en 2013 llegaron al predio actual con tres canchas. Y entonces todo se aceleró: el ascenso a Primera "A" en 2014, el primer título en 2019, el doblete de 2024. Todo lo que Giommi y Nino Menechella soñaron aquella tarde de noviembre de 1990, y mucho más.</p>
     `,
     gallery: [
       '/images/Nino4.34c44e6477323561a186.jpeg',
