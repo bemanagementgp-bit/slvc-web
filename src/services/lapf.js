@@ -154,17 +154,23 @@ async function fetchLapfData() {
 
     const { cat, ed, fecha, zona } = params;
 
-    // Fetch fecha actual (resultados jugados) y próxima fecha en paralelo
-    const [htmlActual, htmlProxima] = await Promise.all([
+    // Fetch fecha actual + 3 próximas en paralelo
+    const [htmlActual, html1, html2, html3] = await Promise.all([
       get(currentUrl),
       get(`${BASE}/datos-torneo/${cat}/${ed}/${fecha + 1}/${zona}`),
+      get(`${BASE}/datos-torneo/${cat}/${ed}/${fecha + 2}/${zona}`),
+      get(`${BASE}/datos-torneo/${cat}/${ed}/${fecha + 3}/${zona}`),
     ]);
 
     const tabla  = parseStandings(htmlActual) || fallback.tabla;
     const teams  = parseTeams(htmlActual);
 
     const jugados  = parseFixture(htmlActual, fecha);
-    const proximos = parseFixture(htmlProxima, fecha + 1);
+    const proximos = [
+      ...parseFixture(html1, fecha + 1),
+      ...parseFixture(html2, fecha + 2),
+      ...parseFixture(html3, fecha + 3),
+    ];
 
     const fixture = [...jugados, ...proximos];
 

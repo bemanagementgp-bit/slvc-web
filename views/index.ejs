@@ -535,15 +535,15 @@ function switchSection(s) {
 ════════════════════════════════════════════════════ -->
 <section style="background:#fff;border-top:1px solid #E4E4E7;border-bottom:1px solid #E4E4E7;padding:0;overflow:hidden;">
   <div style="display:flex;align-items:stretch;">
-    <div style="background:#0A0A0A;padding:0 20px;display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;min-height:56px;">
-      <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#71717A;">Sponsors</span>
+    <div style="background:#0A0A0A;padding:0 28px;display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;min-height:80px;">
+      <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#71717A;">Sponsors</span>
     </div>
-    <div style="overflow:hidden;flex:1;height:56px;display:flex;align-items:center;">
+    <div style="overflow:hidden;flex:1;height:80px;display:flex;align-items:center;">
       <div style="display:inline-flex;align-items:center;animation:ticker 35s linear infinite;gap:0;white-space:nowrap;height:100%;">
         <% [1,2].forEach(function(){ %>
-        <div style="display:inline-flex;align-items:center;gap:64px;padding:0 64px;height:56px;">
+        <div style="display:inline-flex;align-items:center;gap:72px;padding:0 72px;height:80px;">
           <% [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17].forEach(function(n){ %>
-          <img src="/images/sponsor/<%= n %>.png" alt="" style="height:24px;max-width:120px;object-fit:contain;flex-shrink:0;opacity:0.5;filter:grayscale(1);transition:all 0.2s;" onmouseover="this.style.opacity=1;this.style.filter='none'" onmouseout="this.style.opacity=0.5;this.style.filter='grayscale(1)'" />
+          <img src="/images/sponsor/<%= n %>.png" alt="" style="height:36px;max-width:150px;object-fit:contain;flex-shrink:0;opacity:0.5;filter:grayscale(1);transition:all 0.2s;" onmouseover="this.style.opacity=1;this.style.filter='none'" onmouseout="this.style.opacity=0.5;this.style.filter='grayscale(1)'" />
           <% }) %>
         </div>
         <% }) %>
