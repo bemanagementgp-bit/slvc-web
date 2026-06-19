@@ -1,115 +1,410 @@
-<%- include('partials/head', { title: noticia.title }) %>
+<%- include('partials/head', { title: noticia.title + ' — SLVC' }) %>
 <%- include('partials/nav') %>
 
-<!-- Hero -->
-<div style="position:relative;height:60vh;min-height:420px;overflow:hidden;background:#0A0A0A;">
-  <img src="<%= noticia.image %>" alt="<%= noticia.title %>"
-       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.45;" />
-  <div style="position:absolute;inset:0;background:linear-gradient(to top,#fff 0%,rgba(10,10,10,0.6) 50%,rgba(10,10,10,0.3) 100%);"></div>
-  <div style="position:absolute;bottom:0;left:0;right:0;padding:48px 24px;">
-    <div style="max-width:800px;margin:0 auto;">
-      <a href="/noticias" style="display:inline-flex;align-items:center;gap:6px;font-family:'Nexa',sans-serif;font-weight:300;font-size:12px;color:rgba(255,255,255,0.5);text-decoration:none;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;transition:color 0.2s;"
-         onmouseover="this.style.color='rgba(255,255,255,0.9)'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">
-        ← Noticias
-      </a>
-      <span class="badge badge-bordo" style="background:rgba(139,0,0,0.7);color:#C8922A;margin-bottom:12px;"><%= noticia.category %></span>
-      <h1 class="font-zing" style="font-size:clamp(30px,5vw,60px);color:#fff;text-transform:uppercase;line-height:1.0;"><%= noticia.title %></h1>
-    </div>
-  </div>
-</div>
+<style>
+/* ── Article page ── */
+.art-header {
+  background: #fff;
+  border-bottom: 3px solid #0A0A0A;
+  padding: 80px 24px 0;
+  margin-top: 64px;
+}
+.art-header-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding-bottom: 32px;
+}
+.art-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #A1A1AA;
+  text-decoration: none;
+  margin-bottom: 24px;
+  transition: color 0.2s;
+}
+.art-back:hover { color: #8B0000; }
+.art-back svg { width: 14px; height: 14px; }
 
-<!-- Article -->
-<article style="padding:60px 24px 80px;background:#fff;">
-  <div style="max-width:800px;margin:0 auto;">
+.art-kicker {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8B0000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.art-kicker::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: #8B0000;
+}
 
-    <!-- Byline -->
-    <div style="display:flex;align-items:center;gap:14px;padding-bottom:28px;margin-bottom:32px;border-bottom:1px solid #E4E4E7;">
-      <img src="/images/Logo.1268415243901683eac4.png" alt="SLVC"
-           style="width:40px;height:40px;object-fit:contain;border-radius:8px;background:#F4F4F5;padding:4px;" />
+.art-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 7vw, 82px);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #0A0A0A;
+  line-height: 0.92;
+  margin-bottom: 18px;
+}
+
+.art-deck {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(15px, 2vw, 18px);
+  color: #3f3f46;
+  line-height: 1.65;
+  border-left: 4px solid #8B0000;
+  padding-left: 18px;
+  margin-bottom: 24px;
+}
+
+.art-byline {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-top: 1px solid #E4E4E7;
+  border-bottom: 1px solid #E4E4E7;
+}
+.art-byline-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: #F4F4F5;
+  padding: 3px;
+  flex-shrink: 0;
+}
+.art-byline-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0A0A0A;
+}
+.art-byline-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #A1A1AA;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+.art-share {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+.art-share-btn {
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid #E4E4E7;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #A1A1AA;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.art-share-btn:hover { border-color: #8B0000; color: #8B0000; }
+
+/* ── Hero image ── */
+.art-hero {
+  background: #0A0A0A;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.art-hero img {
+  width: 100%;
+  max-height: 560px;
+  object-fit: cover;
+  display: block;
+  opacity: 0.88;
+}
+.art-hero-caption {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.04em;
+}
+
+/* ── Article body ── */
+.art-body-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+/* Drop cap */
+.art-body > p:first-of-type::first-letter {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 5.5em;
+  line-height: 0.8;
+  float: left;
+  margin: 0.06em 14px 0 0;
+  color: #8B0000;
+}
+
+.art-body p {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  line-height: 1.85;
+  color: #27272A;
+  margin-bottom: 24px;
+}
+
+.art-body strong {
+  font-weight: 600;
+  color: #0A0A0A;
+}
+
+.art-body em {
+  font-style: italic;
+  color: #52525B;
+}
+
+.art-body h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #0A0A0A;
+  line-height: 1;
+  margin: 48px 0 16px;
+  padding-top: 32px;
+  border-top: 2px solid #0A0A0A;
+}
+
+.art-body blockquote {
+  margin: 36px 0;
+  padding: 28px 32px;
+  background: #FAFAFA;
+  border-left: 4px solid #8B0000;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.03em;
+  color: #0A0A0A;
+  line-height: 1.2;
+}
+
+.art-rule-bold {
+  border: none;
+  border-top: 2px solid #0A0A0A;
+  margin: 48px 0;
+}
+
+/* ── Gallery ── */
+.art-gallery-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8B0000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.art-gallery-label::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: #8B0000;
+}
+.art-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+@media(max-width: 600px) {
+  .art-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.art-gallery-item {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.art-gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+  display: block;
+}
+.art-gallery-item:hover img { transform: scale(1.06); }
+
+/* ── Prev/Next ── */
+.art-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 2px solid #0A0A0A;
+  margin-top: 64px;
+}
+.art-nav-item {
+  text-decoration: none;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: background 0.2s;
+}
+.art-nav-item:hover { background: #FAFAFA; }
+.art-nav-item:first-child { border-right: 1px solid #E4E4E7; }
+.art-nav-dir {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #A1A1AA;
+}
+.art-nav-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #0A0A0A;
+  line-height: 1;
+}
+.art-nav-item:hover .art-nav-title { color: #8B0000; }
+.art-nav-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  object-fit: cover;
+  margin-top: 8px;
+}
+
+/* ── Lightbox ── */
+#lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0,0,0,0.94);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#lightbox img {
+  max-width: 92vw;
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 2px;
+}
+</style>
+
+<!-- Article Header -->
+<div class="art-header">
+  <div class="art-header-inner">
+    <a href="/noticias" class="art-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12,5 5,12 12,19"/></svg>
+      Volver a Noticias
+    </a>
+    <div class="art-kicker"><%= noticia.category %></div>
+    <h1 class="art-headline"><%= noticia.title %></h1>
+    <p class="art-deck"><%= noticia.subtitle %></p>
+    <div class="art-byline">
+      <img src="/images/Logo.1268415243901683eac4.png" alt="SLVC" class="art-byline-logo" />
       <div>
-        <div class="font-nexa-bold" style="font-size:13px;color:#0A0A0A;">San Lorenzo de Villa Castells</div>
-        <div class="font-nexa" style="font-size:11px;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;">
-          <%= new Date(noticia.date).toLocaleDateString('es-AR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}) %>
-        </div>
+        <div class="art-byline-name">San Lorenzo de Villa Castells</div>
+        <div class="art-byline-date"><%= new Date(noticia.date).toLocaleDateString('es-AR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}) %></div>
       </div>
-      <!-- Share mini -->
-      <div style="margin-left:auto;display:flex;gap:8px;">
-        <a href="https://www.instagram.com/slvc.oficial/" target="_blank"
-           style="width:34px;height:34px;border:1.5px solid #E4E4E7;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#71717A;transition:all 0.2s;"
-           onmouseover="this.style.borderColor='#8B0000';this.style.color='#8B0000'" onmouseout="this.style.borderColor='#E4E4E7';this.style.color='#71717A'">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 3a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm5.25-.75a.875.875 0 1 1 0 1.75.875.875 0 0 1 0-1.75z"/></svg>
+      <div class="art-share">
+        <a href="https://www.instagram.com/slvc.oficial/" target="_blank" class="art-share-btn" title="Instagram">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 3a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zm0 1.5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm5.25-.75a.875.875 0 1 1 0 1.75.875.875 0 0 1 0-1.75z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@slvcoficial" target="_blank" class="art-share-btn" title="YouTube">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.8 5 12 5 12 5s-4.8 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.2.9C6.4 19 12 19 12 19s4.8 0 7-.1c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9l5.6 2.8-5.6 2.7z"/></svg>
         </a>
       </div>
     </div>
-
-    <!-- Subtitle -->
-    <p class="font-nexa-bold" style="font-size:18px;color:#3f3f46;line-height:1.6;margin-bottom:28px;"><%= noticia.subtitle %></p>
-
-    <!-- Body -->
-    <div class="article-body">
-      <%- noticia.content %>
-    </div>
-
-    <!-- Gallery -->
-    <% if(noticia.gallery && noticia.gallery.length > 1){ %>
-    <div style="margin-top:48px;">
-      <div class="section-label" style="margin-bottom:16px;">Galería de fotos</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;">
-        <% noticia.gallery.forEach(function(img){ %>
-        <div style="border-radius:8px;overflow:hidden;aspect-ratio:1;cursor:pointer;"
-             onclick="openLightbox('<%= img %>')">
-          <img src="<%= img %>" alt=""
-               style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;"
-               onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'" />
-        </div>
-        <% }) %>
-      </div>
-    </div>
-    <% } %>
-
-    <!-- Nav prev/next -->
-    <div style="margin-top:56px;padding-top:32px;border-top:1px solid #E4E4E7;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-      <% if(prev){ %>
-      <a href="/noticias/<%= prev.slug %>" class="card" style="text-decoration:none;padding:16px;display:flex;align-items:center;gap:12px;border-radius:12px;">
-        <div style="width:48px;height:48px;border-radius:8px;overflow:hidden;flex-shrink:0;">
-          <img src="<%= prev.thumbnail || prev.image %>" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
-        <div>
-          <div class="font-nexa" style="font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;">← Anterior</div>
-          <div class="font-nexa-bold" style="font-size:13px;color:#0A0A0A;line-height:1.2;"><%= prev.title %></div>
-        </div>
-      </a>
-      <% } else { %><div></div><% } %>
-
-      <% if(next){ %>
-      <a href="/noticias/<%= next.slug %>" class="card" style="text-decoration:none;padding:16px;display:flex;align-items:center;gap:12px;justify-content:flex-end;text-align:right;border-radius:12px;">
-        <div>
-          <div class="font-nexa" style="font-size:10px;color:#A1A1AA;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;">Siguiente →</div>
-          <div class="font-nexa-bold" style="font-size:13px;color:#0A0A0A;line-height:1.2;"><%= next.title %></div>
-        </div>
-        <div style="width:48px;height:48px;border-radius:8px;overflow:hidden;flex-shrink:0;">
-          <img src="<%= next.thumbnail || next.image %>" style="width:100%;height:100%;object-fit:cover;" />
-        </div>
-      </a>
-      <% } else { %><div></div><% } %>
-    </div>
   </div>
-</article>
+</div>
+
+<!-- Hero Image -->
+<div class="art-hero">
+  <img src="<%= noticia.image %>" alt="<%= noticia.title %>" />
+  <div class="art-hero-caption">San Lorenzo de Villa Castells · <%= noticia.category %></div>
+</div>
+
+<!-- Body -->
+<div class="art-body-wrap">
+  <div class="art-body">
+    <%- noticia.content %>
+  </div>
+
+  <!-- Gallery -->
+  <% if(noticia.gallery && noticia.gallery.length > 1){ %>
+  <hr class="art-rule-bold" />
+  <div class="art-gallery-label">Galería de fotos</div>
+  <div class="art-gallery-grid">
+    <% noticia.gallery.forEach(function(img){ %>
+    <div class="art-gallery-item" onclick="openLightbox('<%= img %>')">
+      <img src="<%= img %>" alt="" loading="lazy" />
+    </div>
+    <% }) %>
+  </div>
+  <% } %>
+
+  <!-- Prev / Next -->
+  <% if(prev || next){ %>
+  <div class="art-nav">
+    <% if(prev){ %>
+    <a href="/noticias/<%= prev.slug %>" class="art-nav-item">
+      <div class="art-nav-dir">← Anterior</div>
+      <div class="art-nav-title"><%= prev.title %></div>
+      <img src="<%= prev.thumbnail || prev.image %>" alt="" class="art-nav-thumb" />
+    </a>
+    <% } else { %><div></div><% } %>
+
+    <% if(next){ %>
+    <a href="/noticias/<%= next.slug %>" class="art-nav-item" style="text-align:right;align-items:flex-end;">
+      <div class="art-nav-dir">Siguiente →</div>
+      <div class="art-nav-title"><%= next.title %></div>
+      <img src="<%= next.thumbnail || next.image %>" alt="" class="art-nav-thumb" />
+    </a>
+    <% } else { %><div></div><% } %>
+  </div>
+  <% } %>
+</div>
 
 <!-- Lightbox -->
-<div id="lightbox" onclick="closeLightbox()"
-     style="display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.92);align-items:center;justify-content:center;cursor:pointer;">
-  <img id="lb-img" style="max-width:90vw;max-height:88vh;object-fit:contain;border-radius:4px;" />
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lb-img" />
 </div>
 <script>
 function openLightbox(src){
-  const lb=document.getElementById('lightbox');
-  document.getElementById('lb-img').src=src;
-  lb.style.display='flex';
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lb-img').src = src;
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
 function closeLightbox(){
-  document.getElementById('lightbox').style.display='none';
+  document.getElementById('lightbox').style.display = 'none';
+  document.body.style.overflow = '';
 }
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
 </script>
 
 <%- include('partials/footer') %>

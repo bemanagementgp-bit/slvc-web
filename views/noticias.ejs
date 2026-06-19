@@ -1,73 +1,313 @@
-<%- include('partials/head', { title: 'Noticias' }) %>
+<%- include('partials/head', { title: 'Noticias — San Lorenzo de Villa Castells' }) %>
 <%- include('partials/nav') %>
 
-<!-- Page hero -->
-<div style="background:#0A0A0A;padding:120px 24px 60px;position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;background:url('/images/nuestraHistoria.aa85fb1c70006604d99b.png') center/cover;opacity:0.08;"></div>
-  <div style="max-width:1200px;margin:0 auto;position:relative;">
-    <div class="section-label" style="color:rgba(200,146,42,0.8);">Del Barrio</div>
-    <h1 class="section-title" style="color:#fff;font-size:clamp(40px,6vw,72px);margin-top:8px;">Noticias</h1>
-    <p class="font-nexa" style="font-size:14px;color:rgba(255,255,255,0.4);margin-top:8px;">Todo lo que pasa en El Nido</p>
+<style>
+/* ── Newspaper masthead ── */
+.news-masthead {
+  background: #fff;
+  border-bottom: 3px solid #0A0A0A;
+  padding: 40px 24px 0;
+  margin-top: 64px;
+}
+.news-masthead-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.news-kicker {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8B0000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.news-kicker::before, .news-kicker::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #8B0000;
+}
+.news-page-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 9vw, 110px);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #0A0A0A;
+  line-height: 0.9;
+  text-align: center;
+}
+.news-meta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #E4E4E7;
+  border-bottom: 1px solid #E4E4E7;
+  padding: 8px 0;
+  margin-top: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #A1A1AA;
+  letter-spacing: 0.05em;
+}
+
+/* ── Featured article ── */
+.feat-wrap {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-bottom: 2px solid #0A0A0A;
+  margin-bottom: 0;
+}
+@media(min-width: 900px) {
+  .feat-wrap { grid-template-columns: 1fr 1fr; }
+}
+.feat-img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+@media(min-width: 900px) {
+  .feat-img-wrap { aspect-ratio: unset; min-height: 500px; }
+}
+.feat-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.7s;
+  display: block;
+}
+.feat-img-wrap:hover img { transform: scale(1.04); }
+.feat-body {
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid #E4E4E7;
+  background: #fff;
+}
+.feat-cat {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8B0000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.feat-cat::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  background: #8B0000;
+}
+.feat-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(38px, 4.5vw, 62px);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #0A0A0A;
+  line-height: 0.95;
+  margin-bottom: 16px;
+}
+.feat-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: #52525B;
+  line-height: 1.7;
+  margin-bottom: 28px;
+  border-left: 3px solid #8B0000;
+  padding-left: 14px;
+}
+.feat-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: #A1A1AA;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.feat-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #0A0A0A;
+  padding: 12px 22px;
+  text-decoration: none;
+  margin-top: 24px;
+  align-self: flex-start;
+  transition: background 0.2s;
+}
+.feat-cta:hover { background: #8B0000; }
+
+/* ── Article grid ── */
+.news-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media(min-width: 640px) {
+  .news-grid { grid-template-columns: 1fr 1fr; }
+}
+@media(min-width: 1024px) {
+  .news-grid { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.news-card {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #E4E4E7;
+  border-bottom: 1px solid #E4E4E7;
+  transition: background 0.2s;
+}
+.news-card:nth-child(3n) { border-right: none; }
+@media(max-width:1023px) {
+  .news-card:nth-child(2n) { border-right: none; }
+  .news-card:nth-child(3n) { border-right: 1px solid #E4E4E7; }
+}
+@media(max-width:639px) {
+  .news-card { border-right: none; }
+}
+.news-card:hover { background: #FAFAFA; }
+.news-card-img {
+  position: relative;
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+.news-card-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s;
+  display: block;
+}
+.news-card:hover .news-card-img img { transform: scale(1.05); }
+.news-card-body { padding: 20px 24px 24px; flex: 1; display: flex; flex-direction: column; }
+.news-card-cat {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8B0000;
+  margin-bottom: 10px;
+}
+.news-card-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #0A0A0A;
+  line-height: 1.0;
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+.news-card:hover .news-card-title { color: #8B0000; }
+.news-card-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: #71717A;
+  line-height: 1.6;
+  flex: 1;
+}
+.news-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #F4F4F5;
+}
+.news-card-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: #A1A1AA;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.news-card-read {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0A0A0A;
+}
+.news-card:hover .news-card-read { color: #8B0000; }
+</style>
+
+<!-- Masthead -->
+<div class="news-masthead">
+  <div class="news-masthead-inner">
+    <div class="news-kicker">San Lorenzo de Villa Castells</div>
+    <h1 class="news-page-title">Noticias</h1>
+    <div class="news-meta-bar">
+      <span><%= new Date().toLocaleDateString('es-AR',{weekday:'long',day:'2-digit',month:'long',year:'numeric'}) %></span>
+      <span><%= news.length %> artículos</span>
+      <span>Villa Castells · La Plata</span>
+    </div>
   </div>
 </div>
 
-<section style="padding:60px 24px 80px;background:#fff;">
-  <div style="max-width:1200px;margin:0 auto;">
+<!-- Featured -->
+<% if(news.length > 0){ %>
+<div style="max-width:1200px;margin:0 auto;border-left:1px solid #E4E4E7;border-right:1px solid #E4E4E7;">
+  <a href="/noticias/<%= news[0].slug %>" style="text-decoration:none;display:block;">
+    <div class="feat-wrap">
+      <div class="feat-img-wrap">
+        <img src="<%= news[0].image %>" alt="<%= news[0].title %>" />
+      </div>
+      <div class="feat-body">
+        <div class="feat-cat"><%= news[0].category %></div>
+        <h2 class="feat-title"><%= news[0].title %></h2>
+        <p class="feat-sub"><%= news[0].subtitle %></p>
+        <div class="feat-date"><%= new Date(news[0].date).toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'}) %></div>
+        <span class="feat-cta">Leer artículo →</span>
+      </div>
+    </div>
+  </a>
+</div>
+<% } %>
 
-    <!-- Featured -->
-    <% if(news.length > 0){ %>
-    <a href="/noticias/<%= news[0].slug %>" style="display:grid;grid-template-columns:1fr;border-radius:20px;overflow:hidden;text-decoration:none;background:#0A0A0A;margin-bottom:32px;position:relative;"
-       class="card">
-      <div style="position:relative;aspect-ratio:21/8;overflow:hidden;">
-        <img src="<%= news[0].image %>" alt=""
-             style="width:100%;height:100%;object-fit:cover;opacity:0.5;transition:transform 0.7s;display:block;"
-             onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" />
-        <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(92,0,0,0.8) 0%,rgba(10,10,10,0.3) 60%);"></div>
-        <div style="position:absolute;inset:0;padding:48px;display:flex;flex-direction:column;justify-content:flex-end;max-width:700px;">
-          <div style="display:flex;gap:8px;margin-bottom:12px;">
-            <span class="badge" style="background:rgba(139,0,0,0.8);color:#C8922A;border:1px solid rgba(200,146,42,0.3);"><%= news[0].category %></span>
-            <span class="badge badge-done" style="color:rgba(255,255,255,0.5);">Destacada</span>
-          </div>
-          <h2 class="font-zing" style="font-size:clamp(24px,4vw,48px);color:#fff;text-transform:uppercase;line-height:1.05;margin-bottom:10px;"><%= news[0].title %></h2>
-          <p class="font-nexa" style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;margin-bottom:20px;"><%= news[0].subtitle %></p>
-          <div style="display:flex;align-items:center;justify-content:space-between;">
-            <span class="font-nexa" style="font-size:11px;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:0.08em;">
-              <%= new Date(news[0].date).toLocaleDateString('es-AR',{day:'2-digit',month:'long',year:'numeric'}) %>
-            </span>
-            <span class="btn btn-white" style="font-size:11px;padding:10px 20px;">Leer artículo →</span>
-          </div>
+<!-- Separator -->
+<div style="max-width:1200px;margin:0 auto;padding:0 0 0;">
+  <div style="display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:2px solid #0A0A0A;border-top:1px solid #E4E4E7;margin:0 0;">
+    <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#0A0A0A;padding:0 0;">Todas las notas</span>
+    <div style="flex:1;height:1px;background:#E4E4E7;"></div>
+  </div>
+</div>
+
+<!-- Grid -->
+<div style="max-width:1200px;margin:0 auto;border-left:1px solid #E4E4E7;border-right:1px solid #E4E4E7;margin-bottom:80px;">
+  <div class="news-grid">
+    <% news.slice(1).forEach(function(n){ %>
+    <a href="/noticias/<%= n.slug %>" class="news-card">
+      <div class="news-card-img">
+        <img src="<%= n.thumbnail || n.image %>" alt="<%= n.title %>" loading="lazy" />
+      </div>
+      <div class="news-card-body">
+        <div class="news-card-cat"><%= n.category %></div>
+        <div class="news-card-title"><%= n.title %></div>
+        <p class="news-card-sub"><%= n.subtitle %></p>
+        <div class="news-card-footer">
+          <span class="news-card-date"><%= new Date(n.date).toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'numeric'}) %></span>
+          <span class="news-card-read">Leer →</span>
         </div>
       </div>
     </a>
-    <% } %>
-
-    <!-- Grid -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;">
-      <% news.slice(1).forEach(function(n){ %>
-      <a href="/noticias/<%= n.slug %>" class="card" style="text-decoration:none;">
-        <div style="position:relative;aspect-ratio:3/2;overflow:hidden;">
-          <img src="<%= n.thumbnail || n.image %>" alt="<%= n.title %>"
-               style="width:100%;height:100%;object-fit:cover;transition:transform 0.5s;"
-               onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'" />
-          <div style="position:absolute;top:10px;left:10px;">
-            <span class="badge badge-bordo" style="font-size:9px;backdrop-filter:blur(4px);"><%= n.category %></span>
-          </div>
-        </div>
-        <div style="padding:20px;">
-          <h3 class="font-zing" style="font-size:20px;text-transform:uppercase;color:#0A0A0A;line-height:1.15;margin-bottom:6px;"><%= n.title %></h3>
-          <p class="font-nexa" style="font-size:13px;color:#71717A;line-height:1.6;"><%= n.subtitle %></p>
-          <div style="margin-top:16px;padding-top:14px;border-top:1px solid #F4F4F5;display:flex;align-items:center;justify-content:space-between;">
-            <span class="font-nexa" style="font-size:11px;color:#A1A1AA;">
-              <%= new Date(n.date).toLocaleDateString('es-AR',{day:'2-digit',month:'short',year:'numeric'}) %>
-            </span>
-            <span class="font-nexa-bold" style="font-size:11px;color:#8B0000;text-transform:uppercase;letter-spacing:0.06em;">Leer →</span>
-          </div>
-        </div>
-      </a>
-      <% }) %>
-    </div>
+    <% }) %>
   </div>
-</section>
+</div>
 
 <%- include('partials/footer') %>
 </body>
