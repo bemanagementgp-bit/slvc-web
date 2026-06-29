@@ -469,7 +469,7 @@ function enterHeroFullscreen() {
         <!-- Fecha selector -->
         <div style="display:flex;gap:4px;background:#fff;border-radius:8px;padding:4px;">
           <% [12,13,14,15].forEach(function(f){ %>
-          <button class="tab-btn <%= f===13 ? 'active' : '' %>" onclick="showFecha(<%= f %>)" id="tab-<%= f %>">
+          <button class="tab-btn <%= f===15 ? 'active' : '' %>" onclick="showFecha(<%= f %>)" id="tab-<%= f %>">
             F<%= f %>
           </button>
           <% }) %>
