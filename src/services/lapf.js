@@ -154,31 +154,27 @@ async function fetchLapfData() {
 
     const { cat, ed, fecha, zona } = params;
 
-    // Fetch fecha actual + 3 próximas en paralelo
-    const [htmlActual, html1, html2, html3] = await Promise.all([
-      get(currentUrl),
-      get(`${BASE}/datos-torneo/${cat}/${ed}/${fecha + 1}/${zona}`),
-      get(`${BASE}/datos-torneo/${cat}/${ed}/${fecha + 2}/${zona}`),
-      get(`${BASE}/datos-torneo/${cat}/${ed}/${fecha + 3}/${zona}`),
-    ]);
+    // Fetch ventana de 6 fechas alrededor de la actual (3 atrás + actual + 2 adelante)
+    // Así funciona tanto a mitad como al final del campeonato
+    const offsets = [-3, -2, -1, 0, 1, 2];
+    const htmls = await Promise.all(
+      offsets.map(o => get(`${BASE}/datos-torneo/${cat}/${ed}/${fecha + o}/${zona}`))
+    );
 
+    // Usamos el HTML de la fecha actual para tabla y teams
+    const htmlActual = htmls[3]; // offset 0
     const tabla  = parseStandings(htmlActual) || fallback.tabla;
     const teams  = parseTeams(htmlActual);
 
-    const jugados  = parseFixture(htmlActual, fecha);
-    const proximos = [
-      ...parseFixture(html1, fecha + 1),
-      ...parseFixture(html2, fecha + 2),
-      ...parseFixture(html3, fecha + 3),
-    ];
-
-    const fixture = [...jugados, ...proximos];
+    // Parseamos todas y filtramos solo las que tienen partidos reales
+    const allMatches = offsets.flatMap((o, i) => parseFixture(htmls[i], fecha + o));
+    const fixture = allMatches;
 
     // Próximo partido de SAN LORENZO
     const slvcNames = ['SAN LORENZO V. C.', 'SAN LORENZO V.C.', 'SAN LORENZO V.C'];
     const isSlvc = (t) => slvcNames.some(n => t.includes('SAN LORENZO'));
 
-    const proximoMatch = proximos.find(m => isSlvc(m.local) || isSlvc(m.visitante));
+    const proximoMatch = fixture.find(m => !m.jugado && (isSlvc(m.local) || isSlvc(m.visitante)));
     const proximoPartido = proximoMatch ? {
       fecha:     proximoMatch.fecha,
       local:     proximoMatch.local,
