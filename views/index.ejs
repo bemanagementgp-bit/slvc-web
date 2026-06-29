@@ -468,8 +468,8 @@ function enterHeroFullscreen() {
         </div>
         <!-- Fecha selector -->
         <div style="display:flex;gap:4px;background:#fff;border-radius:8px;padding:4px;">
-          <% [12,13,14,15].forEach(function(f){ %>
-          <button class="tab-btn <%= f===15 ? 'active' : '' %>" onclick="showFecha(<%= f %>)" id="tab-<%= f %>">
+          <% fechas.forEach(function(f){ %>
+          <button class="tab-btn <%= f===fechas[fechas.length-1] ? 'active' : '' %>" onclick="showFecha(<%= f %>)" id="tab-<%= f %>">
             F<%= f %>
           </button>
           <% }) %>
@@ -490,8 +490,8 @@ function enterHeroFullscreen() {
 
     <!-- FIXTURE panel -->
     <div id="panel-fixture" style="background:#fff;border-radius:0 0 16px 16px;border:1px solid #E4E4E7;border-top:none;">
-      <% [12,13,14,15].forEach(function(f){ %>
-      <div id="fecha-<%= f %>" style="display:<%= f===13 ? 'block' : 'none' %>;">
+      <% fechas.forEach(function(f){ %>
+      <div id="fecha-<%= f %>" style="display:<%= f===fechas[fechas.length-1] ? 'block' : 'none' %>;">
         <% const fechaMatches = fixture.filter(m => m.fecha === f); %>
         <% fechaMatches.forEach(function(m, i){ %>
         <%
