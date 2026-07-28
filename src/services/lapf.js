@@ -115,19 +115,30 @@ function parseTeams(html) {
   return teams;
 }
 
-// Obtiene el número de fecha actual desde la URL redireccionada
+// Obtiene la URL activa: prueba zona 2 del mismo torneo, si tiene datos la usa (Rueda 2)
 async function getCurrentFechaUrl() {
-  // Hacemos el get a /datos-torneo/A/1 y obtenemos la redirect URL
-  return new Promise((resolve) => {
+  // Obtenemos zona 1 para extraer cat y ed del torneo
+  const url1 = await new Promise((resolve) => {
     https.get(`${BASE}/datos-torneo/A/1`, { headers: HEADERS }, (res) => {
       if (res.statusCode === 302 && res.headers.location) {
-        resolve(res.headers.location.startsWith('http') ? res.headers.location : BASE + res.headers.location);
-      } else {
-        resolve(null);
-      }
+        const loc = res.headers.location.startsWith('http') ? res.headers.location : BASE + res.headers.location;
+        resolve(loc);
+      } else resolve(null);
       res.resume();
     }).on('error', () => resolve(null));
   });
+
+  if (!url1) return null;
+  const p = parseFechaFromUrl(url1);
+  if (!p) return url1;
+
+  // Probamos zona 2 con el mismo cat y ed (Rueda 2 del mismo campeonato)
+  const url2 = `${BASE}/datos-torneo/${p.cat}/${p.ed}/${p.fecha}/2`;
+  const html2 = await get(url2);
+  const matches2 = parseFixture(html2, p.fecha);
+  if (matches2.length > 0) return url2;
+
+  return url1;
 }
 
 // Normaliza nombres de LAPF para que coincidan con las keys del fallback
@@ -179,7 +190,7 @@ async function fetchLapfData() {
       fecha:     proximoMatch.fecha,
       local:     proximoMatch.local,
       visitante: proximoMatch.visitante,
-      torneo:    `Primera "A" · Rueda 1 · Fecha ${proximoMatch.fecha}`,
+      torneo:    `Primera "A" · Rueda ${zona} · Fecha ${proximoMatch.fecha}`,
       lugar:     'El Nido · Calle 7 y 485, Villa Castells',
     } : fallback.proximoPartido;
 
@@ -193,7 +204,7 @@ async function fetchLapfData() {
       if (key) mergedTeams[key] = { ...mergedTeams[key], logo: data.logo };
     }
 
-    return { fixture, tabla, teams: mergedTeams, proximoPartido };
+    return { fixture, tabla, teams: mergedTeams, proximoPartido, rueda: parseInt(zona) };
 
   } catch (err) {
     console.warn('[LAPF] Error fetching live data, using fallback:', err.message);

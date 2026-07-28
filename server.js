@@ -11,9 +11,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async (req, res) => {
-  const { fixture, tabla, teams, proximoPartido } = await getLapfData();
+  const { fixture, tabla, teams, proximoPartido, rueda } = await getLapfData();
   const fechas = [...new Set(fixture.map(m => m.fecha))].sort((a, b) => a - b);
-  res.render('index', { fixture, tabla, teams, proximoPartido, news: news.slice(0, 6), fechas });
+  res.render('index', { fixture, tabla, teams, proximoPartido, news: news.slice(0, 6), fechas, rueda: rueda || 1 });
 });
 
 app.get('/noticias', (req, res) => {
