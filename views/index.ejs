@@ -463,16 +463,27 @@ function enterHeroFullscreen() {
     <div style="background:#fff;border-bottom:1px solid #E4E4E7;padding:20px 0 0;margin-bottom:0;border-radius:16px 16px 0 0;overflow:hidden;">
       <div style="padding:0 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
         <div>
-          <div class="section-label" style="margin-bottom:4px;">Primera "A" · Rueda <%= rueda %></div>
+          <div class="section-label" style="margin-bottom:4px;">Primera "A"</div>
           <h2 class="section-title" style="font-size:clamp(22px,3vw,32px);">Fixture & Tabla</h2>
         </div>
-        <!-- Fecha selector -->
-        <div style="display:flex;gap:4px;background:#fff;border-radius:8px;padding:4px;">
-          <% fechas.forEach(function(f){ %>
-          <button class="tab-btn <%= f===fechas[fechas.length-1] ? 'active' : '' %>" onclick="showFecha(<%= f %>)" id="tab-<%= f %>">
-            F<%= f %>
-          </button>
-          <% }) %>
+        <!-- Selector Rueda + Fecha -->
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+          <!-- Rueda toggle -->
+          <div style="display:flex;gap:4px;background:#F4F4F5;border-radius:8px;padding:3px;">
+            <button id="btn-r1" onclick="switchRueda(1)"
+              style="padding:5px 14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;transition:all 0.2s;background:<%= activeRueda===1?'#8B0000':'transparent' %>;color:<%= activeRueda===1?'#fff':'#71717A' %>;">
+              R1
+            </button>
+            <% if (r2Fechas && r2Fechas.length > 0) { %>
+            <button id="btn-r2" onclick="switchRueda(2)"
+              style="padding:5px 14px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;border:none;border-radius:6px;cursor:pointer;transition:all 0.2s;background:<%= activeRueda===2?'#8B0000':'transparent' %>;color:<%= activeRueda===2?'#fff':'#71717A' %>;">
+              R2
+            </button>
+            <% } %>
+          </div>
+          <!-- Fecha tabs (se actualiza con JS) -->
+          <div id="fecha-tabs" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;">
+          </div>
         </div>
       </div>
       <!-- Tabs fixture / tabla -->
@@ -482,7 +493,7 @@ function enterHeroFullscreen() {
           Fixture
         </button>
         <button class="fixture-tab-btn" id="ftab-tabla" onclick="switchSection('tabla')"
-          style="flex:1;padding:12px;font-family:'Nexa',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#fff;cursor:pointer;border-bottom:2px solid transparent;color:#71717A;transition:all 0.2s;" id="tabla">
+          style="flex:1;padding:12px;font-family:'Nexa',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;border:none;background:#fff;cursor:pointer;border-bottom:2px solid transparent;color:#71717A;transition:all 0.2s;">
           Tabla de Posiciones
         </button>
       </div>
@@ -490,9 +501,11 @@ function enterHeroFullscreen() {
 
     <!-- FIXTURE panel -->
     <div id="panel-fixture" style="background:#fff;border-radius:0 0 16px 16px;border:1px solid #E4E4E7;border-top:none;">
-      <% fechas.forEach(function(f){ %>
-      <div id="fecha-<%= f %>" style="display:<%= f===fechas[fechas.length-1] ? 'block' : 'none' %>;">
-        <% const fechaMatches = fixture.filter(m => m.fecha === f); %>
+
+      <!-- Rueda 1 fechas -->
+      <% r1Fechas.forEach(function(f){ %>
+      <div id="r1-fecha-<%= f %>" class="fecha-panel" style="display:none;">
+        <% const fechaMatches = r1Fixture.filter(m => m.fecha === f); %>
         <% fechaMatches.forEach(function(m, i){ %>
         <%
           const tL = teams[m.local]    || {};
@@ -526,6 +539,44 @@ function enterHeroFullscreen() {
         <% }) %>
       </div>
       <% }) %>
+
+      <!-- Rueda 2 fechas -->
+      <% if (r2Fechas && r2Fechas.length > 0) { %>
+      <% r2Fechas.forEach(function(f){ %>
+      <div id="r2-fecha-<%= f %>" class="fecha-panel" style="display:none;">
+        <% const fechaMatchesR2 = r2Fixture.filter(m => m.fecha === f); %>
+        <% fechaMatchesR2.forEach(function(m, i){ %>
+        <%
+          const tL2 = teams[m.local]    || {};
+          const tV2 = teams[m.visitante] || {};
+          const isSlvc2 = m.local === 'SAN LORENZO V.C.' || m.visitante === 'SAN LORENZO V.C.';
+        %>
+        <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:16px 24px;border-bottom:<%= i < fechaMatchesR2.length-1 ? '1px solid #F4F4F5' : 'none' %>;background:<%= isSlvc2 ? 'rgba(139,0,0,0.02)' : 'transparent' %>;transition:background 0.15s;"
+             onmouseover="this.style.background='<%= isSlvc2 ? 'rgba(139,0,0,0.05)' : '#FAFAFA' %>'"
+             onmouseout="this.style.background='<%= isSlvc2 ? 'rgba(139,0,0,0.02)' : 'transparent' %>'">
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;text-align:right;">
+            <span class="font-nexa-bold" style="font-size:13px;color:#0A0A0A;text-transform:uppercase;line-height:1.2;<%= m.local === 'SAN LORENZO V.C.' ? 'color:#8B0000;' : '' %>"><%= m.local %></span>
+            <img src="<%= m.local === 'SAN LORENZO V.C.' ? '/images/Logo.1268415243901683eac4.png' : (tL2.logo || '') %>" alt="" style="width:30px;height:30px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'" />
+          </div>
+          <div style="text-align:center;min-width:80px;">
+            <% if (m.jugado) { %>
+              <div class="font-zing" style="font-size:22px;color:#0A0A0A;line-height:1;"><%= m.golL %> – <%= m.golV %></div>
+              <div class="badge badge-done" style="margin-top:4px;font-size:9px;">Final</div>
+            <% } else { %>
+              <div class="font-zing" style="font-size:18px;color:#D4D4D8;line-height:1;">vs</div>
+              <div class="badge badge-bordo" style="margin-top:4px;font-size:9px;">Pendiente</div>
+            <% } %>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:flex-start;gap:10px;">
+            <img src="<%= m.visitante === 'SAN LORENZO V.C.' ? '/images/Logo.1268415243901683eac4.png' : (tV2.logo || '') %>" alt="" style="width:30px;height:30px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'" />
+            <span class="font-nexa-bold" style="font-size:13px;color:#0A0A0A;text-transform:uppercase;line-height:1.2;<%= m.visitante === 'SAN LORENZO V.C.' ? 'color:#8B0000;' : '' %>"><%= m.visitante %></span>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% }) %>
+      <% } %>
+
     </div>
 
     <!-- TABLA panel -->
@@ -591,16 +642,47 @@ function enterHeroFullscreen() {
 </section>
 
 <script>
-function showFecha(n) {
-  [12,13,14,15].forEach(f => {
-    const el = document.getElementById('fecha-'+f);
-    const btn = document.getElementById('tab-'+f);
-    if(el) el.style.display = f===n ? 'block' : 'none';
-    if(btn) {
-      btn.classList.toggle('active', f===n);
-    }
-  });
+const RUEDA_DATA = {
+  1: { fechas: <%- JSON.stringify(r1Fechas) %>, def: <%= r1Default %> },
+  2: { fechas: <%- JSON.stringify(r2Fechas || []) %>, def: <%= r2Default || 'null' %> },
+};
+let currentRueda = <%= activeRueda %>;
+let currentFecha = null;
+
+function renderFechaTabs(rueda, activeFecha) {
+  const { fechas } = RUEDA_DATA[rueda];
+  const container = document.getElementById('fecha-tabs');
+  container.innerHTML = fechas.map(f =>
+    `<button id="tab-r${rueda}-${f}" onclick="showFecha(${f})"
+      style="padding:5px 10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.04em;border:none;border-radius:6px;cursor:pointer;transition:all 0.2s;background:${f===activeFecha?'#0A0A0A':'#F4F4F5'};color:${f===activeFecha?'#fff':'#71717A'};">
+      F${f}
+    </button>`
+  ).join('');
 }
+
+function showFecha(f) {
+  // Ocultar todos los paneles
+  document.querySelectorAll('.fecha-panel').forEach(el => el.style.display = 'none');
+  // Mostrar el panel de la rueda+fecha activa
+  const panel = document.getElementById(`r${currentRueda}-fecha-${f}`);
+  if (panel) panel.style.display = 'block';
+  currentFecha = f;
+  renderFechaTabs(currentRueda, f);
+}
+
+function switchRueda(r) {
+  currentRueda = r;
+  // Actualizar botones R1/R2
+  [1,2].forEach(n => {
+    const btn = document.getElementById('btn-r'+n);
+    if (!btn) return;
+    btn.style.background = n===r ? '#8B0000' : 'transparent';
+    btn.style.color      = n===r ? '#fff'    : '#71717A';
+  });
+  const def = RUEDA_DATA[r].def;
+  showFecha(def);
+}
+
 function switchSection(s) {
   const fp = document.getElementById('panel-fixture');
   const tp = document.getElementById('panel-tabla');
@@ -613,6 +695,9 @@ function switchSection(s) {
   tb.style.borderBottomColor = s==='tabla' ? '#8B0000' : 'transparent';
   tb.style.color = s==='tabla' ? '#8B0000' : '#71717A';
 }
+
+// Init: mostrar rueda activa y primera fecha pendiente
+switchRueda(<%= activeRueda %>);
 </script>
 
 <!-- ═══════════════════════════════════════════════════

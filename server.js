@@ -11,9 +11,17 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async (req, res) => {
-  const { fixture, tabla, teams, proximoPartido, rueda } = await getLapfData();
-  const fechas = [...new Set(fixture.map(m => m.fecha))].sort((a, b) => a - b);
-  res.render('index', { fixture, tabla, teams, proximoPartido, news: news.slice(0, 6), fechas, rueda: rueda || 1 });
+  const d = await getLapfData();
+  res.render('index', {
+    fixture: d.fixture, tabla: d.tabla, teams: d.teams, proximoPartido: d.proximoPartido,
+    news: news.slice(0, 6),
+    r1Fixture: d.r1Fixture, r2Fixture: d.r2Fixture,
+    r1Fechas: d.r1Fechas,   r2Fechas: d.r2Fechas,
+    r1Default: d.r1Default, r2Default: d.r2Default,
+    activeRueda: d.activeRueda,
+    // compat legacy
+    fechas: d.fechas, rueda: d.activeRueda,
+  });
 });
 
 app.get('/noticias', (req, res) => {

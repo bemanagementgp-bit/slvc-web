@@ -1,42 +1,72 @@
 /**
  * Scraper de Liga Amateur Platense de Fútbol
- * Fetchea fixture y posiciones en tiempo real, con caché de 30 minutos.
+ * Trae Rueda 1 (zona=1) y Rueda 2 (zona=2) completas, con caché de 30 minutos.
  */
 
 const https = require('https');
-
-// Fallback estático en caso de error de red
 const fallback = require('../data/fixture');
 
-const CACHE_TTL = 30 * 60 * 1000; // 30 minutos
+const CACHE_TTL = 30 * 60 * 1000;
 let cache = null;
 let cacheTs = 0;
 
 const BASE = 'https://www.lapf.com.ar';
-const LOGO_BASE = `${BASE}/Recursos/img/logos`;
-
 const HEADERS = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
   'Accept': 'text/html,application/xhtml+xml',
 };
 
-function get(url, cookies) {
-  return new Promise((resolve, reject) => {
-    const opts = { headers: { ...HEADERS, ...(cookies ? { Cookie: cookies } : {}) } };
-    https.get(url, opts, (res) => {
+function get(url) {
+  return new Promise((resolve) => {
+    https.get(url, { headers: HEADERS }, (res) => {
       let data = '';
       if (res.statusCode === 302 && res.headers.location) {
-        const cookie = (res.headers['set-cookie'] || []).map(c => c.split(';')[0]).join('; ');
         const loc = res.headers.location.startsWith('http') ? res.headers.location : BASE + res.headers.location;
-        return get(loc, cookie).then(resolve).catch(reject);
+        return get(loc).then(resolve);
       }
       res.on('data', d => data += d);
       res.on('end', () => resolve(data));
-    }).on('error', reject);
+    }).on('error', () => resolve(''));
   });
 }
 
-// Extrae tabla de posiciones del HTML (tabla GVPosicionesDesktop)
+// Normaliza nombres LAPF al formato del fallback
+const FALLBACK_KEYS = Object.keys(fallback.teams);
+function normalizeName(name) {
+  const stripped = name.replace(/[^A-Z]/g, '');
+  return FALLBACK_KEYS.find(k => k.replace(/[^A-Z]/g, '') === stripped) || name;
+}
+
+function parseFechaFromUrl(url) {
+  const m = url.match(/datos-torneo\/(\d+)\/(\d+)\/(\d+)\/(\d+)/);
+  return m ? { cat: m[1], ed: m[2], fecha: parseInt(m[3]), zona: m[4] } : null;
+}
+
+function parseFixture(html, fechaNum) {
+  const matches = [];
+  const tableMatch = html.match(/id="GVFixtureDesktop"[\s\S]*?<tbody>([\s\S]*?)<\/tbody>/);
+  if (!tableMatch) return [];
+
+  const rows = tableMatch[1].match(/<tr>([\s\S]*?)<\/tr>/g) || [];
+  rows.forEach(row => {
+    const cells = row.match(/<td[^>]*>([\s\S]*?)<\/td>/g) || [];
+    if (cells.length < 4) return;
+
+    const getTeam = c => { const a = c.match(/alt="logo ([^"]+)"/); return a ? a[1].trim() : ''; };
+    const getScore = c => { const t = c.replace(/<[^>]+>/g, '').trim(); return t === '' || t === '-' ? null : parseInt(t); };
+
+    const local     = normalizeName(getTeam(cells[0]));
+    const golL      = cells[1] ? getScore(cells[1]) : null;
+    const golV      = cells[3] ? getScore(cells[3]) : null;
+    const visitante = cells[4] ? normalizeName(getTeam(cells[4])) : '';
+
+    if (!local || !visitante) return;
+    const jugado = golL !== null && golV !== null;
+    matches.push({ fecha: fechaNum, local, visitante, jugado, ...(jugado ? { golL, golV } : {}) });
+  });
+  return matches;
+}
+
 function parseStandings(html) {
   const tabla = [];
   const tableMatch = html.match(/id="GVPosicionesDesktop"[\s\S]*?<tbody>([\s\S]*?)<\/tbody>/);
@@ -46,14 +76,11 @@ function parseStandings(html) {
   rows.forEach(row => {
     const cells = row.match(/<td[^>]*>([\s\S]*?)<\/td>/g) || [];
     if (cells.length < 9) return;
-
-    const getText = (cell) => cell.replace(/<[^>]+>/g, '').trim();
+    const getText = c => c.replace(/<[^>]+>/g, '').trim();
     const imgAlt = cells[1] && cells[1].match(/alt="logo ([^"]+)"/);
-    const equipo = normalizeName(imgAlt ? imgAlt[1].trim() : getText(cells[1]));
-
     tabla.push({
       pos:    parseInt(getText(cells[0])) || tabla.length + 1,
-      equipo: equipo,
+      equipo: normalizeName(imgAlt ? imgAlt[1].trim() : getText(cells[1])),
       pts:    parseInt(getText(cells[2])) || 0,
       pj:     parseInt(getText(cells[3])) || 0,
       pg:     parseInt(getText(cells[4])) || 0,
@@ -66,156 +93,99 @@ function parseStandings(html) {
   return tabla.length ? tabla : null;
 }
 
-// Extrae fixture del HTML (tabla GVFixtureDesktop)
-function parseFixture(html, fechaNum) {
-  const matches = [];
-  const tableMatch = html.match(/id="GVFixtureDesktop"[\s\S]*?<tbody>([\s\S]*?)<\/tbody>/);
-  if (!tableMatch) return [];
-
-  const rows = tableMatch[1].match(/<tr>([\s\S]*?)<\/tr>/g) || [];
-  rows.forEach(row => {
-    const cells = row.match(/<td[^>]*>([\s\S]*?)<\/td>/g) || [];
-    if (cells.length < 4) return;
-
-    const getTeam = (cell) => {
-      const alt = cell.match(/alt="logo ([^"]+)"/);
-      return alt ? alt[1].trim() : '';
-    };
-    const getScore = (cell) => {
-      const txt = cell.replace(/<[^>]+>/g, '').trim();
-      return txt === '' || txt === '-' ? null : parseInt(txt);
-    };
-
-    const local     = normalizeName(getTeam(cells[0]));
-    const golL      = cells[1] ? getScore(cells[1]) : null;
-    const golV      = cells[3] ? getScore(cells[3]) : null;
-    const visitante = cells[4] ? normalizeName(getTeam(cells[4])) : '';
-
-    if (!local || !visitante) return;
-
-    const jugado = golL !== null && golV !== null;
-    matches.push({ fecha: fechaNum, local, visitante, jugado, ...(jugado ? { golL, golV } : {}) });
-  });
-  return matches;
-}
-
-// Construye el equipo `teams` desde las imágenes del HTML
 function parseTeams(html) {
   const teams = {};
-  const imgs = html.matchAll(/src="([^"]+\/logos\/[^"]+)" alt="logo ([^"]+)"/g);
-  for (const m of imgs) {
+  for (const m of html.matchAll(/src="([^"]+\/logos\/[^"]+)" alt="logo ([^"]+)"/g)) {
     const name = m[2].trim();
-    if (!teams[name]) {
-      teams[name] = {
-        logo: m[1],
-        short: name.replace(/[^A-Z0-9]/g, '').substring(0, 4),
-      };
-    }
+    if (!teams[name]) teams[name] = { logo: m[1] };
   }
   return teams;
 }
 
-// Obtiene la URL activa: prueba zona 2 del mismo torneo, si tiene datos la usa (Rueda 2)
-async function getCurrentFechaUrl() {
-  // Obtenemos zona 1 para extraer cat y ed del torneo
-  const url1 = await new Promise((resolve) => {
-    https.get(`${BASE}/datos-torneo/A/1`, { headers: HEADERS }, (res) => {
-      if (res.statusCode === 302 && res.headers.location) {
-        const loc = res.headers.location.startsWith('http') ? res.headers.location : BASE + res.headers.location;
-        resolve(loc);
-      } else resolve(null);
-      res.resume();
-    }).on('error', () => resolve(null));
-  });
-
-  if (!url1) return null;
-  const p = parseFechaFromUrl(url1);
-  if (!p) return url1;
-
-  // Probamos zona 2 con el mismo cat y ed (Rueda 2 del mismo campeonato)
-  const url2 = `${BASE}/datos-torneo/${p.cat}/${p.ed}/${p.fecha}/2`;
-  const html2 = await get(url2);
-  const matches2 = parseFixture(html2, p.fecha);
-  if (matches2.length > 0) return url2;
-
-  return url1;
-}
-
-// Normaliza nombres de LAPF para que coincidan con las keys del fallback
-const FALLBACK_KEYS = Object.keys(fallback.teams);
-function normalizeName(lapfName) {
-  const stripped = lapfName.replace(/[^A-Z]/g, '');
-  const match = FALLBACK_KEYS.find(k => k.replace(/[^A-Z]/g, '') === stripped);
-  return match || lapfName;
-}
-
-function parseFechaFromUrl(url) {
-  // URL: /datos-torneo/165/442/12/1
-  const m = url.match(/datos-torneo\/(\d+)\/(\d+)\/(\d+)\/(\d+)/);
-  return m ? { cat: m[1], ed: m[2], fecha: parseInt(m[3]), zona: m[4] } : null;
+// Fetchea todas las fechas de una zona (F1 a F16), descarta las vacías
+async function fetchZona(cat, ed, zona) {
+  const RANGE = Array.from({ length: 16 }, (_, i) => i + 1);
+  const htmls = await Promise.all(RANGE.map(f => get(`${BASE}/datos-torneo/${cat}/${ed}/${f}/${zona}`)));
+  const fixture = RANGE.flatMap((f, i) => parseFixture(htmls[i], f));
+  return fixture; // fechas vacías simplemente no tienen partidos
 }
 
 async function fetchLapfData() {
   try {
-    const currentUrl = await getCurrentFechaUrl();
-    if (!currentUrl) throw new Error('No redirect URL');
+    // Obtenemos cat y ed del torneo activo vía redirect
+    const redirectUrl = await new Promise((resolve) => {
+      https.get(`${BASE}/datos-torneo/A/1`, { headers: HEADERS }, (res) => {
+        if (res.statusCode === 302 && res.headers.location) {
+          const loc = res.headers.location.startsWith('http') ? res.headers.location : BASE + res.headers.location;
+          resolve(loc);
+        } else resolve(null);
+        res.resume();
+      }).on('error', () => resolve(null));
+    });
 
-    const params = parseFechaFromUrl(currentUrl);
-    if (!params) throw new Error('Cannot parse URL params');
+    if (!redirectUrl) throw new Error('No redirect URL');
+    const { cat, ed, fecha } = parseFechaFromUrl(redirectUrl);
 
-    const { cat, ed, fecha, zona } = params;
+    // Fetcheamos Rueda 1 y Rueda 2 en paralelo (32 requests totales, caché 30min)
+    const [r1Fixture, r2Fixture] = await Promise.all([
+      fetchZona(cat, ed, 1),
+      fetchZona(cat, ed, 2),
+    ]);
 
-    // Fetch ventana de 6 fechas alrededor de la actual (3 atrás + actual + 2 adelante)
-    // Así funciona tanto a mitad como al final del campeonato
-    const offsets = [-3, -2, -1, 0, 1, 2];
-    const htmls = await Promise.all(
-      offsets.map(o => get(`${BASE}/datos-torneo/${cat}/${ed}/${fecha + o}/${zona}`))
-    );
+    // Tabla y teams del HTML de la fecha actual
+    const htmlActual = await get(`${BASE}/datos-torneo/${cat}/${ed}/${fecha}/1`);
+    const tabla = parseStandings(htmlActual) || fallback.tabla;
+    const rawTeams = parseTeams(htmlActual);
+    const mergedTeams = { ...fallback.teams };
+    for (const [name, data] of Object.entries(rawTeams)) {
+      const key = FALLBACK_KEYS.find(k => k.replace(/[^A-Z]/g, '') === name.replace(/[^A-Z]/g, ''));
+      if (key) mergedTeams[key] = { ...mergedTeams[key], logo: data.logo };
+    }
 
-    // Usamos el HTML de la fecha actual para tabla y teams
-    const htmlActual = htmls[3]; // offset 0
-    const tabla  = parseStandings(htmlActual) || fallback.tabla;
-    const teams  = parseTeams(htmlActual);
+    // Fechas únicas por rueda (solo las que tienen partidos)
+    const fechasOf = (fix) => [...new Set(fix.map(m => m.fecha))].sort((a, b) => a - b);
+    const r1Fechas = fechasOf(r1Fixture);
+    const r2Fechas = fechasOf(r2Fixture);
 
-    // Parseamos todas y filtramos solo las que tienen partidos reales
-    const allMatches = offsets.flatMap((o, i) => parseFixture(htmls[i], fecha + o));
-    const fixture = allMatches;
+    // Primer fecha sin resultados en cada rueda
+    const firstPending = (fix, fechas) => fechas.find(f => fix.some(m => m.fecha === f && !m.jugado)) || fechas[fechas.length - 1];
+    const r1Default = firstPending(r1Fixture, r1Fechas);
+    const r2Default = firstPending(r2Fixture, r2Fechas);
 
-    // Próximo partido de SAN LORENZO
-    const slvcNames = ['SAN LORENZO V. C.', 'SAN LORENZO V.C.', 'SAN LORENZO V.C'];
-    const isSlvc = (t) => slvcNames.some(n => t.includes('SAN LORENZO'));
+    // Rueda activa: la que tenga partidos pendientes más próximos
+    const activeRueda = r2Fechas.length > 0 && r2Fixture.some(m => !m.jugado) ? 2 : 1;
 
-    const proximoMatch = fixture.find(m => !m.jugado && (isSlvc(m.local) || isSlvc(m.visitante)));
+    // Próximo de SAN LORENZO
+    const isSlvc = t => t.includes('SAN LORENZO');
+    const activeFixture = activeRueda === 2 ? r2Fixture : r1Fixture;
+    const proximoMatch = activeFixture.find(m => !m.jugado && (isSlvc(m.local) || isSlvc(m.visitante)));
     const proximoPartido = proximoMatch ? {
       fecha:     proximoMatch.fecha,
       local:     proximoMatch.local,
       visitante: proximoMatch.visitante,
-      torneo:    `Primera "A" · Rueda ${zona} · Fecha ${proximoMatch.fecha}`,
+      torneo:    `Primera "A" · Rueda ${activeRueda} · Fecha ${proximoMatch.fecha}`,
       lugar:     'El Nido · Calle 7 y 485, Villa Castells',
     } : fallback.proximoPartido;
 
-    // Merge teams con logos conocidos del fallback para los que no encontramos imagen
-    const mergedTeams = { ...fallback.teams };
-    for (const [name, data] of Object.entries(teams)) {
-      // Intentar mapear al nombre en fallback
-      const key = Object.keys(fallback.teams).find(k =>
-        k.replace(/[^A-Z]/g,'') === name.replace(/[^A-Z]/g,'')
-      );
-      if (key) mergedTeams[key] = { ...mergedTeams[key], logo: data.logo };
-    }
-
-    return { fixture, tabla, teams: mergedTeams, proximoPartido, rueda: parseInt(zona) };
+    return {
+      r1Fixture, r2Fixture,
+      r1Fechas,  r2Fechas,
+      r1Default, r2Default,
+      activeRueda,
+      fixture: activeFixture,   // compat con otras partes del template
+      fechas:  activeRueda === 2 ? r2Fechas : r1Fechas,
+      tabla, teams: mergedTeams, proximoPartido,
+    };
 
   } catch (err) {
     console.warn('[LAPF] Error fetching live data, using fallback:', err.message);
-    return fallback;
+    return { ...fallback, r1Fixture: fallback.fixture, r2Fixture: [], r1Fechas: [12,13,14,15], r2Fechas: [], r1Default: 15, r2Default: null, activeRueda: 1, fechas: [12,13,14,15] };
   }
 }
 
 async function getLapfData() {
   const now = Date.now();
   if (cache && now - cacheTs < CACHE_TTL) return cache;
-
   const data = await fetchLapfData();
   cache = data;
   cacheTs = now;
