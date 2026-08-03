@@ -30,7 +30,7 @@ app.get('/api/rifas', (req, res) => {
 const ADMIN_TOKEN = process.env.RIFAS_TOKEN || 'SLVC2025';
 app.post('/api/rifas/marcar', (req, res) => {
   if (req.query.token !== ADMIN_TOKEN) return res.status(401).json({ error: 'No autorizado' });
-  const nuevos = (req.body.numeros || []).map(Number).filter(n => n >= 8000 && n <= 9000);
+  const nuevos = (req.body.numeros || []).map(Number).filter(n => n >= 4000 && n <= 5000);
   const data = getRifas();
   data.vendidas = [...new Set([...data.vendidas, ...nuevos])].sort((a,b)=>a-b);
   saveRifas(data);
