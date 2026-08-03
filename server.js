@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const news = require('./src/data/news');
-const { getLapfData } = require('./src/services/lapf');
+const { getLapfData, getLapfNews } = require('./src/services/lapf');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -11,7 +11,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async (req, res) => {
-  const d = await getLapfData();
+  const [d, lapfNews] = await Promise.all([getLapfData(), getLapfNews()]);
   res.render('index', {
     fixture: d.fixture, tabla: d.tabla, teams: d.teams, proximoPartido: d.proximoPartido,
     news: news.slice(0, 6),
@@ -21,6 +21,7 @@ app.get('/', async (req, res) => {
     activeRueda: d.activeRueda,
     // compat legacy
     fechas: d.fechas, rueda: d.activeRueda,
+    lapfNews,
   });
 });
 

@@ -183,6 +183,37 @@ async function fetchLapfData() {
   }
 }
 
+// Parsea las noticias del carousel de LAPF
+function parseLapfNews(html) {
+  const news = [];
+  const items = html.match(/<div class="carousel-item[^"]*">([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/g) || [];
+  items.forEach(item => {
+    const titleMatch = item.match(/<h2 class="display-6[^"]*">([\s\S]*?)<\/h2>/);
+    const excerptMatch = item.match(/<p class="pe-lg-4">([\s\S]*?)<\/p>/);
+    const linkMatch = item.match(/href="(https:\/\/www\.lapf\.com\.ar\/noticias\/\d+)"/);
+    const imgMatch = item.match(/src="(https:\/\/www\.lapf\.com\.ar\/Recursos\/img\/Noticias\/[^"]+)"/);
+
+    if (!titleMatch || !linkMatch) return;
+
+    news.push({
+      titulo:  titleMatch[1].replace(/<[^>]+>/g, '').trim(),
+      extracto: excerptMatch ? excerptMatch[1].replace(/<[^>]+>/g, '').trim() : '',
+      url:     linkMatch[1],
+      imagen:  imgMatch ? imgMatch[1] : null,
+    });
+  });
+  return news;
+}
+
+async function getLapfNews() {
+  try {
+    const html = await get('https://www.lapf.com.ar/datos-torneo/165/442/1/2');
+    return parseLapfNews(html);
+  } catch {
+    return [];
+  }
+}
+
 async function getLapfData() {
   const now = Date.now();
   if (cache && now - cacheTs < CACHE_TTL) return cache;
@@ -192,4 +223,4 @@ async function getLapfData() {
   return data;
 }
 
-module.exports = { getLapfData };
+module.exports = { getLapfData, getLapfNews };

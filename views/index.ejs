@@ -432,22 +432,35 @@ function enterHeroFullscreen() {
         </div>
       </div>
 
-      <!-- RIGHT: YouTube card -->
-      <a href="https://www.youtube.com/@slvcoficial" target="_blank" rel="noreferrer"
-         style="display:block;border-radius:16px;overflow:hidden;background:#0F0F0F;text-decoration:none;position:relative;aspect-ratio:16/9;max-width:600px;"
-         onmouseover="this.querySelector('.yt-play').style.transform='scale(1.1)'" onmouseout="this.querySelector('.yt-play').style.transform='scale(1)'">
-        <img src="/images/hero-poster.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:1;" />
-        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.25),rgba(0,0,0,0.4));"></div>
-        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;">
-          <div class="yt-play" style="width:68px;height:68px;background:#FF0000;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 28px rgba(255,0,0,0.45);transition:transform 0.3s;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+      <!-- RIGHT: Noticias LAPF -->
+      <div style="display:flex;flex-direction:column;gap:0;border:1px solid #E4E4E7;border-radius:16px;overflow:hidden;background:#fff;">
+        <div style="padding:14px 20px;border-bottom:1px solid #E4E4E7;display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <img src="https://www.lapf.com.ar/Recursos/img/logo.png" alt="LAPF" style="height:20px;object-fit:contain;" onerror="this.style.display='none'" />
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#52525B;">Noticias de la Liga</span>
           </div>
-          <div style="text-align:center;">
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.05em;color:#fff;text-transform:uppercase;">@slvcoficial</div>
-            <div style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.6);margin-top:3px;">Canal oficial · YouTube</div>
-          </div>
+          <a href="https://www.lapf.com.ar/todaslasnoticias" target="_blank" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#8B0000;text-decoration:none;">Ver todas →</a>
         </div>
-      </a>
+        <% (lapfNews || []).slice(0,5).forEach(function(n, i){ %>
+        <a href="<%= n.url %>" target="_blank" style="display:flex;align-items:center;gap:14px;padding:14px 20px;border-bottom:<%= i < 4 ? '1px solid #F4F4F5' : 'none' %>;text-decoration:none;transition:background 0.15s;"
+           onmouseover="this.style.background='#FAFAFA'" onmouseout="this.style.background='transparent'">
+          <% if (n.imagen) { %>
+          <img src="<%= n.imagen %>" alt="" style="width:56px;height:56px;object-fit:cover;border-radius:8px;flex-shrink:0;" onerror="this.style.display='none'" />
+          <% } %>
+          <div style="flex:1;min-width:0;">
+            <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;color:#0A0A0A;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+              <%= n.titulo %>
+            </div>
+            <% if (n.extracto) { %>
+            <div style="font-family:'Inter',sans-serif;font-size:12px;color:#71717A;margin-top:4px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">
+              <%= n.extracto.substring(0, 100) %>
+            </div>
+            <% } %>
+          </div>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;color:#D4D4D8;"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <% }) %>
+      </div>
 
     </div>
   </div>
