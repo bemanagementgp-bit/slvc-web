@@ -326,8 +326,8 @@ function enterHeroFullscreen() {
             <div style="font-family:'Inter',sans-serif;font-size:13px;color:#52525B;margin-top:4px;">Financiado por la<br>comunidad</div>
           </div>
           <div style="background:#F4F4F5;border-radius:12px;padding:20px;text-align:center;">
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:#8B0000;line-height:1;">1001</div>
-            <div style="font-family:'Inter',sans-serif;font-size:13px;color:#52525B;margin-top:4px;">Rifas del<br>8000 al 9000</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:#8B0000;line-height:1;">1000</div>
+            <div style="font-family:'Inter',sans-serif;font-size:13px;color:#52525B;margin-top:4px;">Números para<br>venta digital</div>
           </div>
         </div>
 
@@ -335,7 +335,7 @@ function enterHeroFullscreen() {
         <div style="border-left:3px solid #8B0000;padding-left:20px;display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;align-items:flex-start;gap:10px;">
             <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#8B0000;line-height:1;flex-shrink:0;">1</span>
-            <p style="font-family:'Inter',sans-serif;font-size:14px;color:#3F3F46;line-height:1.6;margin:0;">Hacé clic en <strong>"Comprá tu rifa"</strong> y elegí uno o varios números del 1 al 1001.</p>
+            <p style="font-family:'Inter',sans-serif;font-size:14px;color:#3F3F46;line-height:1.6;margin:0;">Hacé clic en <strong>"Comprá tu rifa"</strong> y elegí uno o varios números del 8000 al 9000.</p>
           </div>
           <div style="display:flex;align-items:flex-start;gap:10px;">
             <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:#8B0000;line-height:1;flex-shrink:0;">2</span>
@@ -365,52 +365,55 @@ function enterHeroFullscreen() {
 </section>
 
 <!-- ═══ MODAL RIFA ═══ -->
-<div id="modal-rifa" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:16px;">
-  <div style="background:#fff;border-radius:20px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,0.25);">
+<div id="modal-rifa" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);align-items:center;justify-content:center;padding:12px;">
+  <div style="background:#fff;border-radius:20px;width:100%;max-width:680px;max-height:92vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,0.3);display:flex;flex-direction:column;">
 
-    <!-- Header modal -->
-    <div style="padding:24px 24px 0;display:flex;align-items:flex-start;justify-content:space-between;">
+    <!-- Header -->
+    <div style="padding:20px 22px 0;display:flex;align-items:flex-start;justify-content:space-between;flex-shrink:0;">
       <div>
         <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#8B0000;margin-bottom:4px;">El Nido · Rosita Beatriz Folino</div>
-        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:#0A0A0A;margin:0;line-height:1;">Elegí tu número de rifa</h3>
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:#0A0A0A;margin:0;line-height:1;">Elegí tu número de rifa</h3>
+        <p style="font-family:'Inter',sans-serif;font-size:12px;color:#71717A;margin:4px 0 0;">Valor por número: <strong style="color:#0A0A0A;">$10.000</strong> · Números disponibles: <strong id="rifa-disponibles" style="color:#0A0A0A;">–</strong></p>
       </div>
-      <button onclick="cerrarModalRifa()" style="background:none;border:none;cursor:pointer;padding:4px;color:#A1A1AA;font-size:22px;line-height:1;">✕</button>
+      <button onclick="cerrarModalRifa()" style="background:none;border:none;cursor:pointer;padding:4px;color:#A1A1AA;font-size:22px;line-height:1;flex-shrink:0;">✕</button>
     </div>
 
-    <div style="padding:20px 24px 24px;display:flex;flex-direction:column;gap:20px;">
+    <div style="padding:16px 22px 22px;display:flex;flex-direction:column;gap:16px;">
 
       <!-- Nombre -->
       <div>
         <label style="font-family:'Inter',sans-serif;font-weight:600;font-size:13px;color:#0A0A0A;display:block;margin-bottom:6px;">Tu nombre *</label>
         <input id="rifa-nombre" type="text" placeholder="Ej: Juan García"
-          style="width:100%;padding:12px 14px;border:1px solid #E4E4E7;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;color:#0A0A0A;outline:none;box-sizing:border-box;transition:border-color 0.2s;"
+          style="width:100%;padding:11px 14px;border:1px solid #E4E4E7;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;color:#0A0A0A;outline:none;box-sizing:border-box;transition:border-color 0.2s;"
           onfocus="this.style.borderColor='#8B0000'" onblur="this.style.borderColor='#E4E4E7'" />
       </div>
 
-      <!-- Buscador de número -->
-      <div>
-        <label style="font-family:'Inter',sans-serif;font-weight:600;font-size:13px;color:#0A0A0A;display:block;margin-bottom:6px;">Elegí uno o más números (8000–9000)</label>
-        <div style="display:flex;gap:8px;margin-bottom:10px;">
-          <input id="rifa-buscar" type="number" min="8000" max="9000" placeholder="Escribí un número..."
-            style="flex:1;padding:10px 14px;border:1px solid #E4E4E7;border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;color:#0A0A0A;outline:none;transition:border-color 0.2s;"
-            onfocus="this.style.borderColor='#8B0000'" onblur="this.style.borderColor='#E4E4E7'"
-            onkeydown="if(event.key==='Enter'){agregarNumero()}" />
-          <button onclick="agregarNumero()"
-            style="padding:10px 16px;background:#0A0A0A;color:#fff;border:none;border-radius:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;cursor:pointer;">
-            Agregar
-          </button>
-        </div>
-        <!-- Números seleccionados -->
-        <div id="rifa-seleccionados" style="display:flex;flex-wrap:wrap;gap:8px;min-height:36px;">
-          <span style="font-family:'Inter',sans-serif;font-size:13px;color:#A1A1AA;padding:4px 0;" id="rifa-placeholder">Ningún número seleccionado todavía.</span>
-        </div>
+      <!-- Leyenda colores -->
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <span style="display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:12px;color:#52525B;">
+          <span style="width:14px;height:14px;border-radius:3px;background:#E4E4E7;border:1px solid #D4D4D8;display:inline-block;"></span>Disponible
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:12px;color:#52525B;">
+          <span style="width:14px;height:14px;border-radius:3px;background:#16a34a;display:inline-block;"></span>Seleccionado
+        </span>
+        <span style="display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;font-size:12px;color:#52525B;">
+          <span style="width:14px;height:14px;border-radius:3px;background:#F4F4F5;border:1px solid #E4E4E7;display:inline-block;"></span>Vendido
+        </span>
       </div>
 
-      <!-- Resumen -->
-      <div id="rifa-resumen" style="display:none;background:#F4F4F5;border-radius:10px;padding:14px 16px;">
-        <div style="font-family:'Inter',sans-serif;font-size:13px;color:#52525B;">
-          Vas a reservar los números <strong id="rifa-resumen-nums" style="color:#0A0A0A;"></strong> a nombre de <strong id="rifa-resumen-nombre" style="color:#0A0A0A;"></strong>.
-        </div>
+      <!-- Grilla de números -->
+      <div id="rifa-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:5px;max-height:300px;overflow-y:auto;padding:4px 2px;">
+        <div style="grid-column:1/-1;font-family:'Inter',sans-serif;font-size:13px;color:#A1A1AA;text-align:center;padding:20px 0;">Cargando números…</div>
+      </div>
+
+      <!-- Total seleccionado -->
+      <div id="rifa-total-bar" style="display:none;background:#F4F4F5;border-radius:10px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+        <span style="font-family:'Inter',sans-serif;font-size:13px;color:#52525B;">
+          <span id="rifa-total-count">0</span> número(s) seleccionado(s)
+        </span>
+        <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:#0A0A0A;">
+          Total: $<span id="rifa-total-precio">0</span>
+        </span>
       </div>
 
       <!-- Botón confirmar -->
@@ -428,12 +431,84 @@ function enterHeroFullscreen() {
 
 <script>
 (function(){
-  const numeros = new Set();
+  const TOTAL = 1001;
+  const MIN   = 8000;
+  const MAX   = 9000;
+  const PRECIO = 10000;
+  let vendidas  = new Set();
+  let seleccion = new Set();
+
+  function formatNum(n) { return n.toLocaleString('es-AR'); }
+
+  function renderGrid() {
+    const grid = document.getElementById('rifa-grid');
+    const frag = document.createDocumentFragment();
+    for (let n = MIN; n <= MAX; n++) {
+      const btn = document.createElement('button');
+      btn.textContent = n;
+      btn.dataset.n = n;
+      const sold = vendidas.has(n);
+      const sel  = seleccion.has(n);
+      btn.style.cssText = [
+        'font-family:"Inter",sans-serif',
+        'font-size:11px',
+        'font-weight:600',
+        'border-radius:5px',
+        'padding:5px 2px',
+        'border:1px solid ' + (sold ? '#E4E4E7' : sel ? '#15803d' : '#D4D4D8'),
+        'background:'       + (sold ? '#F4F4F5' : sel ? '#16a34a' : '#fff'),
+        'color:'            + (sold ? '#A1A1AA' : sel ? '#fff'    : '#0A0A0A'),
+        'cursor:'           + (sold ? 'not-allowed' : 'pointer'),
+        'text-decoration:'  + (sold ? 'line-through' : 'none'),
+        'transition:background 0.15s,border-color 0.15s',
+      ].join(';');
+      if (!sold) btn.onclick = () => toggleNumero(n);
+      frag.appendChild(btn);
+    }
+    grid.innerHTML = '';
+    grid.appendChild(frag);
+    updateStats();
+  }
+
+  function toggleNumero(n) {
+    if (vendidas.has(n)) return;
+    if (seleccion.has(n)) seleccion.delete(n); else seleccion.add(n);
+    const btn = document.querySelector(`#rifa-grid button[data-n="${n}"]`);
+    if (btn) {
+      const sel = seleccion.has(n);
+      btn.style.background   = sel ? '#16a34a' : '#fff';
+      btn.style.borderColor  = sel ? '#15803d' : '#D4D4D8';
+      btn.style.color        = sel ? '#fff'    : '#0A0A0A';
+    }
+    updateStats();
+  }
+
+  function updateStats() {
+    const count = seleccion.size;
+    const bar   = document.getElementById('rifa-total-bar');
+    bar.style.display = count > 0 ? 'flex' : 'none';
+    document.getElementById('rifa-total-count').textContent  = count;
+    document.getElementById('rifa-total-precio').textContent = formatNum(count * PRECIO);
+    document.getElementById('rifa-disponibles').textContent  = (TOTAL - vendidas.size);
+  }
+
+  async function cargarVendidas() {
+    try {
+      const r = await fetch('/api/rifas');
+      const d = await r.json();
+      vendidas = new Set((d.vendidas || []).map(Number));
+    } catch { vendidas = new Set(); }
+    renderGrid();
+  }
 
   window.abrirModalRifa = function() {
+    seleccion = new Set();
     const m = document.getElementById('modal-rifa');
     m.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    document.getElementById('rifa-grid').innerHTML = '<div style="grid-column:1/-1;font-family:Inter,sans-serif;font-size:13px;color:#A1A1AA;text-align:center;padding:20px 0;">Cargando números…</div>';
+    document.getElementById('rifa-total-bar').style.display = 'none';
+    cargarVendidas();
   };
 
   window.cerrarModalRifa = function() {
@@ -445,51 +520,6 @@ function enterHeroFullscreen() {
     if (e.target === this) cerrarModalRifa();
   });
 
-  window.agregarNumero = function() {
-    const input = document.getElementById('rifa-buscar');
-    const n = parseInt(input.value);
-    if (!n || n < 8000 || n > 9000) { input.style.borderColor='#dc2626'; setTimeout(()=>input.style.borderColor='#E4E4E7',1200); return; }
-    numeros.add(n);
-    input.value = '';
-    renderNumeros();
-  };
-
-  function renderNumeros() {
-    const cont = document.getElementById('rifa-seleccionados');
-    const ph   = document.getElementById('rifa-placeholder');
-    const res  = document.getElementById('rifa-resumen');
-    const resNums  = document.getElementById('rifa-resumen-nums');
-    const resNombre = document.getElementById('rifa-resumen-nombre');
-
-    if (numeros.size === 0) {
-      cont.innerHTML = '';
-      cont.appendChild(ph);
-      res.style.display = 'none';
-      return;
-    }
-    ph && (ph.remove ? ph.remove() : null);
-
-    cont.innerHTML = [...numeros].sort((a,b)=>a-b).map(n =>
-      `<span style="display:inline-flex;align-items:center;gap:6px;background:#0A0A0A;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;padding:5px 10px;border-radius:6px;">
-        N° ${n}
-        <button onclick="quitarNumero(${n})" style="background:none;border:none;color:rgba(255,255,255,0.6);cursor:pointer;padding:0;font-size:14px;line-height:1;">✕</button>
-      </span>`
-    ).join('');
-
-    const nombre = document.getElementById('rifa-nombre').value.trim() || '(tu nombre)';
-    const lista = [...numeros].sort((a,b)=>a-b).map(n=>`N°${n}`).join(', ');
-    resNums.textContent = lista;
-    resNombre.textContent = nombre;
-    res.style.display = 'block';
-  }
-
-  window.quitarNumero = function(n) {
-    numeros.delete(n);
-    renderNumeros();
-  };
-
-  document.getElementById('rifa-nombre').addEventListener('input', renderNumeros);
-
   window.confirmarRifa = function() {
     const nombre = document.getElementById('rifa-nombre').value.trim();
     if (!nombre) {
@@ -499,12 +529,13 @@ function enterHeroFullscreen() {
       setTimeout(() => inp.style.borderColor = '#E4E4E7', 1500);
       return;
     }
-    if (numeros.size === 0) {
-      document.getElementById('rifa-buscar').focus();
+    if (seleccion.size === 0) {
+      document.getElementById('rifa-grid').scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-    const lista = [...numeros].sort((a,b)=>a-b).map(n=>`N°${n}`).join(', ');
-    const msg = `Hola! Quiero reservar mi(s) rifa(s) para la cancha de césped sintético El Nido 🏟️\n\n👤 Nombre: ${nombre}\n🎟️ Número(s): ${lista}\n\nQuedo a la espera para coordinar el pago. ¡Gracias!`;
+    const lista = [...seleccion].sort((a,b)=>a-b).map(n=>`N°${n}`).join(', ');
+    const total = formatNum(seleccion.size * PRECIO);
+    const msg = `Hola! Quiero reservar mi(s) rifa(s) para la cancha de césped sintético El Nido 🏟️\n\n👤 Nombre: ${nombre}\n🎟️ Número(s): ${lista}\n💰 Total: $${total}\n\nQuedo a la espera para coordinar el pago. ¡Gracias!`;
     window.open('https://wa.me/5492214119782?text=' + encodeURIComponent(msg), '_blank');
     cerrarModalRifa();
   };

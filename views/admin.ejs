@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Rifas · SLVC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #F4F4F5; color: #0A0A0A; min-height: 100vh; }
+
+    /* ── Login ── */
+    #login-screen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 24px;
+    }
+    .login-card {
+      background: #fff; border-radius: 16px; padding: 40px 36px;
+      width: 100%; max-width: 360px; box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      display: flex; flex-direction: column; gap: 20px;
+    }
+    .login-card h1 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: #8B0000; line-height: 1; }
+    .login-card p  { font-size: 13px; color: #71717A; }
+    .login-card input {
+      width: 100%; padding: 12px 14px; border: 1px solid #E4E4E7; border-radius: 8px;
+      font-size: 14px; outline: none; transition: border-color 0.2s;
+    }
+    .login-card input:focus { border-color: #8B0000; }
+    .login-card button {
+      width: 100%; padding: 13px; background: #8B0000; color: #fff; border: none;
+      border-radius: 8px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 16px; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .login-card button:hover { background: #6b0000; }
+    #login-error { color: #dc2626; font-size: 13px; display: none; }
+
+    /* ── Panel ── */
+    #admin-panel { display: none; }
+    .top-bar {
+      background: #0A0A0A; color: #fff; padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .top-bar-left { display: flex; align-items: center; gap: 12px; }
+    .top-bar h2  { font-family: 'Bebas Neue', sans-serif; font-size: 22px; line-height: 1; }
+    .top-bar span { font-size: 12px; color: #A1A1AA; }
+    .top-bar button {
+      padding: 7px 14px; border-radius: 6px; border: none; cursor: pointer;
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px;
+      letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .btn-salir { background: #3F3F46; color: #fff; }
+    .btn-salir:hover { background: #52525B; }
+
+    .stats-bar {
+      background: #fff; border-bottom: 1px solid #E4E4E7;
+      padding: 12px 24px; display: flex; gap: 24px; flex-wrap: wrap;
+    }
+    .stat { display: flex; flex-direction: column; }
+    .stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: #8B0000; line-height: 1; }
+    .stat-lbl { font-size: 11px; color: #71717A; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+    .controls {
+      padding: 14px 24px; background: #fff; border-bottom: 1px solid #E4E4E7;
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    }
+    .leyenda { display: flex; gap: 14px; flex-wrap: wrap; margin-left: auto; }
+    .leyenda span { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: #52525B; }
+    .dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; flex-shrink: 0; }
+
+    .filter-btn {
+      padding: 6px 14px; border-radius: 6px; border: 1px solid #E4E4E7;
+      background: #fff; cursor: pointer; font-size: 12px; font-weight: 600; transition: all 0.15s;
+    }
+    .filter-btn.active { background: #0A0A0A; color: #fff; border-color: #0A0A0A; }
+
+    .grid-wrap { padding: 20px 24px; }
+    #admin-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(58px, 1fr));
+      gap: 5px;
+    }
+
+    .num-btn {
+      font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
+      border-radius: 5px; padding: 6px 2px; border: 1px solid #D4D4D8;
+      background: #fff; color: #0A0A0A; cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      text-align: center;
+    }
+    .num-btn:hover:not(.vendido) { border-color: #8B0000; background: #fff5f5; transform: scale(1.05); }
+    .num-btn.vendido {
+      background: #8B0000; color: #fff; border-color: #6b0000;
+      text-decoration: none;
+    }
+    .num-btn.vendido:hover { background: #6b0000; border-color: #500000; transform: scale(1.05); }
+    .num-btn.hidden-filter { display: none; }
+
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: #0A0A0A; color: #fff; padding: 10px 20px; border-radius: 8px;
+      font-size: 13px; font-weight: 600; opacity: 0; transition: opacity 0.3s;
+      pointer-events: none; z-index: 9999; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- ── Login ── -->
+<div id="login-screen">
+  <div class="login-card">
+    <div>
+      <h1>Admin Rifas</h1>
+      <p>El Nido · Rosita Beatriz Folino</p>
+    </div>
+    <input id="pwd-input" type="password" placeholder="Contraseña" onkeydown="if(event.key==='Enter')login()" autofocus />
+    <div id="login-error">Contraseña incorrecta.</div>
+    <button onclick="login()">Ingresar</button>
+  </div>
+</div>
+
+<!-- ── Panel ── -->
+<div id="admin-panel">
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <h2>Admin Rifas · SLVC</h2>
+      <span>Hacé clic en un número para marcar/desmarcar como vendido</span>
+    </div>
+    <button class="btn-salir" onclick="salir()">Salir</button>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat"><div class="stat-val" id="s-vendidas">0</div><div class="stat-lbl">Vendidas</div></div>
+    <div class="stat"><div class="stat-val" id="s-disponibles">0</div><div class="stat-lbl">Disponibles</div></div>
+    <div class="stat"><div class="stat-val" id="s-recaudado">$0</div><div class="stat-lbl">Recaudado</div></div>
+  </div>
+
+  <div class="controls">
+    <button class="filter-btn active" onclick="setFilter('todos',this)">Todos</button>
+    <button class="filter-btn" onclick="setFilter('disponibles',this)">Solo disponibles</button>
+    <button class="filter-btn" onclick="setFilter('vendidos',this)">Solo vendidos</button>
+    <div class="leyenda">
+      <span><span class="dot" style="background:#fff;border:1px solid #D4D4D8;"></span>Disponible</span>
+      <span><span class="dot" style="background:#8B0000;"></span>Vendido</span>
+    </div>
+  </div>
+
+  <div class="grid-wrap">
+    <div id="admin-grid"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const MIN = 8000, MAX = 9000, PRECIO = 10000;
+let token = '';
+let vendidas = new Set();
+let currentFilter = 'todos';
+
+function formatPrecio(n) { return '$' + (n * PRECIO).toLocaleString('es-AR'); }
+
+function showToast(msg, ok = true) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = ok ? '#16a34a' : '#dc2626';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function updateStats() {
+  const v = vendidas.size;
+  document.getElementById('s-vendidas').textContent    = v;
+  document.getElementById('s-disponibles').textContent = (MAX - MIN + 1) - v;
+  document.getElementById('s-recaudado').textContent   = '$' + (v * PRECIO).toLocaleString('es-AR');
+}
+
+function renderGrid() {
+  const grid = document.getElementById('admin-grid');
+  grid.innerHTML = '';
+  for (let n = MIN; n <= MAX; n++) {
+    const btn = document.createElement('button');
+    btn.className = 'num-btn' + (vendidas.has(n) ? ' vendido' : '');
+    btn.textContent = n;
+    btn.dataset.n = n;
+    btn.onclick = () => toggleVenta(n, btn);
+    applyFilter(btn);
+    grid.appendChild(btn);
+  }
+  updateStats();
+}
+
+function applyFilter(btn) {
+  const v = vendidas.has(parseInt(btn.dataset.n));
+  if (currentFilter === 'todos') btn.classList.remove('hidden-filter');
+  else if (currentFilter === 'disponibles') btn.classList.toggle('hidden-filter', v);
+  else btn.classList.toggle('hidden-filter', !v);
+}
+
+function setFilter(f, el) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.num-btn').forEach(applyFilter);
+}
+
+async function toggleVenta(n, btn) {
+  const eraVendido = vendidas.has(n);
+  const endpoint = eraVendido ? '/api/rifas/liberar' : '/api/rifas/marcar';
+  try {
+    const r = await fetch(`${endpoint}?token=${token}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ numeros: [n] }),
+    });
+    if (!r.ok) { showToast('Error al guardar', false); return; }
+    if (eraVendido) { vendidas.delete(n); btn.classList.remove('vendido'); }
+    else            { vendidas.add(n);    btn.classList.add('vendido'); }
+    applyFilter(btn);
+    updateStats();
+    showToast(eraVendido ? `N°${n} liberado` : `N°${n} marcado como vendido`);
+  } catch { showToast('Error de conexión', false); }
+}
+
+async function login() {
+  const pwd = document.getElementById('pwd-input').value.trim();
+  if (!pwd) return;
+  // Verificamos contra la API
+  const r = await fetch(`/api/rifas/marcar?token=${pwd}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ numeros: [] }),
+  });
+  if (!r.ok) {
+    document.getElementById('login-error').style.display = 'block';
+    return;
+  }
+  token = pwd;
+  document.getElementById('login-error').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('admin-panel').style.display  = 'block';
+  await cargarVendidas();
+}
+
+async function cargarVendidas() {
+  const r = await fetch('/api/rifas');
+  const d = await r.json();
+  vendidas = new Set((d.vendidas || []).map(Number));
+  renderGrid();
+}
+
+function salir() {
+  token = '';
+  vendidas = new Set();
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-panel').style.display  = 'none';
+  document.getElementById('pwd-input').value = '';
+}
+</script>
+</body>
+</html>
